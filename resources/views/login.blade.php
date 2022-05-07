@@ -11,11 +11,11 @@
     <link rel="icon" href="favicon.ico">
   </head>
   <body>
-    <div class="">
       <section class="position-relative bg-white overflow-hidden">
         <img class="d-none d-md-block position-absolute top-0 start-0 col-5 h-100 img-fluid" style="object-fit: cover;" src="wrexa-assets/images/mom-and-son-big-picture.png" alt="">
         <div class="container">
-          <form action="#" method="post">
+          <form action="/login" method="post">
+            @csrf
             <div class="row">
               <div class="col-12 col-md-7 col-lg-8 ms-auto">
                 <div class="ps-md-10 ps-lg-36 pt-16 pb-14 pb-md-36">
@@ -66,7 +66,6 @@
         </div>
         <img class="d-md-none img-fluid" style="object-fit: cover;" src="wrexa-assets/images/mom-and-son-big-picture.png" alt="">
       </section>
-    </div>
     <script src={{ asset("js/main.js") }}></script>
   </body>
 </html>
