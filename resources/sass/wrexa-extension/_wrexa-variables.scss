@@ -5,55 +5,55 @@ $enable-antialiasing: true !default;
 $enable-negative-margins: true !default;
 
 $border-width: 1px !default;
-$border-color: #DFDFDF !default;
+$border-color: #dfdfdf !default;
 $border-radius: 1rem !default;
 $border-radius-sm: 0.25rem !default;
 $border-radius-lg: 1.5rem !default;
 
 $min-contrast-ratio: 2 !default;
 $body-color: #232126 !default;
-$link-color: #5B2FE2 !default;
-$text-muted: #9B96A4 !default;
+$link-color: #5b2fe2 !default;
+$text-muted: #9b96a4 !default;
 $headings-color: #232126 !default;
 
 $white: #fff !default;
 $black: #000 !default;
 
-$gray-100: #F8F8F8 !default;
-$gray-200: #DFDFDF !default;
-$gray-300: #C5C5C5 !default;
-$gray-400: #ABABAB !default;
-$gray-500: #9B96A4 !default;
+$gray-100: #f8f8f8 !default;
+$gray-200: #dfdfdf !default;
+$gray-300: #c5c5c5 !default;
+$gray-400: #ababab !default;
+$gray-500: #9b96a4 !default;
 $gray-600: #787878 !default;
-$gray-700: #5F5F5F !default;
+$gray-700: #5f5f5f !default;
 $gray-800: #232126 !default;
 $gray-900: #101010 !default;
 
-$primary: #5B2FE2 !default;
-$secondary: #9B96A4 !default;
-$success: #17C9A9 !default;
-$info: #BEE0FB !default;
+$primary: #5b2fe2 !default;
+$secondary: #9b96a4 !default;
+$success: #17c9a9 !default;
+$info: #bee0fb !default;
 $warning: #ffc398 !default;
-$danger: #FFCBC0 !default;
-$light: #F8F8F8 !default;
+$danger: #ffcbc0 !default;
+$light: #f8f8f8 !default;
 $dark: #101010 !default;
 
-$primary-light: #F4F0FF !default;
-$secondary-light: #F8F8F8 !default;
-$success-light: #83FF8F !default;
-$info-light: #EEF7FE !default;
-$warning-light: #FFF9F0 !default;
-$danger-light: #FFF5F3 !default;
-$light-light: #FEFEFE !default;
+$primary-light: #f4f0ff !default;
+$secondary-light: #f8f8f8 !default;
+$success-light: #83ff8f !default;
+$info-light: #eef7fe !default;
+$warning-light: #fff9f0 !default;
+$danger-light: #fff5f3 !default;
+$light-light: #fefefe !default;
 $dark-light: #232126 !default;
 
-$primary-dark: #AA8AFF !default;
-$secondary-dark: #C5C5C5 !default;
-$success-dark: #8DF9C9 !default;
-$info-dark: #8DC9F9 !default;
-$warning-dark: #FFD08A !default;
-$danger-dark: #FFA18D !default;
-$light-dark: #C5C5C5 !default;
+$primary-dark: #aa8aff !default;
+$secondary-dark: #c5c5c5 !default;
+$success-dark: #8df9c9 !default;
+$info-dark: #8dc9f9 !default;
+$warning-dark: #ffd08a !default;
+$danger-dark: #ffa18d !default;
+$light-dark: #c5c5c5 !default;
 
 $theme-colors: (
     primary: $primary,
@@ -78,91 +78,97 @@ $theme-colors: (
     info-dark: $info-dark,
     warning-dark: $warning-dark,
     danger-dark: $danger-dark,
-    light-dark: $light-dark
+    light-dark: $light-dark,
 ) !default;
 
-$blue: #2D9CF3 !default;
-$red: #FF4C27 !default;
-$orange: #FFA724 !default;
-$green: #2DF39C !default;
+$blue: #2d9cf3 !default;
+$red: #ff4c27 !default;
+$orange: #ffa724 !default;
+$green: #2df39c !default;
 
-$blue-100: #EEF7FE !default;
-$blue-200: #BEE0FB !default;
-$blue-300: #8DC9F9 !default;
-$blue-400: #5DB3F6 !default;
-$blue-500: #2D9CF3 !default;
-$blue-600: #0D83E0 !default;
-$blue-700: #0A67B0 !default;
-$blue-800: #074B80 !default;
-$blue-900: #EEF7FE !default;
+$blue-100: #eef7fe !default;
+$blue-200: #bee0fb !default;
+$blue-300: #8dc9f9 !default;
+$blue-400: #5db3f6 !default;
+$blue-500: #2d9cf3 !default;
+$blue-600: #0d83e0 !default;
+$blue-700: #0a67b0 !default;
+$blue-800: #074b80 !default;
+$blue-900: #eef7fe !default;
 
-$indigo-100: #F4F0FF !default;
-$indigo-200: #CFBDFF !default;
-$indigo-300: #AA8AFF !default;
-$indigo-400: #8457FF !default;
-$indigo-500: #4100F0 !default;
-$indigo-600: #4100F0 !default;
-$indigo-700: #3300BD !default;
-$indigo-800: #25008A !default;
-$indigo-900: #5B2FE2 !default;
+$indigo-100: #f4f0ff !default;
+$indigo-200: #cfbdff !default;
+$indigo-300: #aa8aff !default;
+$indigo-400: #8457ff !default;
+$indigo-500: #4100f0 !default;
+$indigo-600: #4100f0 !default;
+$indigo-700: #3300bd !default;
+$indigo-800: #25008a !default;
+$indigo-900: #5b2fe2 !default;
 
-$pink-100: #FFF0FE !default;
-$pink-200: #FFBDFA !default;
-$pink-300: #FF8AF7 !default;
-$pink-400: #FF57F3 !default;
-$pink-500: #FF24F0 !default;
-$pink-600: #F000E0 !default;
-$pink-700: #BD00B0 !default;
-$pink-800: #8A0081 !default;
+$pink-100: #fff0fe !default;
+$pink-200: #ffbdfa !default;
+$pink-300: #ff8af7 !default;
+$pink-400: #ff57f3 !default;
+$pink-500: #ff24f0 !default;
+$pink-600: #f000e0 !default;
+$pink-700: #bd00b0 !default;
+$pink-800: #8a0081 !default;
 $pink-900: #570051 !default;
 
-$red-100: #FFF5F3 !default;
-$red-200: #FFCBC0 !default;
-$red-300: #FFA18D !default;
-$red-400: #FF765A !default;
-$red-500: #FF4C27 !default;
-$red-600: #F32A00 !default;
-$red-700: #C02100 !default;
-$red-800: #8D1800 !default;
-$red-900: #5A0F00 !default;
+$red-100: #fff5f3 !default;
+$red-200: #ffcbc0 !default;
+$red-300: #ffa18d !default;
+$red-400: #ff765a !default;
+$red-500: #ff4c27 !default;
+$red-600: #f32a00 !default;
+$red-700: #c02100 !default;
+$red-800: #8d1800 !default;
+$red-900: #5a0f00 !default;
 
-$orange-100: #FFF9F0 !default;
-$orange-200: #FFE4BD !default;
-$orange-300: #FFD08A !default;
-$orange-400: #FFBB57 !default;
-$orange-500: #FFA724 !default;
-$orange-600: #F09000 !default;
-$orange-700: #BD7100 !default;
-$orange-800: #8A5300 !default;
+$orange-100: #fff9f0 !default;
+$orange-200: #ffe4bd !default;
+$orange-300: #ffd08a !default;
+$orange-400: #ffbb57 !default;
+$orange-500: #ffa724 !default;
+$orange-600: #f09000 !default;
+$orange-700: #bd7100 !default;
+$orange-800: #8a5300 !default;
 $orange-900: #ffc398 !default;
 
-$green-100: #EEFEF7 !default;
-$green-200: #BEFBE0 !default;
-$green-300: #8DF9C9 !default;
-$green-400: #5DF6B3 !default;
-$green-500: #2DF39C !default;
-$green-600: #0DE083 !default;
-$green-700: #0AB067 !default;
-$green-800: #07804B !default;
-$green-900: #17C9A9 !default;
+$green-100: #eefef7 !default;
+$green-200: #befbe0 !default;
+$green-300: #8df9c9 !default;
+$green-400: #5df6b3 !default;
+$green-500: #2df39c !default;
+$green-600: #0de083 !default;
+$green-700: #0ab067 !default;
+$green-800: #07804b !default;
+$green-900: #17c9a9 !default;
 
 $container-max-widths: (
     sm: 640px,
     md: 768px,
     lg: 1024px,
-    xl: 1146px
+    xl: 1146px,
 ) !default;
 
-$font-family-base: "Readex Pro",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !default;
+$font-family-base: "Readex Pro", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji" !default;
 $font-size-base: 1rem !default;
 $font-size-sm: 0.875rem !default;
 $font-size-lg: 1.125rem !default;
 $font-weight-bold: 700 !default;
 
-$small-font-size: .875em !default;
+$small-font-size: 0.875em !default;
 $line-height-lg: 2rem !default;
 
-$headings-font-family: "Readex Pro",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !default;
+$headings-font-family: "Readex Pro", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji" !default;
 $headings-font-weight: 500 !default;
 $headings-line-height: 1.25 !default;
 
@@ -173,9 +179,16 @@ $h4-font-size: 1.875rem !default;
 $h5-font-size: 1.25rem !default;
 $h6-font-size: 1rem !default;
 
-$display-font-family: Prata,ui-serif,Georgia,Cambria,"Times New Roman",Times,serif !default;
+$display-font-family: Prata, ui-serif, Georgia, Cambria, "Times New Roman",
+    Times, serif !default;
 $display-font-weight: 400 !default;
-$display-font-sizes: (1: 6rem,2: 5rem,3: 4rem,4: 3.5rem,5: 2.5rem) !default;
+$display-font-sizes: (
+    1: 6rem,
+    2: 5rem,
+    3: 4rem,
+    4: 3.5rem,
+    5: 2.5rem,
+) !default;
 $display-line-height: 1.25 !default;
 
 $lead-font-size: 1rem !default;
@@ -216,10 +229,14 @@ $spacers: (
     64: 16rem,
     72: 18rem,
     80: 20rem,
-    96: 24rem
+    96: 24rem,
 ) !default;
 
-$negative-spacers: if($enable-negative-margins, negativify-map($spacers), null) !default;
+$negative-spacers: if(
+    $enable-negative-margins,
+    negativify-map($spacers),
+    null
+) !default;
 
 $link-decoration: none !default;
 $link-hover-decoration: underline !default;
@@ -248,8 +265,8 @@ $input-btn-font-size-lg: 1.125rem !default;
 $btn-font-weight: 500 !default;
 
 $input-color: #232126 !default;
-$input-border-color: #D2D2D2 !default;
-$input-placeholder-color: #9B96A4 !default;
+$input-border-color: #d2d2d2 !default;
+$input-placeholder-color: #9b96a4 !default;
 $input-padding-y: 0.75rem !default;
 $input-padding-x: 2.5rem !default;
 $input-border-radius: 0.5rem !default;
@@ -262,11 +279,11 @@ $navbar-nav-link-padding-x: 3rem !default;
 $navbar-light-color: #000 !default;
 $navbar-light-hover-color: #101010 !default;
 $navbar-light-active-color: #101010 !default;
-$navbar-light-disabled-color: #9B96A4 !default;
+$navbar-light-disabled-color: #9b96a4 !default;
 $navbar-dark-color: #fff !default;
-$navbar-dark-hover-color: #DFDFDF !default;
-$navbar-dark-active-color: #DFDFDF !default;
-$navbar-dark-disabled-color: #9B96A4 !default;
+$navbar-dark-hover-color: #dfdfdf !default;
+$navbar-dark-active-color: #dfdfdf !default;
+$navbar-dark-disabled-color: #9b96a4 !default;
 
 $alert-color: null !default;
 $alert-font-size: null !default;
@@ -282,5 +299,3 @@ $alert-border-top-right-radius: $alert-border-radius !default;
 $alert-border-top-left-radius: $alert-border-radius !default;
 $alert-border-bottom-right-radius: $alert-border-radius !default;
 $alert-border-bottom-left-radius: $alert-border-radius !default;
-
-
