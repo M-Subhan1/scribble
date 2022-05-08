@@ -28982,3 +28982,37 @@ textarea.form-control-lg {
     max-width: 80rem;
   }
 }
+.dashboard-nav {
+  width: 200px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.dashboard-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+}
+
+.nav-collapse {
+  width: 80px;
+}
+
+.dashboard-nav.nav-collapse .nav-item .label {
+  display: none;
+}
+
+.dashboard-nav .nav-item a {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.dashboard-nav.nav-collapse .nav-item a {
+  display: inline-block;
+}

@@ -11,7 +11,7 @@
         <ul class="navbar-nav">
           <li class="nav-item position-relative">
             <a class="nav-link pb-4" href="#">Home</a>
-            @if (strcmp($currentPage, 'home') == 0)
+            @if (strcmp($currentPage, '') == 0)
               <div class="mt-4 pe-10 position-absolute bottom-0 start-0 w-100 bg-success-light" style="height: 3px;"></div>
             @endif
           </li>
