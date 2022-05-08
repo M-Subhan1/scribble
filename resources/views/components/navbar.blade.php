@@ -9,19 +9,44 @@
       </button>
       <div class="position-absolute top-50 start-50 translate-middle mt-6 collapse navbar-collapse">
         <ul class="navbar-nav">
-          <li class="nav-item dropdown position-relative">
-            <a class="nav-link pb-4 pe-10 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Collection</a>
-            <div class="position-absolute bottom-0 start-0 w-100 bg-success-light" style="height: 3px;"></div>
+          <li class="nav-item position-relative">
+            <a class="nav-link pb-4" href="#">Home</a>
+            @if (strcmp($currentPage, 'home') == 0)
+              <div class="mt-4 pe-10 position-absolute bottom-0 start-0 w-100 bg-success-light" style="height: 3px;"></div>
+            @endif
           </li>
-          <li class="nav-item"><a class="nav-link pb-4" href="#">Projects</a></li>
-          <li class="nav-item"><a class="nav-link pb-4" href="#">About</a></li>
-          <li class="nav-item dropdown"><a class="nav-link pb-4 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">How to Start</a></li>
-          <li class="nav-item"><a class="nav-link pb-4" href="#">Design</a></li>
+          <li class="nav-item position-relative">
+            <a class="nav-link pb-4" href="#">Pricing</a>
+            @if (strcmp($currentPage, 'pricing') == 0)
+              <div class="mt-4 pe-10 position-absolute bottom-0 start-0 w-100 bg-success-light" style="height: 3px;"></div>
+            @endif
+          </li>
+          <li class="nav-item position-relative">
+            <a class="nav-link pb-4" href="#">Pivacy Policy</a>
+            @if (strcmp($currentPage, 'privacy-policy') == 0)
+              <div class="mt-4 pe-10 position-absolute bottom-0 start-0 w-100 bg-success-light" style="height: 3px;"></div>
+            @endif
+          </li>          
+          <li class="nav-item position-relative">
+            <a class="nav-link pb-4" href="#">Features</a>
+            @if (strcmp($currentPage, 'features') == 0)
+              <div class="mt-4 pe-10 position-absolute bottom-0 start-0 w-100 bg-success-light" style="height: 3px;"></div>
+            @endif
+          </li>
         </ul>
       </div>
-      <div class="collapse navbar-collapse">
-        <div class="ms-auto"><a class="btn btn-outline-light" href="#">Get Started</a></div>
-      </div>
+      @if (!$isAuthorized)
+        <div class="collapse navbar-collapse">
+          <div class="ms-auto">
+            <a class="btn btn-primary mx-3" href="/login">Login</a>
+            <a class="btn btn-outline-light" href="/register">Register</a>
+          </div>
+        </div>
+      @else 
+        <div class="collapse navbar-collapse">
+          <div class="ms-auto"><a class="btn btn-outline-light" href="/dashboard">Dashboard</a></div>
+        </div>
+      @endif
     </div>
   </nav>
   <div class="d-none navbar-menu position-relative" style="z-index: 99;">
@@ -36,28 +61,19 @@
         </div>
         <div class="my-auto py-10">
           <ul class="nav flex-column">
-            <li class="nav-item dropdown mb-6"><a class="nav-link dropdown-toggle p-0 text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Collection</a></li>
-            <li class="nav-item mb-6"><a class="nav-link p-0 text-dark" href="#">Projects</a></li>
-            <li class="nav-item mb-16"><a class="nav-link p-0 text-dark" href="#">About</a></li>
-            <li class="nav-item dropdown mb-6"><a class="nav-link dropdown-toggle p-0 text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">How to Start</a></li>
-            <li class="nav-item"><a class="nav-link p-0 text-dark" href="#">Design</a></li>
+            <li class="nav-item mb-6"><a class="nav-link p-0 text-dark" href="/home">Home</a></li>
+            <li class="nav-item mb-6"><a class="nav-link p-0 text-dark" href="/pricing">Pricing</a></li>
+            <li class="nav-item mb-6"><a class="nav-link p-0 text-dark" href="/privacy-policy">Privacy Policy</a></li>
+            <li class="nav-item mb-16"><a class="nav-link p-0 text-dark" href="/features">Features</a></li>
+            @if (!$isAuthorized)
+            <li class="nav-item mb-6"><a class="nav-link p-0 text-dark" href="/login">Register</a></li>
+            <li class="nav-item mb-6"><a class="nav-link p-0 text-dark" href="/login">Login</a></li>              
+            @else
+            <li class="nav-item mb-6"><a class="nav-link p-0 text-dark" href="/dashboard">Dashboard</a></li>
+            <li class="nav-item mb-6"><a class="nav-link p-0 text-dark" href="/logout">Logout</a></li>
+            @endif
           </ul>
         </div>
-      </div>
-      <div class="position-absolute bottom-0 w-100">
-        <a class="btn py-5 px-4 d-flex align-items-center text-start mt-auto bg-white" href="#">
-          <div class="flex-shrink-0 position-relative me-4">
-            <img class="img-fluid rounded-circle" style="width: 48px; height: 48px;" src="wrexa-assets/images/avatar2.png" alt="">
-            <div class="position-absolute bottom-0 start-0 ms-n2 d-flex align-items-center justify-content-center rounded-circle bg-success text-white small" style="width: 23px; height: 23px;">1</div>
-          </div>
-          <div class="me-auto">
-            <h4 class="text-secondary small mb-0">Account</h4>
-            <span class="text-dark">matloay</span>
-          </div>
-          <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 2L6 6L2 2" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square" stroke-linejoin="round"></path>
-          </svg>
-        </a>
       </div>
     </nav>
   </div>

@@ -43,11 +43,10 @@ document.addEventListener("DOMContentLoaded", function () {
         return new bootstrap.Toast(toastEl, {
             animation: true,
             autohide: true,
-            delay: true,
+            delay: 3000,
         });
     });
 
-    console.log(toastList);
     // Toggle
     toastList.forEach((toast) => toast.show());
 });

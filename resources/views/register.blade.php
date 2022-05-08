@@ -1,5 +1,6 @@
 <x-layout>
-  <x-navbar />
+  <x-navbar :is-logged-in="$is_logged_in ?? false" current-page="register" :is-authorized="$is_authorized ?? false" />
+
   <x-slot:title>
       Register
   </x-slot>
@@ -65,17 +66,8 @@
         </div>
       </form>
 
-      <div class="m-4 position-fixed bottom-0 end-0 toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-          <div class="toast-body">
-            Hello, world! This is a toast message.
-          </div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-      </div>
-
       @isset($alert)
-      <div class="m-4 position-fixed bottom-0 end-0 toast align-items-center text-white bg-{{ $alert->type }} border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="m-4 position-fixed bottom-0 end-0 toast align-items-center text-white bg-{{ $alert->type }}-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
           <div class="toast-body">
             {{ $alert->message }}
@@ -84,6 +76,7 @@
         </div>
       </div>
       @endisset
+
       </div>
     </div>
   </section>
