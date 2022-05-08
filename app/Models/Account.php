@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
-{    
+{
     /**
      * The table associated with the model.
      *
@@ -21,7 +21,9 @@ class Account extends Model
         'first_name',
         'last_name',
         'email',
-        'password'
+        'password',
+        'is_blocked',
+        'is_verified',
     ];
 
     /**
