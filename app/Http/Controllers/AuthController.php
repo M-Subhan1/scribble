@@ -18,20 +18,26 @@ class AuthController extends Controller
      * @param string $passwordConfirm
      * @return \Illuminate\View\View
      */
-    public function login(Request $request) {
-        $request->validate([
-            'email' => 'bail|required',
-            'password' => 'bail|required|max:8'
-        ]);
-
+    public function login(Request $request)
+    {
         $input = $request->all();
+
+        if (strlen($input['email']) == 0 || strlen($input['password']) == 0)
+            return view('login', ['alert' => (object)array('type' => 'danger', 'message' => 'Missing Required Fields!')]);
+
         $account = Account::where('email', $input['email'])->first(); //if email found
-        if($account){
-            if(password_verify($input['password'], $account->password))  return redirect("/login?success=true"); //password matches
-            else return view('login', ['alert' => (object) array('type' => 'danger', 'message' => 'The password you entered is incorrect!')]);
-            
+
+
+
+        if ($account) {
+            if (password_verify($input['password'], $account->password))
+                return redirect("/dashboard?success=true"); //password matches
+
+            return view('login', ['alert' => (object)array('type' => 'danger', 'message' => 'The password you entered is incorrect!')]);
+
         }
-        else return view('login', ['alert' => (object) array('type' => 'danger', 'message' => 'Your account is not registered')]);
+
+        return view('login', ['alert' => (object)array('type' => 'danger', 'message' => 'Your account is not registered')]);
     }
 
     /**
@@ -40,7 +46,9 @@ class AuthController extends Controller
      * @param  string  $username/email
      * @return \Illuminate\View\View
      */
-    public function logout() {}
+    public function logout()
+    {
+    }
 
     /**
      * Show the profile for a given user.
@@ -48,17 +56,20 @@ class AuthController extends Controller
      * @param  Request  $request
      * @return \Illuminate\View\View
      */
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
         $input = $request->all();
 
         if (strlen($input['email']) == 0 || strlen($input['password']) == 0 || strlen($input['confirm_password']) == 0 || strlen($input['first_name']) == 0 || strlen($input['last_name']) == 0) {
-            return view('register', ['alert' => (object) array('type' => 'danger', 'message' => 'Missing required fields!')]);
+            return view('register', ['alert' => (object)array('type' => 'danger', 'message' => 'Missing required fields!')]);
         }
 
-        if ($input['password'] != $input['confirm_password']) return view('register', ['alert' => (object) array('type' => 'danger', 'message' => 'Passwords do not match!')]);
+        if ($input['password'] != $input['confirm_password'])
+            return view('register', ['alert' => (object)array('type' => 'danger', 'message' => 'Passwords do not match!')]);
 
         $account = Account::where('email', $input['email'])->first();
-        if ($account) return view('register', ['alert' => (object) array('type' => 'danger', 'message' => 'Account already exists!')]);
+        if ($account)
+            return view('register', ['alert' => (object)array('type' => 'danger', 'message' => 'Account already exists!')]);
 
         $account = new Account([
             'email' => $input['email'],
@@ -67,7 +78,8 @@ class AuthController extends Controller
             'last_name' => $input['last_name'],
         ]);
 
-        if ($account->save()) return redirect('/login?success=true');
-        return view('register', ['alert' => (object) array('type' => 'danger', 'message' => 'Account could not be created!')]);
+        if ($account->save())
+            return redirect('/login?success=true');
+        return view('register', ['alert' => (object)array('type' => 'danger', 'message' => 'Account could not be created!')]);
     }
 }
