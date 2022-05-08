@@ -18,8 +18,20 @@ class AuthController extends Controller
      * @param string $passwordConfirm
      * @return \Illuminate\View\View
      */
-    public function login($identifier, $password, $passwordConfirm) {
+    public function login(Request $request) {
+        $request->validate([
+            'email' => 'bail|required',
+            'password' => 'bail|required|max:8'
+        ]);
 
+        $input = $request->all();
+        $account = Account::where('email', $input['email'])->first(); //if email found
+        if($account){
+            if(password_verify($input['password'], $account->password))  return redirect("/login?success=true"); //password matches
+            else return view('login', ['alert' => (object) array('type' => 'danger', 'message' => 'The password you entered is incorrect!')]);
+            
+        }
+        else return view('login', ['alert' => (object) array('type' => 'danger', 'message' => 'Your account is not registered')]);
     }
 
     /**
