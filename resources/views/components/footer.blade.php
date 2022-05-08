@@ -12,12 +12,12 @@
 
     </div>
   </div>
-  <div class="pt-10 pb-10 bg-dark-light">
+  <div class="pb-5 bg-dark">
     <div class="container">
       <div class="mw-2xl mx-auto text-center">
         <div class="d-md-flex align-items-center justify-content-center mb-6">
           <a class="d-inline-block mb-4 mb-md-0 me-md-3" href="#">
-            <img class="img-fluid" style="height: 44px;" src="wrexa-assets/logos/wrexa-co-logo-name.svg" alt="">
+            <img class="img-fluid" style="height: 44px;" src="wrexa-assets/logos/logo-wrexa.svg" alt="">
           </a>
           <span class="d-block small text-white">© 2022 Scribble. All rights reserved.</span>
         </div>
