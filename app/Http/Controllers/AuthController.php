@@ -27,8 +27,6 @@ class AuthController extends Controller
 
         $account = Account::where('email', $input['email'])->first(); //if email found
 
-
-
         if ($account) {
             if (password_verify($input['password'], $account->password))
                 return redirect("/dashboard?success=true"); //password matches
