@@ -7,13 +7,36 @@ use Illuminate\View\Component;
 class Navbar extends Component
 {
     /**
+    * Is Current Page, Auth Page.
+    *
+    * @var boolean
+    */
+    public $isAuthorized;
+
+    /**
+    * Is User loggied_in
+    *
+    * @var boolean
+    */
+    public $isLoggedIn;
+
+    /**
+    * Current Page
+    *
+    * @var string
+    */
+    public $currentPage;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($isAuthorized, $isLoggedIn, $currentPage)
     {
-        //
+        $this->isAuthorized = $isAuthorized;
+        $this->isLoggedIn = $isLoggedIn;
+        $this->currentPage = $currentPage;
     }
 
     /**

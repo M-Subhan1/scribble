@@ -1,5 +1,5 @@
 <x-layout>
-  <x-navbar />
+  <x-navbar :is-logged-in="$is_logged_in ?? false" current-page="login" :is-authorized="$is_authorized ?? false" />
   <x-slot:title>
       Login
   </x-slot>
