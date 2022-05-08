@@ -78,6 +78,7 @@ class AuthController extends Controller
 
         if ($account->save())
             return redirect('/login?success=true');
+
         return view('register', ['alert' => (object)array('type' => 'danger', 'message' => 'Account could not be created!')]);
     }
 }
