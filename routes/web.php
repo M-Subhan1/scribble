@@ -34,5 +34,9 @@ Route::get("/logout", function () {
     return redirect('/login');
 });
 
+Route::get("/page", function () {
+    return view("page");
+});
+
 Route::post("/register", [AuthController::class , "register"]);
 Route::post("/login", [AuthController::class , "login"]);
