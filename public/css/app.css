@@ -29016,3 +29016,14 @@ textarea.form-control-lg {
 .dashboard-nav.nav-collapse .nav-item a {
   display: inline-block;
 }
+
+.dashboard-content {
+  width: calc(100% - 200px);
+  min-height: 100vh;
+  margin-left: 200px;
+}
+
+.dashboard-collapse-content {
+  width: calc(100% - 80px);
+  margin-left: 80px;
+}
