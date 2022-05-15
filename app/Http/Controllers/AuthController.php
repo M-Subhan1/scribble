@@ -31,6 +31,7 @@ class AuthController extends Controller
             if (password_verify($input['password'], $account->password)) {
 
                 session_start();
+                $_SESSION['id'] = $account->id;
                 $_SESSION['email'] = $account->email;
                 $_SESSION['is_blocked'] = $account->is_blocked;
                 $_SESSION['is_verified'] = $account->is_verified;
@@ -54,6 +55,11 @@ class AuthController extends Controller
      */
     public function logout()
     {
+        session_start();
+        session_unset();
+        session_destroy();
+
+        return redirect('/login');
     }
 
     /**

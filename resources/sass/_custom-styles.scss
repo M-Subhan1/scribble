@@ -1,3 +1,5 @@
+@import "./wrexa-extension/wrexa-variables";
+
 .dashboard-nav {
     width: 200px;
     height: 100vh;
@@ -42,4 +44,42 @@
 .dashboard-collapse-content {
     width: calc(100% - 80px);
     margin-left: 80px;
+}
+
+.component {
+    position: relative;
+    padding: 0.5rem 3.5rem;
+    border: none;
+    border-left: 5px solid white;
+}
+
+.component .menu {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 70px;
+    background-color: white;
+}
+
+.component:hover {
+    border-color: blue;
+    padding-left: calculate(3.5rem - 0.5rem);
+}
+
+.component:hover .menu {
+    display: flex;
+}
+
+.component .menu span {
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.component .menu span:hover {
+    background-color: $gray-300;
+}
+
+.dashboard-container {
+    margin-top: 2rem;
 }
