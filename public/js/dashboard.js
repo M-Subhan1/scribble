@@ -5,5 +5,4 @@ const dashboardCotent = document.getElementById("dashboard-content");
 hamburger.addEventListener("click", (e) => {
     navbar.classList.toggle("nav-collapse");
     dashboardCotent.classList.toggle("dashboard-collapse-content");
-    console.log(navbar);
 });
