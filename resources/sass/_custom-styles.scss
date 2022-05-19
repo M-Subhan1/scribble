@@ -39,6 +39,7 @@
     width: calc(100% - 200px);
     min-height: 100vh;
     margin-left: 200px;
+    background-color: $gray-100;
 }
 
 .dashboard-collapse-content {
@@ -48,22 +49,22 @@
 
 .component {
     position: relative;
-    padding: 0.5rem 3.5rem;
+    padding: 0.5rem 1.5rem;
     border: none;
     border-left: 5px solid white;
+    min-height: calc(1rem + 0.5rem);
+}
+
+.component:hover {
+    border-color: $primary;
 }
 
 .component .menu {
     display: none;
     position: absolute;
-    top: 20px;
-    right: 70px;
+    top: 0.49rem;
+    right: 1rem;
     background-color: white;
-}
-
-.component:hover {
-    border-color: blue;
-    padding-left: calculate(3.5rem - 0.5rem);
 }
 
 .component:hover .menu {
@@ -81,5 +82,40 @@
 }
 
 .dashboard-container {
-    margin-top: 2rem;
+    padding: 3rem 0;
+}
+
+#components-container {
+    background-color: white;
+    padding: 4rem 2rem;
+}
+
+.page-title-container {
+    padding: 0 1.5rem;
+}
+
+.page-title {
+    padding: 0.5rem;
+}
+
+.page-title-container .row {
+    padding-left: 0.75rem;
+    color: $gray-400;
+    font-size: smaller;
+}
+
+.page-title-container .row div {
+    padding-left: 0.75rem;
+    padding: 0.5rem;
+    color: $gray-400;
+    font-size: smaller;
+}
+
+[contenteditable]:focus {
+    outline: 1px solid $primary;
+    padding: 0.5rem;
+}
+
+[contenteditable]:empty:before {
+    content: attr(data-placeholder);
 }
