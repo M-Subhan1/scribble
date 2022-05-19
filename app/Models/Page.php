@@ -20,11 +20,11 @@ class Page extends Model
      */
     protected $fillable = [
         'journalId',
-        'number',
+        'identifier',
     ];
 
     public function components()
     {
-        return $this->hasMany(Component::class , 'pageId', 'id');
+        return $this->hasMany(Component::class, 'pageId', 'id');
     }
 }
