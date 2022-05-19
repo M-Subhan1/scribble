@@ -6,75 +6,97 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Journal;
 use App\Models\Component;
+use App\Models\Page;
 use Illuminate\Support\Facades\Response;
 
 class JournalController extends Controller
 {
-    public function list_journals()
-    {
-        session_start();
-
-        if (!isset($_SESSION['id']))
-            return redirect('/login');
-
-        $journals = Journal::where('id', $_SESSION['id'])->get();
-
-        return Response::json($journals);
-    }
-
     public function add_journal()
     {
         session_start();
 
         if (!isset($_SESSION['id']))
-            return redirect('/login');
+            return Response::json([
+                'success' => false,
+                'message' => 'You must be logged in to add a journal.'
+            ], 401);
     }
 
-    public function list_pages($journal_name)
+    public function list_journals()
     {
         session_start();
 
         if (!isset($_SESSION['id']))
-            return redirect('/login');
+            return Response::redirectTo('/login');
 
-        $journal = Journal::where(['id' => $_SESSION['id'], 'name' => $journal_name])->with(['pages'])->first();
+        $journals = Journal::where('id', $_SESSION['id'])->get();
 
-        if (!$journal || !$journal->pages)
-            route('/404');
-
-        return Response::json($journal->pages);
+        return Response::view('journals', ['journals' => $journals]);
     }
 
-    public function add_page()
+    public function delete_journal($journal_id)
+    {
+        session_start();
+
+        if (!isset($_SESSION['id'])) {
+            return Response::json([
+                'success' => false,
+                'message' => 'You must be logged in to add a journal.'
+            ], 401);
+        }
+
+        $journal = Journal::where(['name' => $journal_id, 'authorId' => $_SESSION['id']])->first();
+
+        if (!$journal) {
+            return Response::json([
+                'success' => false,
+                'message' => 'Unauthorized.'
+            ], 401);
+        }
+
+        $journal->delete();
+
+        return Response::json([
+            'success' => true,
+            'message' => 'Journal deleted.'
+        ], 200);
+    }
+
+    public function list_pages($journal_id)
     {
         session_start();
 
         if (!isset($_SESSION['id']))
-            return redirect('/login');
+            return Response::redirectTo('/login');
 
-        $journals = Journal::where('id', $_SESSION['id'])->first()->pages();
+        $journal = Journal::where(['authorId' => $_SESSION['id'], 'id' => $journal_id])->with(['pages'])->first();
+
+        if (!$journal)
+            return Response::redirectTo('/404');
+
+        return Response::view('journal_pages', ['pages' => $journal['pages']]);
     }
 
-    public function render_page($journal_name, $page_num)
+    public function render_page($journal_id, $page_identifier)
     {
         session_start();
 
         if (!isset($_SESSION['id']))
-            return redirect('/login');
+            return Response::redirectTo('/login');
 
-        $journal = Journal::where(['authorId' => $_SESSION['id'], 'name' => $journal_name])->with(['pages', 'pages.components'])->first();
+        $journal = Journal::where(['authorId' => $_SESSION['id'], 'id' => $journal_id])->with(['pages', 'pages.components'])->first();
 
-        $GLOBALS['page_num'] = $page_num;
+        $GLOBALS['page_identifier'] = $page_identifier;
 
-        if (!$journal || count($journal['pages']) < $page_num)
-            route('/404');
+        if (!$journal)
+            return Response::redirectTo('/404');
 
         $pages = [...array_filter($journal['pages']->toArray(), function ($page) {
-            return $page['number'] == $GLOBALS['page_num'];
+            return $page['identifier'] == $GLOBALS['page_identifier'];
         })];
 
         if (count($pages) == 0)
-            route('/404');
+            return Response::redirectTo('/404');
 
         $components = $pages[0]['components'];
 
@@ -85,13 +107,47 @@ class JournalController extends Controller
         return view('page', ['components' => $components]);
     }
 
+    public function add_page()
+    {
+        session_start();
+
+        if (!isset($_SESSION['id']))
+            return Response::redirectTo('/login');
+
+        $journals = Journal::where('id', $_SESSION['id'])->first()->pages();
+    }
+
     public function update_page()
     {
         session_start();
 
         if (!isset($_SESSION['id']))
-            return redirect('/login');
+            return Response::redirectTo('/login');
 
         $journals = Component::where('id', $_SESSION['id'])->first()->pages();
+    }
+
+    public function delete_page($journal_id, $page_id)
+    {
+        session_start();
+
+        if (!isset($_SESSION['id']))
+            return Response::json(['success' => false, 'message' => 'Not logged in.'], 401);
+
+        $journal = Journal::where(['authorId' => $_SESSION['id'], 'name' => $journal_id])->with(['pages', 'pages.components'])->first();
+
+        if (!$journal)
+            return Response::json(['success' => false, 'message' => 'Not Authorized.'], 403);
+
+        $GLOBALS['page_id'] = $page_id;
+        $pages = [...array_filter($journal['pages']->toArray(), function ($page) {
+            return $page['id'] == $GLOBALS['page_id'];
+        })];
+
+        if (count($pages) == 0)
+            return Response::json(['success' => false, 'message' => 'Journal does not contain the specified page.'], 403);
+
+        Page::destroy($page_id);
+        return Response::json([], 204);
     }
 }

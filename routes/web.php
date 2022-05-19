@@ -27,16 +27,17 @@ Route::get("/register", function () {
     return view("register");
 });
 
-Route::get("/logout", [AuthController::class , "logout"]);
-Route::post("/register", [AuthController::class , "register"]);
-Route::post("/login", [AuthController::class , "login"]);
-Route::get("/page", [JournalController::class , "render_page"]);
-Route::get('/journals/', [JournalController::class , "list_journals"]);
-Route::post('/journals/', [JournalController::class , "add_journal"]);
-Route::get('/journals/{journal_name}/', [JournalController::class , "list_pages"]);
-Route::post('/journals/{journal_name}/', [JournalController::class , "add_page"]);
-Route::get('/journals/{journal_name}/{page_num}/', [JournalController::class , "render_page"]);
-Route::post('/journals/{journal_name}/{page_num}/', [JournalController::class , "update_page"]);
-Route::get('/404', function () {
-    return view('404');
-});
+Route::get("/logout", [AuthController::class, "logout"]);
+Route::post("/register", [AuthController::class, "register"]);
+Route::post("/login", [AuthController::class, "login"]);
+
+// Journal Routes
+Route::get('/journals', [JournalController::class, "list_journals"]);
+Route::put('/journals', [JournalController::class, "add_journal"]);
+Route::delete('/journals/{journal_id}', [JournalController::class, "delete_journal"]);
+Route::patch('/journals/{journal_id}', [JournalController::class, "update_journal"]);
+Route::get('/journals/{journal_id}', [JournalController::class, "list_pages"]);
+Route::put('/journals/{journal_id}', [JournalController::class, "add_page"]);
+Route::patch('/journals/{journal_id}/{identifier}', [JournalController::class, "update_page"]);
+Route::get('/journals/{journal_id}/{id}', [JournalController::class, "render_page"]);
+Route::delete('/journals/{journal_id}/{id}', [JournalController::class, "delete_page"]);

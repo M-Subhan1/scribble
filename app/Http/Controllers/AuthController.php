@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Models\Account;
 use Illuminate\Support\Facades\Response;
@@ -37,11 +36,10 @@ class AuthController extends Controller
                 $_SESSION['is_verified'] = $account->is_verified;
                 $_SESSION['first_name'] = $account->first_name;
 
-                return redirect("/dashboard?success=true"); //password matches
+                return Response::redirectTo("/dashboard?success=true"); //password matches
             }
 
             return view('login', ['alert' => (object)array('type' => 'danger', 'message' => 'The password you entered is incorrect!')]);
-
         }
 
         return view('login', ['alert' => (object)array('type' => 'danger', 'message' => 'Your account is not registered')]);
