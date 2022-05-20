@@ -1,6 +1,6 @@
 <x-dashboard-layout>
     <div class="container dashboard-container">
-        <h2 class="mt-20">Todo Title</h2>
+        <h2 class="mt-20">{{ $list->name }}</h2>
 
         <div class="description mt-7 mb-0">
             Use todo to track your personal tasks.<br>
@@ -14,13 +14,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/todo/board-view">Board View</a>
+                            <a class="nav-link active" aria-current="page" href="/list/{{ $list->id }}">Board View</a>
                         </li>
                         <li class="nav-item  tb-view">
-                            <a class="nav-link" href="/todo/table-view">Table View</a>
+                            <a class="nav-link" href="/list/{{ $list->id }}">Table View</a> 
                         <li class="nav-item">
-                            <a class="nav-link addtask" href="/add-entry">Add Task</a>
+                            <a class="nav-link addtask" href="/">Add Task</a>
                         </li>
+
                     </ul>
                 </div>
             </div>
@@ -33,16 +34,16 @@
                     <td scope="col" class="text-muted">Date Created</td>
                     <td scope="col" class="text-muted">Status</td>
                 </tr>
+                @foreach($list->list_columns as $column)
+                    @foreach($column->list_entries as $entry)
                 <tr>
-                    <td>go for a walk</td>
-                    <td>12-34-23</td>
-                    <td>todo</td>
+                    <td>{{$entry->content}}</td>
+                    <td>{{$entry->created_at}}</td>
+                    <td>{{$column->name}}</td>
                 </tr>
-                <tr>
-                    <td>sleep</td>
-                    <td>45-98-67</td>
-                    <td>doing</td>
-                </tr>
+                    @endforeach
+                @endforeach
+
             </tbody>
         </table>
 
