@@ -28,10 +28,11 @@ class ListController extends Controller
         session_start();
 
         if (!isset($_SESSION['id']))
-            return redirect('/login');
+        return Response::redirectTo('/login');
 
-        $list = List_::where('user_id', $_SESSION['id'])->get();
-        return view("welcome");
+        $lists = List_::where('user_id', $_SESSION['id'])->get();
+
+        return Response::view('todo_display', ['lists' => $lists]);
     }
 
     public function add_list_column(Request $request, $list_id){
@@ -57,7 +58,7 @@ class ListController extends Controller
         session_start();
 
         if (!isset($_SESSION['id']))
-            return redirect('/login');
+            return Response::redirectTo('/login');
 
         $list = List_::where(["user_id" => $_SESSION["id"], "id" => $list_id])->with(["list_columns"])->first();
         $col_exists = list_column::find($list_col_id);
@@ -68,17 +69,18 @@ class ListController extends Controller
         $list_entry->column_id = $list_col_id;
         $list_entry->content = $request->content;
         $list_entry->save();
+
     }  
 
     public function render_list($list_id){
         session_start();
 
         if (!isset($_SESSION['id']))
-            return redirect('/login');
+            return Response::redirectTo('/login');
 
         $list = List_::where(["user_id" => $_SESSION["id"], "id" => $list_id])->with(['list_columns', 'list_columns.list_entries'])->first();
-
         var_dump($list);
+        return view('todo_tableview', ["list" => $list]);
     }
 
     public function delete_list($list_id){
@@ -87,8 +89,12 @@ class ListController extends Controller
         if (!isset($_SESSION['id']))
             return redirect('/login');
 
-        $list = List_::where(["user_id" => $_SESSION["id"], "id" => $list_id])->with(['list_columns', 'list_columns.list_entries'])->first();
+        $list = List_::where(["user_id" => $_SESSION["id"], "id" => $list_id])->first();
+        $list_col = list_column::where("list_id", $list_id)->first();
+        $list_entries = list_entry::where("column_id", $list_col_id)->get();
         $list->delete();
+        $list_col->delete();
+        $list_entries->delete();
 
         var_dump($list);
     }
@@ -103,10 +109,10 @@ class ListController extends Controller
 
         if(is_null($list_exists) || is_null($col_exists)) return "error";
 
-        $list_col = list_column::where(["list_id" => $list_id, "id" => $list_col_id])->with('list_columns.list_entries')->first();
+        $list_col = list_column::where(["list_id" => $list_id, "id" => $list_col_id])->first();
+        $list_entries = list_entry::where("column_id", $list_col_id)->get();
         $list_col->delete();
-
-        var_dump($list_col);
+        $list_entries->delete();
     }
 
     public function delete_entry($list_id, $list_col_id, $list_entry_id){

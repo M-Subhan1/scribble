@@ -18,22 +18,18 @@
 
             <div class="container px-4 mt-20 ml-0">
                 <hr>
+                @foreach($lists as $list)
                 <div class="row gx-5">
                     <div class="col">
                         <div class="p-3 border bg-light">
-                            <a href="/" class="h4"> List title </a>
-                            <div>list subtitle/description/createdat/updatedat goes here</div>
+                        <a href='/list/{{ $list->id }}' class="h4"> {{ $list->name }}
+                            </a>
+                            <div>{{ $list->subtitle }}</div>
+                            <div class="text-muted">Created at: {{ $list->created_at }} Updated at: {{ $list->updated_at }}</div>
                         </div>
                     </div>
                 </div>
-                <div class="row gx-5 mt-10">
-                    <div class="col">
-                        <div class="p-3 border bg-light">
-                            <a href="/" class="h4"> List title </a>
-                            <div>list subtitle/description goes here</div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
             <script src="https://code.jquery.com/jquery-3.6.0.js"
