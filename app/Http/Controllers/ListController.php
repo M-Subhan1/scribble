@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Response;
 
 class ListController extends Controller
 {
+
     public function add_list(Request $request){
         session_start();
 
@@ -39,8 +40,6 @@ class ListController extends Controller
                 'message'=> "List Created Successfully!",
             ]);
         }
-
-        // return view("todo_display");
     }
 
     public function display_lists(){
@@ -122,7 +121,7 @@ class ListController extends Controller
 
     }  
 
-    public function render_list($list_id){
+    public function render_list(Request $request, $list_id){
         session_start();
 
         if (!isset($_SESSION['id']))
@@ -132,14 +131,12 @@ class ListController extends Controller
         ], 401);
 
         $list = List_::where(["user_id" => $_SESSION["id"], "id" => $list_id])->with(['list_columns', 'list_columns.list_entries'])->first();
-
-        // foreach($list->list_columns as $column){
-        //     foreach($list->list_entries as $entry){
-        //         var_dump(entry->content);
-        //     }
-        // }
  
-        // return Response::view('todo_tableview', ["list" => $list]);
+        $data = $request->all();
+
+        if(isset($data['view']) && strcmp($data['view'], 'table') == 0){
+            return Response::view('todo_tableview', ["list" => $list]);
+        }
         return view('todo_boardview', ["list" => $list]);
     }
 
