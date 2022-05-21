@@ -1,18 +1,20 @@
 <x-dashboard-layout>
     <div class="container dashboard-container">
-        <h2 class="mt-20">Pages</h2>
+        <div class="px-4">
+            <h2 class="mt-12">Pages</h2>
 
-        <div class="description mt-7 mb-0">
-            All of the pages in your journal are displayed below.<br>
-            Click on the page tag you want to open. <br>
-            To create a new page click the add page button.
-            </span>
-        </div>
+            <div class="description mt-7 mb-0">
+                All of the pages in your journal are displayed below.<br>
+                Click on the page tag you want to open. <br>
+                To create a new page click the add page button.
+                </span>
+            </div>
 
-        <div class="position-relative mb-0 mt-6">
-            <div class="position-absolute top-0 end-0">
-                <div class="text-right"><button type="button" class="btn btn-primary btn-sm todo_btn">Add
-                        Page</button></div>
+            <div class="position-relative mb-0 mt-6">
+                <div class="position-absolute top-0 end-0">
+                    <div class="text-right"><button type="button" class="btn btn-primary btn-sm todo_btn">Add
+                            Page</button></div>
+                </div>
             </div>
         </div>
 
