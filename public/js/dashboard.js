@@ -1,12 +1,5 @@
-const hamburger = document.getElementById("dashboard-hamburger");
-const navbar = document.getElementById("dashboard-nav");
-const dashboardCotent = document.getElementById("dashboard-content");
-let selectedJournal = -1;
-
-hamburger.addEventListener("click", (e) => {
-    navbar.classList.toggle("nav-collapse");
-    dashboardCotent.classList.toggle("dashboard-collapse-content");
-});
+let selectedJournal = undefined;
+let selectedPage = undefined;
 
 $(function () {
     $("#create-journal-btn").on("click", createJournal);
@@ -14,6 +7,16 @@ $(function () {
     $("#delete-journal-btn").on("click", deleteJournal);
     $(".edit-journal-btn").on("click", selectJournal);
     $(".delete-journal-btn").on("click", selectJournal);
+    $("#create-page-btn").on("click", createPage);
+    $("#edit-page-btn").on("click", editPage);
+    $("#delete-page-btn").on("click", deletePage);
+    $(".edit-page-btn").on("click", selectPage);
+    $(".delete-page-btn").on("click", selectPage);
+    $("#dashboard-hamburger").on("click", (e) => {
+        e.stopPropagation();
+        $("#dashboard-nav").toggleClass("nav-collapse");
+        $("dashboard-content").toggleClass("dashboard-collapse-content");
+    });
 });
 
 function selectJournal() {
@@ -71,7 +74,7 @@ function createJournal() {
 }
 
 function deleteJournal() {
-    if (selectedJournal == -1) return;
+    if (selectedJournal == undefined) return;
 
     const journal_id = selectedJournal;
 
@@ -82,21 +85,18 @@ function deleteJournal() {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: (data) => {
-            if (data.success) {
-                $(`[data-id='${journal_id}']`).remove();
-            } else {
-            }
+            $(`[data-id='${journal_id}']`).remove();
         },
         error: (err) => {
             console.log(err);
         },
     });
 
-    selectedJournal = -1;
+    selectedJournal = undefined;
 }
 
 function editJournal() {
-    if (selectedJournal == -1) return;
+    if (selectedJournal == undefined) return;
     const journal_id = selectedJournal;
 
     const name = $("#edit-journal-name").val();
@@ -124,5 +124,114 @@ function editJournal() {
         },
     });
 
-    selectedJournal = -1;
+    selectedJournal = undefined;
+}
+
+function selectPage() {
+    const page = $(this).closest(".page-list-entry");
+    selectedPage = page.data("page-id");
+    selectedJournal = $("#page").data("journal-id");
+    $("#editPageModal #edit-page-name").val(page.data("identifier"));
+
+    console.log(selectedPage);
+}
+
+function createPage() {
+    const name = $("#createPageModal #page-name").val();
+    const id = $("#page").data("journal-id");
+
+    $.ajax({
+        url: `/journals/${id}`,
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        data: {
+            name,
+        },
+        success: (response) => {
+            const page = response.data;
+            $("#pages-container")
+                .append(`<div class="page-list-entry" data-page-id='${page.id}'
+                        data-identifier='${page.identifier}'>
+                        <div>
+                            <div class="p-2 border bg-light d-flex justify-content-between align-items-center">
+                                <a href='/journals/${page.journal_id}/${page.id}' class="h5 page-name">
+                                    ${page.identifier}</a>
+                                <div>
+                                    <span class="d-none d-md-inline-block mr-2 text-muted text-sm">Created At: 7</span>
+                                    <span>
+                                        <button class="btn btn-sm btn-primary edit-journal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#editPageModal">Edit</button>
+                                        <button class="btn btn-sm btn-danger delete-journal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#deletePageModal">Delete</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`);
+            $(`[data-page-id='${page.id}']`)
+                .find(".btn")
+                .on("click", selectPage);
+        },
+        error: (err) => {
+            console.log(err);
+        },
+    });
+}
+
+function deletePage() {
+    console.log(selectedJournal, selectedPage);
+    if (selectedPage == undefined || selectedJournal == undefined) return;
+
+    const journal_id = selectedJournal;
+    const page_id = selectedPage;
+
+    $.ajax({
+        url: `/journals/${journal_id}/${page_id}`,
+        method: "DELETE",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: (data) => {
+            $(`[data-page-id='${page_id}']`).remove();
+        },
+        error: (err) => {
+            console.log(err);
+        },
+    });
+
+    selectedJournal = undefined;
+    selectedPage = undefined;
+}
+
+function editPage() {
+    if (selectedJournal == undefined || selectedPage == undefined) return;
+    const journal_id = selectedJournal;
+    const page_id = selectedPage;
+
+    const name = $("#edit-page-name").val();
+
+    $.ajax({
+        url: `/journals/${selectedJournal}/${selectedPage}`,
+        method: "PATCH",
+        data: {
+            name,
+        },
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: () => {
+            const page = $(`[data-page-id='${page_id}']`);
+
+            page.data("identifier", name);
+            page.find(".page-name").text(name);
+        },
+        error: (err) => {
+            console.log(err);
+        },
+    });
+
+    selectedJournal = undefined;
+    selectedPage = undefined;
 }
