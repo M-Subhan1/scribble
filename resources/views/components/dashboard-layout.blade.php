@@ -103,6 +103,7 @@
     </section>
 
     @push('body-scripts')
+        <script src={{ asset('js/jquery.min.js') }}></script>
         <script src={{ asset('js/dashboard.js') }}></script>
     @endpush
 </x-layout>
