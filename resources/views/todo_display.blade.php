@@ -11,13 +11,12 @@
 
             <!--Create List Modal -->
             <div class="modal fade" id="AddTodoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="CreateModalLabel">Create Todo</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="create_todo">
@@ -33,7 +32,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-sm todo_btn" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary btn-sm todo_btn create_list">Save changes</button>
                 </div>
                 </div>
@@ -49,13 +48,12 @@
 
             <!-- Edit list modal -->
             <div class="modal fade" id="EditTodoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="CreateModalLabel">Edit Your Todo</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="edit_todo">
@@ -71,7 +69,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-sm todo_btn" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary btn-sm todo_btn update_list">Save changes</button>
                 </div>
                 </div>
@@ -80,20 +78,19 @@
 
             <!-- Delete list modal -->
             <div class="modal fade" id="DeleteTodoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="CreateModalLabel">Delete Your Todo</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                         <input type="hidden" id="delete_todo_id">
                         <h6>Are you sure you want to delete this todo?</h6>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-sm todo_btn" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary btn-sm todo_btn delete_list_btn">Delete</button>
                 </div>
                 </div>
@@ -104,34 +101,22 @@
             <div class="container px-4 mt-20 ml-0">
                 <hr>
                 @foreach($lists as $list)
-                <div class="row gx-5">
-                    <div class="col">
-                        <div class="p-3 border bg-light">
-                        <a href='/render-list/{{ $list->id }}' class="h4"> {{ $list->name }}
-                            </a>
+                    <div class="p-2 border bg-light d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                        <a href='/render-list/{{ $list->id }}' class="h5"> {{ $list->name }}</a>
                             <div>{{ $list->subtitle }}</div>
                             <div class="text-muted">Created at: {{ $list->created_at }} Updated at: {{ $list->updated_at }}</div>
-                            <div class="link-container"><button type="button" value="{{$list->id}}" class="edittask edit_list btn btn-sm">Edit</button> <button value="{{$list->id}}" class="deltask delete_list btn btn-sm">Delete</button></div>
                         </div>
+                        <span>
+                            <button  type="button" class="btn btn-sm btn-primary edit-journal-btn edit_list" value="{{$list->id}}" >Edit</button>
+                            <button class="btn btn-sm btn-danger delete_list delete-journal-btn" value="{{$list->id}}" >Delete</button>
+                        </span>
                     </div>
-                </div>
-                @endforeach
+            @endforeach
             </div>
 
-        @isset($alert)
-        <div class="m-4 position-fixed bottom-0 end-0 toast align-items-center text-white bg-{{ $alert->type }}-dark border-0"
-            role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    {{ $alert->message }}
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                    aria-label="Close"></button>
-            </div>
-        </div>
-        @endisset
 
-        @push('body-scripts')
+    @push('body-scripts')
         @once
             <script src={{ asset('js/jquery.min.js') }}></script>
         @endonce

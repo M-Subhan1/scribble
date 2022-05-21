@@ -19,19 +19,17 @@ $(function () {
     });
 });
 
-$(".bd-view").on('click', function () {
-    $(this).css({ "border-bottom": "4px solid rgb(102, 0, 204)" })
-});
-
-$(".tb-view").on('click', function () {
-    $(this).css({ "border-bottom": "4px solid rgb(102, 0, 204)" })
-});
-
-$(".todo_btn").on("hover", function () {
-    $(this).css("background-color", "black");
-}, function () {
-    $(this).css("background-color", "rgb(102, 0, 204)");
-});
+function display_view_border(){
+    const queryString = window.location.search;
+    console.log(queryString);
+    const urlParams = new URLSearchParams(queryString);
+    const view = urlParams.get('view')
+    console.log(view);
+    if(view == "table"){
+        document.getElementsByClassName("tb-view").style.borderBottom = "2px solid rgb(102, 0, 204)"; 
+    }
+    else document.getElementsByClassName("bd-view").style.borderBottom = "2px solid rgb(102, 0, 204)"; 
+}
 
 $(document).on('click', '.create_list', function (e) {
     e.preventDefault();
