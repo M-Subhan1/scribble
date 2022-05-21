@@ -29,21 +29,21 @@ class JournalController extends Controller
             return Response::json([
                 'success' => false,
                 'message' => 'Missing Required Fields.'
-            ], 401);
+            ], 400);
         }
 
         if (strlen($data['name']) > 20) {
             return Response::json([
                 'success' => false,
                 'message' => 'Name cannot be have more than 300 characters.'
-            ], 401);
+            ], 400);
         }
 
         if (strlen($data['description']) > 200) {
             return Response::json([
                 'success' => false,
                 'message' => 'Name cannot be have more than 1000 characters.'
-            ], 401);
+            ], 400);
         }
 
         $journal = new Journal();
@@ -87,15 +87,12 @@ class JournalController extends Controller
             return Response::json([
                 'success' => false,
                 'message' => 'Unauthorized.'
-            ], 401);
+            ], 400);
         }
 
         $journal->delete();
 
-        return Response::json([
-            'success' => true,
-            'message' => 'Journal deleted.'
-        ], 200);
+        return Response::json([], 204);
     }
 
     public function update_journal($journal_id)
@@ -106,7 +103,7 @@ class JournalController extends Controller
             return Response::json([
                 'success' => false,
                 'message' => 'Unauthorized'
-            ], 401);
+            ], 400);
         }
 
         $journal = Journal::where(['id' => $journal_id, 'authorId' => $_SESSION['id']])->first();
@@ -115,7 +112,7 @@ class JournalController extends Controller
             return Response::json([
                 'success' => false,
                 'message' => 'Unauthorized.'
-            ], 401);
+            ], 400);
         }
 
         $data = request()->all();
@@ -125,21 +122,21 @@ class JournalController extends Controller
             return Response::json([
                 'success' => false,
                 'message' => 'Missing Required Fields.'
-            ], 401);
+            ], 400);
         }
 
         if (strlen($data['name']) > 20) {
             return Response::json([
                 'success' => false,
                 'message' => 'Name cannot be have more than 20 characters.'
-            ], 401);
+            ], 400);
         }
 
         if (strlen($data['description']) > 200) {
             return Response::json([
                 'success' => false,
                 'message' => 'Name cannot be have more than 200 characters.'
-            ], 401);
+            ], 400);
         }
 
         $journal->name = $data['name'];
@@ -164,7 +161,7 @@ class JournalController extends Controller
         if (!$journal)
             return Response::redirectTo('/404');
 
-        return Response::view('journal_pages', ['pages' => $journal['pages']]);
+        return Response::view('journal_pages', ['journal' => $journal]);
     }
 
     public function render_page($journal_id, $page_identifier)
@@ -176,13 +173,13 @@ class JournalController extends Controller
 
         $journal = Journal::where(['authorId' => $_SESSION['id'], 'id' => $journal_id])->with(['pages', 'pages.components'])->first();
 
-        $GLOBALS['page_identifier'] = $page_identifier;
+        $GLOBALS['page_id'] = $page_identifier;
 
         if (!$journal)
             return Response::redirectTo('/404');
 
         $pages = [...array_filter($journal['pages']->toArray(), function ($page) {
-            return $page['identifier'] == $GLOBALS['page_identifier'];
+            return $page['id'] == $GLOBALS['page_id'];
         })];
 
         if (count($pages) == 0)
@@ -197,24 +194,69 @@ class JournalController extends Controller
         return view('page', ['components' => $components]);
     }
 
-    public function add_page()
+    public function add_page(Request $request, $journal_id)
     {
         session_start();
 
-        if (!isset($_SESSION['id']))
-            return Response::redirectTo('/login');
+        if (!isset($_SESSION['id'])) {
+            return Response::json([
+                'success' => false,
+                'message' => 'Unauthorized'
+            ], 403);
+        }
 
-        $journals = Journal::where('id', $_SESSION['id'])->first()->pages();
+        $journal = Journal::where(['authorId' => $_SESSION['id'], 'id' => $journal_id])->with('pages')->first();
+
+        if (!$journal) {
+            return Response::json([
+                'success' => false,
+                'message' => 'Bad Request'
+            ], 400);
+        }
+
+        $data = $request->all();
+        $page = new Page();
+        $page->journalId = $journal->id;
+        $page->identifier = $data['name'];
+        $page->save();
+
+        return Response::json(['success' => true, 'data' => $page], 200);
     }
 
-    public function update_page()
+    public function update_page($journal_id, $page_id)
     {
         session_start();
 
-        if (!isset($_SESSION['id']))
-            return Response::redirectTo('/login');
+        if (!isset($_SESSION['id'])) {
+            return Response::json([
+                'success' => false,
+                'message' => 'Unauthorized'
+            ], 403);
+        }
 
-        $journals = Component::where('id', $_SESSION['id'])->first()->pages();
+        $journal = Journal::where(['id' => $journal_id])->with(['pages'])->first();
+
+        if (!$journal) {
+            return Response::json([
+                'success' => false,
+                'message' => 'Bad Request'
+            ], 400);
+        }
+
+        $page = $journal->pages->where('id', $page_id)->first();
+
+        if (!$page) {
+            return Response::json([
+                'success' => false,
+                'message' => 'Bad Request'
+            ], 400);
+        }
+
+        $data = request()->all();
+        $page->identifier = $data['name'];
+        $page->save();
+
+        return Response::json([], 204);
     }
 
     public function delete_page($journal_id, $page_id)
@@ -222,12 +264,12 @@ class JournalController extends Controller
         session_start();
 
         if (!isset($_SESSION['id']))
-            return Response::json(['success' => false, 'message' => 'Not logged in.'], 401);
+            return Response::json(['success' => false, 'message' => 'Not Authorized.'], 401);
 
-        $journal = Journal::where(['authorId' => $_SESSION['id'], 'name' => $journal_id])->with(['pages', 'pages.components'])->first();
+        $journal = Journal::where(['authorId' => $_SESSION['id'], 'id' => $journal_id])->with(['pages', 'pages.components'])->first();
 
         if (!$journal)
-            return Response::json(['success' => false, 'message' => 'Not Authorized.'], 403);
+            return Response::json(['success' => false, 'message' => 'Bad Request'], 400);
 
         $GLOBALS['page_id'] = $page_id;
         $pages = [...array_filter($journal['pages']->toArray(), function ($page) {
@@ -235,7 +277,31 @@ class JournalController extends Controller
         })];
 
         if (count($pages) == 0)
-            return Response::json(['success' => false, 'message' => 'Journal does not contain the specified page.'], 403);
+            return Response::json(['success' => false, 'message' => 'Bad Request'], 401);
+
+        Page::destroy($page_id);
+        return Response::json([], 204);
+    }
+
+    public function update_page_data($journal_id, $page_id)
+    {
+        session_start();
+
+        if (!isset($_SESSION['id']))
+            return Response::json(['success' => false, 'message' => 'Not Authorized.'], 401);
+
+        $journal = Journal::where(['authorId' => $_SESSION['id'], 'id' => $journal_id])->with(['pages', 'pages.components'])->first();
+
+        if (!$journal)
+            return Response::json(['success' => false, 'message' => 'Bad Request'], 400);
+
+        $GLOBALS['page_id'] = $page_id;
+        $pages = [...array_filter($journal['pages']->toArray(), function ($page) {
+            return $page['id'] == $GLOBALS['page_id'];
+        })];
+
+        if (count($pages) == 0)
+            return Response::json(['success' => false, 'message' => 'Bad Request'], 401);
 
         Page::destroy($page_id);
         return Response::json([], 204);
