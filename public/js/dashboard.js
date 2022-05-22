@@ -46,7 +46,8 @@ $(document).on("click", ".create_list", function (e) {
         subtitle: $("#todo_desc").val(),
     };
 
-    console.log(data);
+    $("#AddTodoModal").modal("hide");
+    createAlert("info", "Processing...");
 
     $.ajaxSetup({
         headers: {
@@ -60,12 +61,9 @@ $(document).on("click", ".create_list", function (e) {
         data: data,
         dataType: "json",
         success: function (response) {
-            console.log(response);
-            $("#AddTodoModal").modal("hide");
-            alert("Data Saved");
+            createAlert("success", "Data Saved");
         },
         error: function (response) {
-            console.log(error);
             alert("Data not saved");
         },
     });
@@ -80,7 +78,6 @@ $(document).on("click", ".edit_list", function (e) {
         type: "GET",
         url: "/list/" + list_id,
         success: function (response) {
-            console.log(response);
             if (response.status == 200) {
                 $("#edit_name").val(response.list.name);
                 $("#edit_subtitle").val(response.list.subtitle);
@@ -88,7 +85,6 @@ $(document).on("click", ".edit_list", function (e) {
             }
         },
         error: function (response) {
-            console.log(error);
             alert("Data not saved");
         },
     });
@@ -98,9 +94,6 @@ $(document).on("click", ".delete_list", function (e) {
     e.preventDefault();
     var list_id = $(this).val();
     $("#delete_todo_id").val(list_id);
-
-    console.log(list_id);
-
     $("#DeleteTodoModal").modal("show");
 });
 
@@ -108,6 +101,7 @@ $(document).on("click", ".delete_list_btn", function (e) {
     e.preventDefault();
     var list_id = $("#delete_todo_id").val();
     $("#DeleteTodoModal").modal("show");
+    createAlert("success", "Processing...");
 
     $.ajaxSetup({
         headers: {
@@ -115,12 +109,13 @@ $(document).on("click", ".delete_list_btn", function (e) {
         },
     });
 
+    $("#DeleteTodoModal").modal("hide");
+
     $.ajax({
         type: "DELETE",
         url: "/list/" + list_id,
         success: function (response) {
-            console.log(response);
-            $("#DeleteTodoModal").modal("hide");
+            createAlert("success", "List Deleted");
         },
         error: function (response) {
             alert("Data not saved");
@@ -130,10 +125,9 @@ $(document).on("click", ".delete_list_btn", function (e) {
 
 $(document).on("click", ".update_list", function (e) {
     e.preventDefault();
-    console.log("hello");
 
     var list_id = $("#edit_todo_id").val();
-    console.log(list_id);
+    createAlert("info", "Processing...");
 
     var data = {
         name: $("#edit_name").val(),
@@ -146,15 +140,16 @@ $(document).on("click", ".update_list", function (e) {
         },
     });
 
+    $("#EditTodoModal").modal("hide");
+
     $.ajax({
         type: "PATCH",
         url: "/update-list/" + list_id,
         data: data,
         dataType: "json",
         success: function (response) {
-            console.log(response);
             if (response.status == 200) {
-                $("#EditTodoModal").modal("hide");
+                createAlert("success", "Data Updated");
             }
         },
         error: function (response) {
@@ -165,7 +160,6 @@ $(document).on("click", ".update_list", function (e) {
 
 $(document).on("click", ".create_entry", function (e) {
     e.preventDefault();
-    console.log("hello");
 
     var list_id = $("#list_id").val();
 
@@ -174,7 +168,7 @@ $(document).on("click", ".create_entry", function (e) {
         status: $("#status").val(),
     };
 
-    console.log(data);
+    createAlert("info", "Processing...");
 
     $.ajaxSetup({
         headers: {
@@ -182,15 +176,15 @@ $(document).on("click", ".create_entry", function (e) {
         },
     });
 
+    $("#AddEntryModal").modal("hide");
+
     $.ajax({
         type: "POST",
         url: "/create-entry/" + list_id,
         data: data,
         dataType: "json",
         success: function (response) {
-            console.log(response);
-            $("#AddEntryModal").modal("hide");
-            alert("Data Saved");
+            createAlert("success", "Data Saved");
         },
         error: function (response) {
             console.log(error);
@@ -207,21 +201,23 @@ $(document).on("click", ".edit_entry", function (e) {
 
     $("#EditEntryModal").modal("show");
 
+    createAlert("info", "Processing...");
+
     $.ajax({
         type: "GET",
         url: "/list/" + list_id + "/" + col_id + "/" + entry_id,
         success: function (response) {
-            console.log(response);
             if (response.status == 200) {
                 $("#edit_content").val(response.entry.content);
                 $("#edit_status").val(response.column.name);
                 $("#edit_entry_id").val(entry_id);
                 $("#edit_col_id").val(col_id);
                 $("#edit_list_id").val(list_id);
+
+                createAlert("success", "List Deleted");
             }
         },
         error: function (response) {
-            console.log(error);
             alert("Data not saved");
         },
     });
@@ -229,19 +225,18 @@ $(document).on("click", ".edit_entry", function (e) {
 
 $(document).on("click", ".update_entry", function (e) {
     e.preventDefault();
-    console.log("hello");
 
     var entry_id = $("#edit_entry_id").val();
-    console.log(entry_id);
     var col_id = $("#edit_col_id").val();
-    console.log(col_id);
     var list_id = $("#edit_list_id").val();
-    console.log(list_id);
 
     var data = {
         content: $("#edit_content").val(),
         status: $("#edit_status").val(),
     };
+
+    $("#EditEntryModal").modal("hide");
+    createAlert("info", "Processing...");
 
     $.ajaxSetup({
         headers: {
@@ -255,9 +250,8 @@ $(document).on("click", ".update_entry", function (e) {
         data: data,
         dataType: "json",
         success: function (response) {
-            console.log(response);
             if (response.status == 200) {
-                $("#EditEntryModal").modal("hide");
+                createAlert("success", "List Updated");
             }
         },
         error: function (response) {
@@ -278,9 +272,10 @@ $(document).on("click", ".delete_entry", function (e) {
 $(document).on("click", ".delete_entry_btn", function (e) {
     e.preventDefault();
     var entry_id = $("#delete_entry_id").val();
-    // var list_id = $('#delete_list_id').val();
-    // console.log(list_id);
+
     $("#DeleteEntryModal").modal("show");
+
+    createAlert("info", "Processing...");
 
     $.ajaxSetup({
         headers: {
@@ -292,9 +287,9 @@ $(document).on("click", ".delete_entry_btn", function (e) {
         type: "DELETE",
         url: "/delete-list/" + entry_id,
         success: function (response) {
-            console.log(response);
+            $("#DeleteEntryModal").modal("hide");
             if (response.status == 200) {
-                $("#DeleteEntryModal").modal("hide");
+                createAlert("success", "List Deleted");
             }
         },
         error: function (response) {
@@ -305,27 +300,25 @@ $(document).on("click", ".delete_entry_btn", function (e) {
 
 $(document).on("click", ".add_bdentry", function (e) {
     e.preventDefault();
-    console.log("hello");
     var col_id = $(this).val();
-    console.log(col_id);
     var list_id = $("#list_id").val();
-    console.log(list_id);
 
     $("#AddBDEntryModal").modal("show");
+
+    createAlert("info", "Processing...");
 
     $.ajax({
         type: "GET",
         url: "/create-bdentry/" + list_id + "/" + col_id,
         success: function (response) {
-            console.log(response);
             if (response.status == 200) {
                 $("#bd_status").val(response.column.name);
                 $("#bd_col_id").val(response.column.id);
                 $("#bd_list_id").val(response.list.id);
+                createAlert("success", "Entry Added");
             }
         },
         error: function (response) {
-            console.log(error);
             alert("Data not saved");
         },
     });
@@ -333,11 +326,8 @@ $(document).on("click", ".add_bdentry", function (e) {
 
 $(document).on("click", ".create_bdentry", function (e) {
     e.preventDefault();
-    console.log("hello");
     var col_id = $(".add_bdentry").val();
-    console.log(col_id);
     var list_id = $("#list_id").val();
-    console.log(list_id);
 
     var data = {
         col_id: $("#bd_col_id").val(),
@@ -345,7 +335,8 @@ $(document).on("click", ".create_bdentry", function (e) {
         content: $("#bd_content").val(),
         status: $("#bd_status").val(),
     };
-    console.log(data);
+
+    createAlert("info", "Processing...");
 
     $.ajaxSetup({
         headers: {
@@ -361,11 +352,10 @@ $(document).on("click", ".create_bdentry", function (e) {
             console.log(response);
             if (response.status == 200) {
                 $("#AddBDEntryModal").modal("hide");
-                alert("Data Saved");
+                createAlert("success", "Entry Added");
             }
         },
         error: function (response) {
-            console.log(error);
             alert("Data not saved");
         },
     });
@@ -373,14 +363,13 @@ $(document).on("click", ".create_bdentry", function (e) {
 
 $(document).on("click", ".create_col", function (e) {
     e.preventDefault();
-    console.log("hello");
     var list_id = $("#list_id").val();
 
     var data = {
         name: $("#bdv_status").val(),
     };
 
-    console.log(data);
+    createAlert("info", "Processing...");
 
     $.ajaxSetup({
         headers: {
@@ -394,9 +383,8 @@ $(document).on("click", ".create_col", function (e) {
         data: data,
         dataType: "json",
         success: function (response) {
-            console.log(response);
             $("#AddTodoModal").modal("hide");
-            alert("Data Saved");
+            createAlert("success", "Column Added");
         },
         error: function (response) {
             alert("Data not saved");
@@ -418,6 +406,8 @@ function createJournal() {
     const name = $("#createJournalModal #journal-name").val();
     const description = $("#createJournalModal #journal-description").val();
 
+    createAlert("info", "Processing...");
+
     $.ajax({
         url: "/journals",
         method: "PUT",
@@ -430,7 +420,6 @@ function createJournal() {
         },
         success: (response) => {
             const journal = response.data;
-
             $("#journal-list-container")
                 .append(`<div class="journal-list-entry" data-id='${journal.id}' data-title='${journal.name}' data-description='${journal.description}'>
                     <div>
@@ -448,12 +437,14 @@ function createJournal() {
                         </div>
                     </div>`);
 
+            createAlert("success", "Journal created");
+
             $(`[data-id='${journal.id}'`)
                 .find(".btn")
                 .on("click", selectJournal);
         },
         error: (err) => {
-            console.log(err);
+            createAlert("danger", "Server Error");
         },
     });
 }
@@ -462,6 +453,7 @@ function deleteJournal() {
     if (selectedJournal == undefined) return;
 
     const journal_id = selectedJournal;
+    createAlert("success", "Processing...");
 
     $.ajax({
         url: `/journals/${journal_id}`,
@@ -471,6 +463,7 @@ function deleteJournal() {
         },
         success: (data) => {
             $(`[data-id='${journal_id}']`).remove();
+            createAlert("success", "Journal Deleted");
         },
         error: (err) => {
             console.log(err);
@@ -486,6 +479,7 @@ function editJournal() {
 
     const name = $("#edit-journal-name").val();
     const description = $("#edit-journal-description").val();
+    createAlert("success", "Processing...");
 
     $.ajax({
         url: `/journals/${journal_id}`,
@@ -503,6 +497,7 @@ function editJournal() {
             journal.data("description", description);
             journal.data("title", name);
             journal.find(".journal-name").text(name);
+            createAlert("success", "Journal Updated");
         },
         error: (err) => {
             console.log(err);
@@ -524,6 +519,7 @@ function selectPage() {
 function createPage() {
     const name = $("#createPageModal #page-name").val();
     const id = $("#page").data("journal-id");
+    createAlert("success", "Processing...");
 
     $.ajax({
         url: `/journals/${id}`,
@@ -555,6 +551,9 @@ function createPage() {
                             </div>
                         </div>
                     </div>`);
+
+            createAlert("success", "Page Added Successfully.");
+
             $(`[data-page-id='${page.id}']`)
                 .find(".btn")
                 .on("click", selectPage);
@@ -568,6 +567,7 @@ function createPage() {
 function deletePage() {
     console.log(selectedJournal, selectedPage);
     if (selectedPage == undefined || selectedJournal == undefined) return;
+    createAlert("success", "Processing...");
 
     const journal_id = selectedJournal;
     const page_id = selectedPage;
@@ -580,6 +580,7 @@ function deletePage() {
         },
         success: (data) => {
             $(`[data-page-id='${page_id}']`).remove();
+            createAlert("success", "Page Deleted");
         },
         error: (err) => {
             console.log(err);
@@ -596,6 +597,7 @@ function editPage() {
     const page_id = selectedPage;
 
     const name = $("#edit-page-name").val();
+    createAlert("success", "Processing...");
 
     $.ajax({
         url: `/journals/${selectedJournal}/${selectedPage}`,
@@ -611,6 +613,7 @@ function editPage() {
 
             page.data("identifier", name);
             page.find(".page-name").text(name);
+            createAlert("success", "Page Updated");
         },
         error: (err) => {
             console.log(err);
