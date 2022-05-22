@@ -19,28 +19,28 @@
             <div class="position-absolute top-50 start-50 translate-middle mt-6 collapse navbar-collapse">
                 <ul class="navbar-nav">
                     <li class="nav-item position-relative">
-                        <a class="nav-link pb-4" href="#">Home</a>
+                        <a class="nav-link pb-4" href="./">Home</a>
                         @if (strcmp($currentPage, '') == 0)
                             <div class="mt-4 pe-10 position-absolute bottom-0 start-0 w-100 bg-success-light"
                                 style="height: 3px;"></div>
                         @endif
                     </li>
                     <li class="nav-item position-relative">
-                        <a class="nav-link pb-4" href="#">Pricing</a>
+                        <a class="nav-link pb-4" href="./pricing">Pricing</a>
                         @if (strcmp($currentPage, 'pricing') == 0)
                             <div class="mt-4 pe-10 position-absolute bottom-0 start-0 w-100 bg-success-light"
                                 style="height: 3px;"></div>
                         @endif
                     </li>
                     <li class="nav-item position-relative">
-                        <a class="nav-link pb-4" href="#">Pivacy Policy</a>
-                        @if (strcmp($currentPage, 'privacy-policy') == 0)
+                        <a class="nav-link pb-4" href="./about-us">About Us</a>
+                        @if (strcmp($currentPage, 'about-us') == 0)
                             <div class="mt-4 pe-10 position-absolute bottom-0 start-0 w-100 bg-success-light"
                                 style="height: 3px;"></div>
                         @endif
                     </li>
                     <li class="nav-item position-relative">
-                        <a class="nav-link pb-4" href="#">Features</a>
+                        <a class="nav-link pb-4" href="./features">Features</a>
                         @if (strcmp($currentPage, 'features') == 0)
                             <div class="mt-4 pe-10 position-absolute bottom-0 start-0 w-100 bg-success-light"
                                 style="height: 3px;"></div>

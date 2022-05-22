@@ -15,7 +15,7 @@ $(function () {
     $("#dashboard-hamburger").on("click", (e) => {
         e.stopPropagation();
         $("#dashboard-nav").toggleClass("nav-collapse");
-        $("dashboard-content").toggleClass("dashboard-collapse-content");
+        $("#dashboard-content").toggleClass("dashboard-collapse-content");
     });
 });
 
@@ -31,21 +31,39 @@ function display_view_border(){
     else document.getElementsByClassName("bd-view").style.borderBottom = "2px solid rgb(102, 0, 204)"; 
 }
 
-$(document).on('click', '.create_list', function (e) {
+$(".bd-view").on("click", function () {
+    $(this).css({ "border-bottom": "4px solid rgb(102, 0, 204)" });
+});
+
+$(".tb-view").on("click", function () {
+    $(this).css({ "border-bottom": "4px solid rgb(102, 0, 204)" });
+});
+
+$(".todo_btn").on(
+    "hover",
+    function () {
+        $(this).css("background-color", "black");
+    },
+    function () {
+        $(this).css("background-color", "rgb(102, 0, 204)");
+    }
+);
+
+$(document).on("click", ".create_list", function (e) {
     e.preventDefault();
     console.log("hello");
 
     var data = {
-        'name': $("#todo").val(),
-        'subtitle': $("#todo_desc").val(),
-    }
+        name: $("#todo").val(),
+        subtitle: $("#todo_desc").val(),
+    };
 
     console.log(data);
 
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
     });
 
     $.ajax({
@@ -55,17 +73,17 @@ $(document).on('click', '.create_list', function (e) {
         dataType: "json",
         success: function (response) {
             console.log(response);
-            $('#AddTodoModal').modal('hide');
-            alert('Data Saved');
+            $("#AddTodoModal").modal("hide");
+            alert("Data Saved");
         },
         error: function (response) {
             console.log(error);
-            alert('Data not saved');
-        }
+            alert("Data not saved");
+        },
     });
 });
 
-$(document).on('click', '.edit_list', function (e) {
+$(document).on("click", ".edit_list", function (e) {
     e.preventDefault();
     var list_id = $(this).val();
     $("#EditTodoModal").modal("show");
@@ -83,30 +101,30 @@ $(document).on('click', '.edit_list', function (e) {
         },
         error: function (response) {
             console.log(error);
-            alert('Data not saved');
-        }
+            alert("Data not saved");
+        },
     });
 });
 
-$(document).on('click', '.delete_list', function (e) {
+$(document).on("click", ".delete_list", function (e) {
     e.preventDefault();
     var list_id = $(this).val();
-    $('#delete_todo_id').val(list_id);
+    $("#delete_todo_id").val(list_id);
 
     console.log(list_id);
 
     $("#DeleteTodoModal").modal("show");
 });
 
-$(document).on('click', '.delete_list_btn', function (e) {
+$(document).on("click", ".delete_list_btn", function (e) {
     e.preventDefault();
-    var list_id = $('#delete_todo_id').val();
+    var list_id = $("#delete_todo_id").val();
     $("#DeleteTodoModal").modal("show");
 
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
     });
 
     $.ajax({
@@ -117,12 +135,12 @@ $(document).on('click', '.delete_list_btn', function (e) {
             $("#DeleteTodoModal").modal("hide");
         },
         error: function (response) {
-            alert('Data not saved');
-        }
+            alert("Data not saved");
+        },
     });
 });
 
-$(document).on('click', '.update_list', function (e) {
+$(document).on("click", ".update_list", function (e) {
     e.preventDefault();
     console.log("hello");
 
@@ -130,14 +148,14 @@ $(document).on('click', '.update_list', function (e) {
     console.log(list_id);
 
     var data = {
-        'name': $("#edit_name").val(),
-        'subtitle': $("#edit_subtitle").val(),
-    }
+        name: $("#edit_name").val(),
+        subtitle: $("#edit_subtitle").val(),
+    };
 
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
     });
 
     $.ajax({
@@ -152,28 +170,28 @@ $(document).on('click', '.update_list', function (e) {
             }
         },
         error: function (response) {
-            alert('Data not saved');
-        }
+            alert("Data not saved");
+        },
     });
 });
 
-$(document).on('click', '.create_entry', function (e) {
+$(document).on("click", ".create_entry", function (e) {
     e.preventDefault();
     console.log("hello");
 
     var list_id = $("#list_id").val();
 
     var data = {
-        'content': $("#content").val(),
-        'status': $("#status").val(),
-    }
+        content: $("#content").val(),
+        status: $("#status").val(),
+    };
 
     console.log(data);
 
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
     });
 
     $.ajax({
@@ -183,17 +201,17 @@ $(document).on('click', '.create_entry', function (e) {
         dataType: "json",
         success: function (response) {
             console.log(response);
-            $('#AddEntryModal').modal('hide');
-            alert('Data Saved');
+            $("#AddEntryModal").modal("hide");
+            alert("Data Saved");
         },
         error: function (response) {
             console.log(error);
-            alert('Data not saved');
-        }
+            alert("Data not saved");
+        },
     });
 });
 
-$(document).on('click', '.edit_entry', function (e) {
+$(document).on("click", ".edit_entry", function (e) {
     e.preventDefault();
     var entry_id = $(this).val();
     var col_id = $("#col_id").val();
@@ -216,12 +234,12 @@ $(document).on('click', '.edit_entry', function (e) {
         },
         error: function (response) {
             console.log(error);
-            alert('Data not saved');
-        }
+            alert("Data not saved");
+        },
     });
 });
 
-$(document).on('click', '.update_entry', function (e) {
+$(document).on("click", ".update_entry", function (e) {
     e.preventDefault();
     console.log("hello");
 
@@ -233,14 +251,14 @@ $(document).on('click', '.update_entry', function (e) {
     console.log(list_id);
 
     var data = {
-        'content': $("#edit_content").val(),
-        'status': $("#edit_status").val(),
-    }
+        content: $("#edit_content").val(),
+        status: $("#edit_status").val(),
+    };
 
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
     });
 
     $.ajax({
@@ -255,36 +273,36 @@ $(document).on('click', '.update_entry', function (e) {
             }
         },
         error: function (response) {
-            alert('Data not saved');
-        }
+            alert("Data not saved");
+        },
     });
 });
 
-$(document).on('click', '.delete_entry', function (e) {
+$(document).on("click", ".delete_entry", function (e) {
     e.preventDefault();
     var entry_id = $(this).val();
     // var list_id = $('#list_id').val();
-    $('#delete_entry_id').val(entry_id);
+    $("#delete_entry_id").val(entry_id);
     // $('#delete_list_id').val(list_id);
     $("#DeleteEntryModal").modal("show");
 });
 
-$(document).on('click', '.delete_entry_btn', function (e) {
+$(document).on("click", ".delete_entry_btn", function (e) {
     e.preventDefault();
-    var entry_id = $('#delete_entry_id').val();
+    var entry_id = $("#delete_entry_id").val();
     // var list_id = $('#delete_list_id').val();
     // console.log(list_id);
     $("#DeleteEntryModal").modal("show");
 
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
     });
 
     $.ajax({
         type: "DELETE",
-        url: "/delete-list/"+ entry_id,
+        url: "/delete-list/" + entry_id,
         success: function (response) {
             console.log(response);
             if (response.status == 200) {
@@ -292,12 +310,12 @@ $(document).on('click', '.delete_entry_btn', function (e) {
             }
         },
         error: function (response) {
-            alert('Data not saved');
-        }
+            alert("Data not saved");
+        },
     });
 });
 
-$(document).on('click', '.add_bdentry', function (e) {
+$(document).on("click", ".add_bdentry", function (e) {
     e.preventDefault();
     console.log("hello");
     var col_id = $(this).val();
@@ -320,12 +338,12 @@ $(document).on('click', '.add_bdentry', function (e) {
         },
         error: function (response) {
             console.log(error);
-            alert('Data not saved');
-        }
+            alert("Data not saved");
+        },
     });
 });
 
-$(document).on('click', '.create_bdentry', function (e) {
+$(document).on("click", ".create_bdentry", function (e) {
     e.preventDefault();
     console.log("hello");
     var col_id = $(".add_bdentry").val();
@@ -334,17 +352,17 @@ $(document).on('click', '.create_bdentry', function (e) {
     console.log(list_id);
 
     var data = {
-        'col_id':$("#bd_col_id").val(),
-        'list_id':$("#bd_list_id").val(),
-        'content': $("#bd_content").val(),
-        'status': $("#bd_status").val(),
-    }
+        col_id: $("#bd_col_id").val(),
+        list_id: $("#bd_list_id").val(),
+        content: $("#bd_content").val(),
+        status: $("#bd_status").val(),
+    };
     console.log(data);
 
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
     });
 
     $.ajax({
@@ -353,51 +371,50 @@ $(document).on('click', '.create_bdentry', function (e) {
         data: data,
         success: function (response) {
             console.log(response);
-            if(response.status == 200){
-                $('#AddBDEntryModal').modal('hide');
-                alert('Data Saved');
+            if (response.status == 200) {
+                $("#AddBDEntryModal").modal("hide");
+                alert("Data Saved");
             }
         },
         error: function (response) {
             console.log(error);
-            alert('Data not saved');
-        }
+            alert("Data not saved");
+        },
     });
 });
 
-$(document).on('click', '.create_col', function (e) {
+$(document).on("click", ".create_col", function (e) {
     e.preventDefault();
     console.log("hello");
     var list_id = $("#list_id").val();
 
     var data = {
-        'name': $("#bdv_status").val(),
-    }
+        name: $("#bdv_status").val(),
+    };
 
     console.log(data);
 
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
     });
 
     $.ajax({
         type: "POST",
-        url: "/create-col/"+list_id,
+        url: "/create-col/" + list_id,
         data: data,
         dataType: "json",
         success: function (response) {
             console.log(response);
-            $('#AddTodoModal').modal('hide');
-            alert('Data Saved');
+            $("#AddTodoModal").modal("hide");
+            alert("Data Saved");
         },
         error: function (response) {
-            alert('Data not saved');
-        }
+            alert("Data not saved");
+        },
     });
 });
-
 
 function selectJournal() {
     const journal = $(this).closest(".journal-list-entry");
@@ -415,7 +432,7 @@ function createJournal() {
 
     $.ajax({
         url: "/journals",
-        method: "POST",
+        method: "PUT",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
@@ -522,7 +539,7 @@ function createPage() {
 
     $.ajax({
         url: `/journals/${id}`,
-        method: "POST",
+        method: "PUT",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
