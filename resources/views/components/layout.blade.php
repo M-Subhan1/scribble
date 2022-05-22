@@ -10,7 +10,9 @@
         href="https://fonts.googleapis.com/css2?family=Prata&amp;family=Readex+Pro:wght@300;400;500;600;700&amp;display=swap">
     <link rel="stylesheet" href={{ asset('css/app.css') }}>
     <link rel="icon" href={{ asset('wrexa-assets/logos/logo-wrexa.svg') }}>
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <link rel="stylesheet" href={{ asset('css/list.css') }}>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 
 <body>

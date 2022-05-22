@@ -28,19 +28,38 @@ Route::get("/register", function () {
     return view("register");
 });
 
-Route::get("/logout", [AuthController::class, "logout"]);
-Route::post("/register", [AuthController::class, "register"]);
-Route::post("/login", [AuthController::class, "login"]);
-Route::get("/page", [JournalController::class, "render_page"]);
-Route::get('/journals', [JournalController::class, "list_journals"]);
-Route::post('/journals', [JournalController::class, "add_journal"]);
-Route::get('/journals/{journal_name}/', [JournalController::class, "list_pages"]);
-Route::post('/journals/{journal_name}/', [JournalController::class, "add_page"]);
-Route::get('/journals/{journal_name}/{page_num}/', [JournalController::class, "render_page"]);
-Route::post('/journals/{journal_name}/{page_num}/', [JournalController::class, "update_page"]);
+
+Route::get("/logout", [AuthController::class , "logout"]);
+Route::post("/register", [AuthController::class , "register"]);
+Route::post("/login", [AuthController::class , "login"]);
+Route::get("/page", [JournalController::class , "render_page"]);
+Route::get('/journals', [JournalController::class , "list_journals"]);
+Route::post('/journals', [JournalController::class , "add_journal"]);
+Route::get('/journals/{journal_name}/', [JournalController::class , "list_pages"]);
+Route::post('/journals/{journal_name}/', [JournalController::class , "add_page"]);
+Route::get('/journals/{journal_name}/{page_num}/', [JournalController::class , "render_page"]);
+Route::post('/journals/{journal_name}/{page_num}/', [JournalController::class , "update_page"]);
 Route::get('/404', function () {
     return view('404');
 });
+
+Route::get('/render-list/{list_id}', [ListController::class , "render_list"]);
+Route::get('/list', [ListController::class , "display_lists"]);
+Route::post('/create-list', [ListController::class , "add_list"]);
+// Route::put('/list/{list_id}', [ListController::class , "add_list_column"]);
+Route::post('/create-entry/{list_id}', [ListController::class , "add_list_entry"]);
+Route::delete('/list/{list_id}', [ListController::class , "delete_list"]);
+Route::delete('/list/{list_id}/{list_col_id}', [ListController::class , "delete_column"]);
+// Route::delete('/list/{list_id}/{list_col_id}/{list_entry_id}', [ListController::class , "delete_entry"]);
+Route::get('/list/{list_id}', [ListController::class , "edit_list"]);
+Route::patch('list/{list_id}/{list_col_id}', [ListController::class , "edit_column"]);
+Route::get('/list/{list_id}/{list_col_id}/{list_entry_id}', [ListController::class , "edit_entry"]);
+Route::patch('/update-list/{list_id}', [ListController::class , "update_list"]);
+Route::patch('/list/{list_id}/{list_col_id}/{list_entry_id}', [ListController::class , "update_entry"]);
+Route::delete('/delete-list/{list_entry_id}', [ListController::class , "delete_entry"]);
+Route::post('/create-bdentry/{list_id}/{list_col_id}', [ListController::class , "add_list_dbentry"]);
+Route::get('/create-bdentry/{list_id}/{list_col_id}', [ListController::class , "add_dbentry"]);
+Route::post('/create-col/{list_id}', [ListController::class , "add_list_column"]);
 
 Route::get('/list/{list_id}', [ListController::class, "render_list"]);
 Route::get('/list', [ListController::class, "display_lists"]);
