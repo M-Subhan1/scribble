@@ -28,6 +28,7 @@ Route::get("/register", function () {
     return view("register");
 });
 
+
 Route::get("/logout", [AuthController::class , "logout"]);
 Route::post("/register", [AuthController::class , "register"]);
 Route::post("/login", [AuthController::class , "login"]);
@@ -60,10 +61,17 @@ Route::post('/create-bdentry/{list_id}/{list_col_id}', [ListController::class , 
 Route::get('/create-bdentry/{list_id}/{list_col_id}', [ListController::class , "add_dbentry"]);
 Route::post('/create-col/{list_id}', [ListController::class , "add_list_column"]);
 
-Route::get("/logout", [AuthController::class, "logout"]);
-Route::post("/register", [AuthController::class, "register"]);
-Route::post("/login", [AuthController::class, "login"]);
-
+Route::get('/list/{list_id}', [ListController::class, "render_list"]);
+Route::get('/list', [ListController::class, "display_lists"]);
+Route::put('/list', [ListController::class, "add_list"]);
+Route::put('/list/{list_id}', [ListController::class, "add_list_column"]);
+Route::put('/list/{list_id}/{list_col_id}', [ListController::class, "add_list_entry"]);
+Route::post('/list/{list_id}', [ListController::class, "delete_list"]);
+Route::post('/list/{list_id}/{list_col_id}', [ListController::class, "delete_column"]);
+Route::post('/list/{list_id}/{list_col_id}/{list_entry_id}', [ListController::class, "delete_entry"]);
+Route::patch('/list/{list_id}', [ListController::class, "edit_list"]);
+Route::post('list/{list_id}/{list_col_id}', [ListController::class, "edit_column"]);
+Route::post('/list/{list_id}/{list_col_id}/{list_entry_id}', [ListController::class, "edit_entry"]);
 // Journal Routes
 Route::get('/journals', [JournalController::class, "list_journals"]);
 Route::put('/journals', [JournalController::class, "add_journal"]);
@@ -71,6 +79,6 @@ Route::delete('/journals/{journal_id}', [JournalController::class, "delete_journ
 Route::patch('/journals/{journal_id}', [JournalController::class, "update_journal"]);
 Route::get('/journals/{journal_id}', [JournalController::class, "list_pages"]);
 Route::put('/journals/{journal_id}', [JournalController::class, "add_page"]);
-Route::patch('/journals/{journal_id}/{identifier}', [JournalController::class, "update_page"]);
+Route::patch('/journals/{journal_id}/{id}', [JournalController::class, "update_page"]);
 Route::get('/journals/{journal_id}/{id}', [JournalController::class, "render_page"]);
 Route::delete('/journals/{journal_id}/{id}', [JournalController::class, "delete_page"]);
