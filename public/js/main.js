@@ -1,4 +1,5 @@
 // Burger menus
+let alert_id = 0;
 document.addEventListener("DOMContentLoaded", function () {
     // open
     const burger = document.querySelectorAll(".navbar-burger");
@@ -51,4 +52,28 @@ document.addEventListener("DOMContentLoaded", function () {
     toastList.forEach((toast) => toast.show());
 });
 
-function addAlert() {}
+function createAlert(type, message) {
+    $(".toast").remove();
+    $("body")
+        .append(`<div id="alert-${alert_id}" class="m-4 position-fixed bottom-0 end-0 toast align-items-center text-white bg-${type}-dark border-0"
+            role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    ${message}
+                </div>
+            </div>
+        </div>`);
+
+    const toastEl = new bootstrap.Toast(
+        document.getElementById(`alert-${alert_id}`),
+        {
+            animation: true,
+            autohide: true,
+            delay: 3000,
+        }
+    );
+
+    toastEl.show();
+
+    alert_id++;
+}
