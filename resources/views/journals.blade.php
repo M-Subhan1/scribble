@@ -31,19 +31,4 @@
             @endforeach
 
         </div>
-
-        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-                crossorigin="anonymous"></script>
-
-        <script>
-            $(".todo_btn").hover(function() {
-                $(this).css("background-color", "black");
-            }, function() {
-                $(this).css("background-color", "rgb(102, 0, 204)");
-            });
-
-            $(".todo_btn").click(function() {
-                alert("create list");
-            });
-        </script>
 </x-dashboard-layout>
