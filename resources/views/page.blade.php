@@ -1,4 +1,4 @@
-<x-dashboard-layout>
+<x-dashboard-layout current-page="journals">
     <div class="container dashboard-container">
         <nav id="bread-crumb" aria-label="breadcrumb">
             <ol class="breadcrumb">
