@@ -11,9 +11,13 @@
             <h2 class="mt-12">Happy Scribbling!!</h2>
             <div class="description mt-7 mb-0">
                 Welcome to Scribble.<br>
-                All of your journals entries can be accessed using the menu of the left.<br>
+                All of your journals entries and todo lists can be accessed using the menu of the left.<br>
                 You can store and edit journal pages/entries using markdown syntax. This provides a lot of flexibility
-                on top of our fast and robust platform<br /><br />
+                on top of our fast and robust platform<br />
+                Similarly, todos are here to your rescue with similar features and provision of a couple views to assist you. 
+                <br><br>
+                <h4><- Get Started</h4>
+
                 </span>
             </div>
         </div>

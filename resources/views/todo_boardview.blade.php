@@ -8,7 +8,6 @@
             </ol>
         </nav>
         
-        <h2 class="mt-20">{{ $list->name }}</h2>
         <div class="px-4 mt-20">
             <h2>{{ $list->name }}</h2>
             <h5>{{ $list->subtitle }}</h5>
@@ -17,6 +16,7 @@
                 Use todo to track your personal tasks.<br>
                 Click on the list tag you want to open. <br>
                 To create a new todo click the create list button.
+                Click Add column to add a new column to your todo.
                 </span>
             </div>
         </div>
