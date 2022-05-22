@@ -5,7 +5,7 @@
             <div class="d-flex align-items-center mb-10">
                 <span class="display-6 h5 mb-0 text-white">05</span>
                 <div class="mx-4 bg-light-dark rounded-circle" style="width: 4px; height: 4px;"></div>
-                <span class="display-6 h5 mb-0 text-white">Be unique with features</span>
+                <span class="display-6 h5 mb-0 text-white">Explore Scribble's features</span>
             </div>
             <h1 class="display-3 text-white text-center mb-24">Features</h1>
             <div class="row">
@@ -22,10 +22,9 @@
                                 style="width: 1px;"></div>
                             <div class="d-lg-none position-absolute bottom-0 start-0 w-100 bg-light-dark"
                                 style="height: 1px;"></div>
-                            <h5 class="display-6 text-white lh-lg mb-14">Create design and furniture</h5>
+                            <h5 class="display-6 text-white lh-lg mb-14">Never ask “What’s the context?” again</h5>
                             <div class="mt-auto px-8 px-xl-20">
-                                <p class="text-light-dark lh-lg mb-0">The house by the pond cras ornare, some chords for
-                                    a three moments, like a sense of truth that.</p>
+                                <p class="text-light-dark lh-lg mb-0">Stale wikis aren't helpful. Neither are floating docs. In Scribble, your daily work and knowledge live side by side — so you never lose context.</p>
                             </div>
                         </div>
                     </div>
@@ -50,10 +49,12 @@
                                 style="width: 1px;"></div>
                             <div class="d-lg-none position-absolute bottom-0 start-0 w-100 bg-light-dark"
                                 style="height: 1px;"></div>
-                            <h5 class="display-6 text-white lh-lg mb-14">New in: Modular Design</h5>
+                            <h5 class="display-6 text-white lh-lg mb-14">Start with a template.
+                                Modify it however you need.</h5>
                             <div class="mt-auto px-8 px-xl-20">
-                                <p class="text-light-dark lh-lg mb-0">The lorem ipsum house by the pond cras ornare,
-                                    some chords for a three moments, lorem like this.</p>
+                                <p class="text-light-dark lh-lg mb-0">Choose from thousands of free, pre-built setups — for work and life with the help
+                                    of our journals, lists and databases.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -71,10 +72,10 @@
                             <rect x="30.55" width="3.525" height="30.55" rx="1.7625" fill="#5B2FE2"></rect>
                         </svg>
                         <div>
-                            <h5 class="display-6 text-white lh-lg mb-14">Make every day feel like Sunday</h5>
+                            <h5 class="display-6 text-white lh-lg mb-14">Build the workflow you want</h5>
                             <div class="mt-auto px-8 px-xl-20">
-                                <p class="text-light-dark lh-lg mb-0">The house by lorem ipsum the pond cras ornare,
-                                    some chords for a three moments.</p>
+                                <p class="text-light-dark lh-lg mb-0">Customize Notion to make it work the way you want it to.
+                                    Just select the dashboard, database, doc, list or journal that you need.</p>
                             </div>
                         </div>
                     </div>

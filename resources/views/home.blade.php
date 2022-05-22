@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row align-items-center pt-28 pb-14 text-center">
                 <div class="col-12 text-center">
-                    <span class="d-inline-block mb-10">Welcome to Wrexa App</span>
+                    <span class="d-inline-block mb-10">Welcome to Scribble App</span>
                 </div>
                 <div class="col-auto mx-auto order-2 order-lg-0">
                     <a class="d-inline-block" href="#">
@@ -16,7 +16,7 @@
                     </a>
                 </div>
                 <div class="col-12 col-md-9 mx-auto mx-lg-20">
-                    <h1 class="display-2 mb-0">Customize your architectual design</h1>
+                    <h1 class="display-2 mb-0">One Workspace Every Individual</h1>
                 </div>
                 <div class="col-auto mx-auto order-2 order-lg-0">
                     <a class="d-inline-block" href="#">
@@ -26,14 +26,14 @@
                         </svg>
                     </a>
                 </div>
-                <div class="col-12 mt-16 mb-16 mb-lg-0"><a class="btn py-3 px-8 btn-primary" href="#">Discover Now</a>
+                <div class="col-12 mt-16 mb-16 mb-lg-0"><a class="btn py-3 px-8 btn-primary" href="/about-us">Discover Now</a>
                 </div>
             </div>
             <div class="d-flex flex-column w-100 mb-14 align-items-center">
                 <div class="py-9 bg-dark" style="width: 1.5px;"></div>
                 <div class="py-5 bg-white" style="width: 1.5px;"></div>
             </div>
-            <img class="img-fluid w-100" src="wrexa-assets/images/image-app-placeholder.png" alt="">
+            <img class="img-fluid w-100" height="30px" src="/images/productivity.jpg" alt="error">
         </div>
         <div class="d-none navbar-menu position-relative" style="z-index: 99;">
             <div class="navbar-backdrop position-fixed top-0 start-0 end-0 bottom-0 bg-dark opacity-75"></div>
@@ -112,14 +112,14 @@
                         <h4 class="text-white fw-bold lh-lg mb-8">Register your account</h4>
                         <div class="d-flex align-items-center">
                             <span class="text-secondary mb-0">Get started.</span>
-                            <a class="btn ms-1 p-0 btn-link text-secondary" href="#">Click here</a>
+                            <a class="btn ms-1 p-0 btn-link text-secondary" href="/register">Click here</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 mb-8 mb-xl-0 mt-xxl-48">
                     <div class="mw-sm mx-auto h-100 pt-8 pb-14 px-10 bg-dark-light rounded">
                         <span class="text-secondary lh-lg">Step 3</span>
-                        <h4 class="text-white fw-bold lh-lg mb-8">Find your style</h4>
+                        <h4 class="text-white fw-bold lh-lg mb-8">Find and customise templates</h4>
                         <div class="d-flex align-items-center">
                             <span class="text-secondary mb-0">Get started.</span>
                             <a class="btn ms-1 p-0 btn-link text-secondary" href="#">Click here</a>
@@ -129,7 +129,7 @@
                 <div class="col-xl-3">
                     <div class="mw-sm mx-auto pt-8 pb-14 px-10 bg-dark-light rounded">
                         <span class="text-secondary lh-lg">Step 4</span>
-                        <h4 class="text-white fw-bold lh-lg mb-8">Build your home!</h4>
+                        <h4 class="text-white fw-bold lh-lg mb-8">Build your own workspace!</h4>
                         <div class="d-flex align-items-center">
                             <span class="text-secondary mb-0">Get started.</span>
                             <a class="btn ms-1 p-0 btn-link text-secondary" href="#">Click here</a>
@@ -137,10 +137,6 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex flex-column flex-md-row align-items-start w-100"><a class="me-md-24 text-white"
-                    href="#">Download application</a><a class="me-md-12 text-white" href="#">Select plan</a><a
-                    class="ms-md-auto text-white" href="#">Start a conversation</a></div>
-        </div>
     </section>
 
     <section class="position-relative py-24 py-xl-36 bg-light">
@@ -178,7 +174,7 @@
                     <div class="mw-xs px-lg-14 mx-auto">
                         <img class="img-fluid mb-12" src="wrexa-assets/elements/stats-icon1.svg" alt="">
                         <h3 class="display-5 text-white mb-3">89%</h3>
-                        <h5 class="display-6 text-white mb-10">Projects is good</h5>
+                        <h5 class="display-6 text-white mb-10">Increase in Productivity</h5>
                         <p class="text-secondary lh-lg mb-0">Really, like a sense of truth that comes from within. The
                             final game.</p>
                     </div>
@@ -187,18 +183,16 @@
                     <div class="mw-xs px-lg-14 mx-auto">
                         <img class="img-fluid mb-12" src="wrexa-assets/elements/stats-icon2.svg" alt="">
                         <h3 class="display-5 text-white mb-3">75%</h3>
-                        <h5 class="display-6 text-white mb-10">Projects is perfect!</h5>
-                        <p class="text-secondary lh-lg mb-0">Really, like a sense of truth that comes from within. The
-                            final game.</p>
+                        <h5 class="display-6 text-white mb-10">Customisable Templates</h5>
+                        <p class="text-secondary lh-lg mb-0">Use our journal, list and database templates.</p>
                     </div>
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="mw-xs px-lg-14 mx-auto">
                         <img class="img-fluid mb-12" src="wrexa-assets/elements/stats-icon3.svg" alt="">
-                        <h3 class="display-5 text-white mb-3">14 days</h3>
+                        <h3 class="display-5 text-white mb-3">7 days</h3>
                         <h5 class="display-6 text-white mb-10">Trial is enough</h5>
-                        <p class="text-secondary lh-lg mb-0">Really, like a sense of truth that comes from within. The
-                            final game.</p>
+                        <p class="text-secondary lh-lg mb-0">Explore Notion, learn and register yourself.</p>
                     </div>
                 </div>
             </div>

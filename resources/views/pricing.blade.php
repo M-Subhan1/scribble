@@ -89,13 +89,13 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <a class="btn btn-primary" href="#">Start free trial</a>
+                            <a class="btn btn-primary" href="/register">Start free trial</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-lg-4 mb-8 mb-lg-0 mt-lg-24">
                     <div class="mw-md mx-auto pt-16 px-8 px-md-16 pb-16 bg-dark-light rounded">
-                        <h2 class="display-5 text-white mb-4">Team</h2>
+                        <h2 class="display-5 text-white mb-4">Plus</h2>
                         <p class="text-secondary mb-8">
                             The house by the pond cras ornare.
                         </p>
@@ -146,13 +146,13 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <a class="btn btn-primary" href="#">Start free trial</a>
+                            <a class="btn btn-primary" href="/register">Start free trial</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-lg-4">
                     <div class="mw-md mx-auto pt-16 px-8 px-md-16 pb-16 bg-dark-light rounded">
-                        <h2 class="display-5 text-white mb-4">Plus</h2>
+                        <h2 class="display-5 text-white mb-4">Pro</h2>
                         <p class="text-secondary mb-8">
                             The house by the pond cras ornare.
                         </p>
@@ -203,7 +203,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <a class="btn btn-primary" href="#">Start free trial</a>
+                            <a class="btn btn-primary" href="/register">Start free trial</a>
                         </div>
                     </div>
                 </div>
