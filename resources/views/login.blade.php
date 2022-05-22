@@ -5,7 +5,7 @@
         </x-slot>
         <section class="position-relative bg-white overflow-hidden">
             <img class="d-none d-md-block position-absolute top-0 start-0 col-5 h-100 img-fluid"
-                style="object-fit: cover;" src="wrexa-assets/images/mom-and-son-big-picture.png" alt="">
+                style="object-fit: cover;" src="/images/img7.jpg" alt="">
             <div class="container">
                 <form action="/login" method="post" id="login-form">
                     @csrf

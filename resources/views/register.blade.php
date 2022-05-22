@@ -21,7 +21,7 @@
             <span class="ms-4">Back home</span>
           </a>
           <h3 class="display-5 text-white mb-8">Better together. Join our community</h3>
-          <p class="text-white lh-lg">The house like a sense of truth that comes from within.</p>
+          <p class="text-white lh-lg">Sribble and team is here for you!</p>
         </div>
       </div>
     </div>
