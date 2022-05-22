@@ -1,8 +1,7 @@
 <x-dashboard-layout current-page="list">
     <div class="container dashboard-container">
         <div class="px-4 mt-20">
-            <h2 class="mt-20">{{ $list->name }}</h2>
-
+            <h2>{{ $list->name }}</h2>
             <h5>{{ $list->subtitle }}</h5>
 
             <div class="description mt-7 mb-0">
