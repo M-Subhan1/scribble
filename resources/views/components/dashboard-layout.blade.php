@@ -43,7 +43,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn p-0 mb-6 text-light" href='/dashboard/journal'>
+                    <a class="btn p-0 mb-6 text-light" href='/journals'>
                         <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g>
                                 <path
@@ -56,12 +56,12 @@
                             </g>
                         </svg>
                         <span class="px-2 label text-light">
-                            Journal
+                            Journals
                         </span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn p-0 mb-6 text-light" href='/dashboard/lists'>
+                    <a class="btn p-0 mb-6 text-light" href='/lists'>
                         <svg width="25" height="13" viewBox="0 0 20 9" fill="black" xmlns="http://www.w3.org/2000/svg">
                             <line x1="0.75" y1="1.25" x2="19.25" y2="1.25" stroke="white" stroke-width="1.5"
                                 stroke-linecap="round"></line>
