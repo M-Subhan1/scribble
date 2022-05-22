@@ -144,3 +144,11 @@
     position: relative;
     left: 1rem;
 }
+
+.dashboard-menu {
+    border-right: 4px solid transparent;
+}
+
+.dashboard-menu.active {
+    border-right: 4px solid $green;
+}
