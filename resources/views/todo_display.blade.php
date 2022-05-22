@@ -1,13 +1,13 @@
 
 <x-dashboard-layout current-page="list">
-      <div class="container dashboard-container">
+
+    <div class="container dashboard-container">
         <nav id="bread-crumb" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Todos</li>
             </ol>
         </nav>
-
         <div class="px-4 mt-20">
             <h2>Todo Lists</h2>
             <div class="description mt-7 mb-0">

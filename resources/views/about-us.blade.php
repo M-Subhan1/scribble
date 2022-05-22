@@ -4,7 +4,6 @@
     <section class="position-relative pt-24 pt-md-40 bg-light overflow-hidden">
         <div class="container mb-24 mb-md-44">
             <div class="d-flex align-items-center mb-8">
-                <span class="display-6 h5 mb-0">02</span>
                 <div class="mx-4 bg-light-dark rounded-circle" style="width: 4px; height: 4px"></div>
                 <span class="display-6 h5 mb-0">Content</span>
             </div>
@@ -16,9 +15,11 @@
                 </div>
                 <div class="col-12 col-xl-6">
                     <p class="mw-lg ms-xl-auto text-muted lh-lg">
-                            Scribble is more than a document. Or a table. Customise Scribble to work the way you do. You have access to multiple list templates
-                            like reading, todo and movie lists. You can maintain your own journal, access your databases with a custom 
-                            display and much more!
+                        Scribble is more than a document. Or a table. Customise Scribble to work the way you do. You
+                        have access to multiple list templates
+                        like reading, todo and movie lists. You can maintain your own journal, access your databases
+                        with a custom
+                        display and much more!
                     </p>
                 </div>
             </div>
@@ -29,8 +30,7 @@
                     <img class="d-block ms-md-10 img-fluid" src="/images/img2.jpg" alt="" />
                 </div>
                 <div class="col-12 col-md-3 ms-10">
-                    <img class="d-block ms-auto mx-md-auto img-fluid" src="/images/img4.jpg"
-                        alt="" />
+                    <img class="d-block ms-auto mx-md-auto img-fluid" src="/images/img4.jpg" alt="" />
                 </div>
             </div>
             <div
@@ -39,7 +39,8 @@
                     Scribble is all about building the workflow you want.
                 </h1>
                 <p class="mw-sm text-muted lh-lg mb-20">
-                    Scribble is a productivity app built for endless uses. You start with a template and modify it however you need.
+                    Scribble is a productivity app built for endless uses. You start with a template and modify it
+                    however you need.
                 </p>
                 <a class="btn px-sm-20 btn-primary" href="/register">Explore Now</a>
             </div>

@@ -16,7 +16,7 @@
                     </a>
                 </div>
                 <div class="col-12 col-md-9 mx-auto mx-lg-20">
-                    <h1 class="display-2 mb-0">One Workspace Every Individual</h1>
+                    <h1 class="display-2 mb-0">Boost your Productivity</h1>
                 </div>
                 <div class="col-auto mx-auto order-2 order-lg-0">
                     <a class="d-inline-block" href="#">
@@ -26,7 +26,8 @@
                         </svg>
                     </a>
                 </div>
-                <div class="col-12 mt-16 mb-16 mb-lg-0"><a class="btn py-3 px-8 btn-primary" href="/about-us">Discover Now</a>
+                <div class="col-12 mt-16 mb-16 mb-lg-0"><a class="btn py-3 px-8 btn-primary" href="/about-us">Discover
+                        Now</a>
                 </div>
             </div>
             <div class="d-flex flex-column w-100 mb-14 align-items-center">
@@ -45,7 +46,6 @@
             src="wrexa-assets/elements/half-circles-with-logo.svg" alt="">
         <div class="container position-relative">
             <div class="d-flex align-items-center mb-16">
-                <span class="display-6 h5 text-white mb-0">01</span>
                 <div class="mx-4 bg-light-dark rounded-circle" style="width: 4px; height: 4px;"></div>
                 <span class="display-6 h5 text-white mb-0">Introduction.</span>
             </div>
@@ -168,7 +168,6 @@
                     style="height: 1px;"></div>
                 <div class="col-md-5 pt-20 pb-20 pb-md-64">
                     <div class="d-flex align-items-center mb-24">
-                        <span class="display-6 h5 mb-0">03</span>
                         <div class="mx-4 bg-light-dark rounded-circle" style="width: 4px; height: 4px;"></div>
                         <span class="display-6 h5 mb-0">Newsletter</span>
                     </div>
