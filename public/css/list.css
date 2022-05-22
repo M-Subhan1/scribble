@@ -13,10 +13,6 @@
     text-align: center;
 }
 
-a:visited {
-    color: white;
-}
-
 a:hover {
     color: rgb(102, 0, 204);
     background-color: white;
@@ -24,27 +20,25 @@ a:hover {
     border: 1px solid rgb(102, 0, 204);
 }
 
-.edittask, .deltask{
+.edittask,
+.deltask {
     background-color: rgb(102, 0, 204);
     color: white;
-    padding:0.5rem;
+    padding: 0.5rem;
 }
 
-.edittask{
-    padding-left:1rem;
-    padding-right:1rem;
+.edittask {
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
-.link-container{
-    text-align:center;
+.link-container {
+    text-align: center;
 }
 
-a:visited {
+.edittask a,
+.deletetask a:hover {
     color: white;
- }
-
-.edittask a, .deletetask a:hover {
-    color: white;
-    background-color:black;
-    text-decoration:none;
+    background-color: black;
+    text-decoration: none;
 }

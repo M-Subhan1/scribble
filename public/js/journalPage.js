@@ -1,14 +1,23 @@
+const showdown_converter = new showdown.Converter({
+    simpleLineBreaks: true,
+});
 const turndown_service = new TurndownService({
     headingStyle: "atx",
 });
-const showdown_converter = new showdown.Converter();
 
 $(() => {
-    add_event_listeners();
+    add_component_event_listener();
+    $(".component-add-btn").on("click", add_component);
+    $("#save-btn").on("click", save_page);
+    $("#back-btn").on("click", function () {
+        window.location.href = `/journals/${$("#components-container").data(
+            `journal-id`
+        )}`;
+    });
 });
 
-function add_event_listeners() {
-    $(".component-add-btn").on("click", add_component);
+function add_component_event_listener() {
+    $(".component-clone-btn").on("click", clone_component);
     $(".component-up-btn").on("click", move_component_up);
     $(".component-down-btn").on("click", move_component_down);
     $(".component-add-above-btn").on("click", add_component_above);
@@ -16,20 +25,27 @@ function add_event_listeners() {
     $(".component-delete-btn").on("click", delete_component);
     $(".component .content").on("focus", on_focus);
     $(".component .content").on("blur", on_blur);
-    $("#save-btn").on("click", save_page);
 }
 
-function remove_event_listeners() {
-    $(".component-add-btn").off("click", add_component_above);
+function remove_component_event_listeners() {
+    $(".component-add-btn").off("click", add_component);
+    $(".component-clone-btn").off("click", clone_component);
     $(".component-up-btn").off("click", move_component_up);
     $(".component-down-btn").off("click", move_component_down);
     $(".component-add-above-btn").off("click", add_component_above);
     $(".component-add-below-btn").off("click", add_component_below);
     $(".component-delete-btn").off("click", delete_component);
-    $(".component .content").off("input", on_change);
+    $(".component .content").off("focus", on_focus);
+    $(".component .content").off("blur", on_blur);
 }
 
 function add_component() {
+    remove_component_event_listeners();
+    $("#components-container").append(create_component());
+    add_component_event_listener();
+}
+
+function clone_component() {
     const component = $(this).closest(".component");
     component.after(component.clone(true, true));
 }
@@ -79,13 +95,12 @@ function delete_component() {
 }
 // Utility Functions
 function create_component() {
-    const component = document.createElement("div.component.bg-white");
-    component.innerHTML(`<div class="bg-white component" data-component-number={{ $component['number'] }}>
+    return `<div class="bg-white component" data-component-number={{ $component['number'] }}>
         <div class="content" contenteditable="true">
 
         </div>
         <div class="menu">
-            <span class="component-add-btn">
+            <span class="component-clone-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"
                     fill="none" data-icon="ui-components:duplicate">
                     <path xmlns="http://www.w3.org/2000/svg" class="jp-icon3" fill-rule="evenodd"
@@ -163,42 +178,56 @@ function create_component() {
                 </svg>
             </span>
         </div>
-    </div>`);
-
-    return component;
+    </div>`;
 }
 
 function on_focus() {
     const content = $(this);
     const markdown = turndown_service.turndown(content.html());
-    console.log(markdown);
     content.html(markdown);
 }
 
 function on_blur() {
     const content = $(this);
-    const html = showdown_converter.makeHtml(content.html());
-
-    console.log(html);
-    content.html(html);
+    const md = turndown_service.turndown(
+        showdown_converter.makeHtml(content.html())
+    );
+    content.html(showdown_converter.makeHtml(md));
 }
 
 function save_page() {
-    const journal_id = $(this).data("journal-id");
-    const title = $("#title").val();
-    const content = $("#content").val();
+    const components = [];
+    const journal_id = $("#components-container").data("journal-id");
+    const page_id = $("#components-container").data("page-id");
+    const title = $("#page-title").text();
+    $("#components-container .component .content").each(function (index) {
+        if (turndown_service.turndown($(this).html()).length == 0) return;
 
-    const journal = {
-        title,
-        content,
+        components.push({
+            number: index,
+            content: turndown_service.turndown($(this).html()),
+        });
+    });
+
+    console.log(title);
+
+    const data = {
+        name: title,
+        components,
     };
 
     $.ajax({
-        url: `/api/journals/${journal_id}`,
-        type: "PUT",
-        data: journal,
+        url: `/journals/${journal_id}/${page_id}`,
+        type: "PATCH",
+        data,
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
         success: function (data) {
-            console.log(data);
+            $(".page-title").text(title);
+        },
+        error: function (err) {
+            console.log(err);
         },
     });
 }
