@@ -19,16 +19,18 @@ $(function () {
     });
 });
 
-function display_view_border(){
+function display_view_border() {
     const queryString = window.location.search;
     console.log(queryString);
     const urlParams = new URLSearchParams(queryString);
-    const view = urlParams.get('view')
+    const view = urlParams.get("view");
     console.log(view);
-    if(view == "table"){
-        document.getElementsByClassName("tb-view").style.borderBottom = "2px solid rgb(102, 0, 204)"; 
-    }
-    else document.getElementsByClassName("bd-view").style.borderBottom = "2px solid rgb(102, 0, 204)"; 
+    if (view == "table") {
+        document.getElementsByClassName("tb-view").style.borderBottom =
+            "2px solid rgb(102, 0, 204)";
+    } else
+        document.getElementsByClassName("bd-view").style.borderBottom =
+            "2px solid rgb(102, 0, 204)";
 }
 
 $(".bd-view").on("click", function () {
@@ -436,9 +438,11 @@ function createJournal() {
                 .append(`<div class="journal-list-entry" data-id='${journal.id}' data-title='${journal.name}' data-description='${journal.description}'>
                     <div>
                         <div class="p-2 border bg-light d-flex justify-content-between align-items-center">
-                            <a href='/journals/${journal.id}' class="h5 journal-name"> ${journal.name}</a>
                             <div>
-                                <span class="d-none d-md-inline-block mr-2 text-muted text-sm">Created At: 7</span>
+                                <a href='/journals/${journal.id}' class="h5 journal-name"> ${journal.name}</a>
+                                <div class="text-muted">Created at: ${journal.created_at} Updated at: ${journal.updated_at}</div>
+                            </div>
+                            <div>
                                 <span>
                                     <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#editJournalModal">Edit</button>
@@ -549,10 +553,11 @@ function createPage() {
                         data-identifier='${page.identifier}'>
                         <div>
                             <div class="p-2 border bg-light d-flex justify-content-between align-items-center">
-                                <a href='/journals/${page.journal_id}/${page.id}' class="h5 page-name">
-                                    ${page.identifier}</a>
                                 <div>
-                                    <span class="d-none d-md-inline-block mr-2 text-muted text-sm">Created At: 7</span>
+                                <a href='/journals/${page.journal_id}/${page.id}' class="h5 page-name"> ${page.identifier}</a>
+                                    <div class="text-muted">Created at: ${page.created_at} Updated at: ${page.updated_at}</div>
+                                </div>
+                                <div>
                                     <span>
                                         <button class="btn btn-sm btn-primary edit-journal-btn" data-bs-toggle="modal"
                                             data-bs-target="#editPageModal">Edit</button>
