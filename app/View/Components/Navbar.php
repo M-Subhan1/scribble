@@ -7,24 +7,24 @@ use Illuminate\View\Component;
 class Navbar extends Component
 {
     /**
-    * Is Current Page, Auth Page.
-    *
-    * @var boolean
-    */
+     * Is Current Page, Auth Page.
+     *
+     * @var boolean
+     */
     public $isAuthorized;
 
     /**
-    * Is User loggied_in
-    *
-    * @var boolean
-    */
+     * Is User loggied_in
+     *
+     * @var boolean
+     */
     public $isLoggedIn;
 
     /**
-    * Current Page
-    *
-    * @var string
-    */
+     * Current Page
+     *
+     * @var string
+     */
     public $currentPage;
 
     /**
