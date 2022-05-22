@@ -1,4 +1,4 @@
-<x-dashboard-layout>
+<x-dashboard-layout current-page="list">
     <div class="container dashboard-container">
         <div class="px-4 mt-20">
             <h2>{{ $list->name }}</h2>

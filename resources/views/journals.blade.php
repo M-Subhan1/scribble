@@ -1,4 +1,4 @@
-<x-dashboard-layout>
+<x-dashboard-layout current-page="journals">
     <div class="container dashboard-container">
         <nav id="bread-crumb" aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -30,22 +30,20 @@
         <div class="container px-4 mt-20 ml-0" id="journal-list-container">
             <hr>
             @foreach ($journals as $journal)
-                <div class="journal-list-entry" data-id='{{ $journal->id }}' data-title='{{ $journal->name }}'
+                <div class="p-2 border bg-light d-flex justify-content-between align-items-center mb-4 journal-list-entry"
+                    data-id='{{ $journal->id }}' data-title='{{ $journal->name }}'
                     data-description='{{ $journal->description }}'>
                     <div>
-                        <div class="p-2 border bg-light d-flex justify-content-between align-items-center text-dark">
-                            <a href='/journals/{{ $journal->id }}' class="h5 journal-name"> {{ $journal->name }}</a>
-                            <div>
-                                <span class="d-none d-md-inline-block mr-2 text-muted text-sm">Created At: 7</span>
-                                <span>
-                                    <button class="btn btn-sm btn-primary edit-journal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#editJournalModal">Edit</button>
-                                    <button class="btn btn-sm btn-danger delete-journal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#deleteJournalModal">Delete</button>
-                                </span>
-                            </div>
-                        </div>
+                        <a href='/journals/{{ $journal->id }}' class="h5"> {{ $journal->name }}</a>
+                        <div class="text-muted">Created at: {{ $journal->created_at }} Updated at:
+                            {{ $journal->updated_at }}</div>
                     </div>
+                    <span>
+                        <button class="btn btn-sm btn-primary edit-journal-btn" data-bs-toggle="modal"
+                            data-bs-target="#editJournalModal">Edit</button>
+                        <button class="btn btn-sm btn-danger delete-journal-btn" data-bs-toggle="modal"
+                            data-bs-target="#deleteJournalModal">Delete</button>
+                    </span>
                 </div>
             @endforeach
         </div>

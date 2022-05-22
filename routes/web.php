@@ -18,30 +18,66 @@ Route::get('/dashboard', function () {
 });
 
 Route::get("/login", function () {
+    session_start();
+
+    if (isset($_SESSION['id'])) {
+        redirect('/journals');
+    }
+
     if (array_key_exists('success', $_GET) && $_GET['success'] == 'true')
         return view('login', ['alert' => (object)array('type' => 'success', 'message' => 'Account Created!')]);
-
-    return view("login");
 });
 
 Route::get("/register", function () {
-    return view("register");
+    session_start();
+
+    if (isset($_SESSION['id'])) {
+        redirect('/journals');
+    }
+
+    return view("register", [
+        'is_authorized' => isset($_SESSION['id'])
+    ]);
 });
 
 Route::get('pricing', function () {
-    return view("pricing");
+    session_start();
+
+    return view("pricing", [
+        'is_authorized' => isset($_SESSION['id'])
+    ]);
+});
+
+Route::get('sitemap', function () {
+    session_start();
+
+    return view("sitemap", [
+        'is_authorized' => isset($_SESSION['id'])
+    ]);
 });
 
 Route::get('/', function () {
-    return view("home");
+    session_start();
+
+    return view("home", [
+        'is_authorized' => isset($_SESSION['id'])
+    ]);
 });
 
 Route::get('about-us', function () {
-    return view("about-us");
+    session_start();
+
+    return view("about-us", [
+        'is_authorized' => isset($_SESSION['id'])
+    ]);
 });
 
 Route::get('features', function () {
-    return view("features");
+    session_start();
+
+    return view("features", [
+        'is_authorized' => isset($_SESSION['id'])
+    ]);
 });
 
 Route::get("/logout", [AuthController::class, "logout"]);

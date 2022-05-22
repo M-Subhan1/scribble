@@ -4,6 +4,7 @@
             <a class="navbar-brand" href="#">
                 <img src={{ asset('wrexa-assets/logos/logo-wrexa.svg') }} alt="" width="auto">
             </a>
+
             <button
                 class="d-xl-none navbar-burger btn btn-light p-0 d-flex justify-content-center align-items-center rounded-circle"
                 style="width: 50px; height: 50px;" type="button" data-bs-toggle="collapse"
@@ -66,18 +67,21 @@
         <div class="navbar-backdrop position-fixed top-0 start-0 end-0 bottom-0 bg-dark opacity-75"></div>
         <nav class="position-fixed top-0 start-0 bottom-0 w-75 mw-sm pt-6 bg-light">
             <div class="d-flex flex-column px-6 pb-32 h-100 overflow-auto">
-                <div class="d-flex align-items-center mb-10">
+                <div class="d-flex align-items-center mb-8">
                     <a class="me-auto h4 mb-0 text-decoration-none" href="#">
                         <img src="wrexa-assets/logos/logo-wrexa.svg" alt="" width="auto">
                     </a>
                     <button class="navbar-close btn-close" type="button" aria-label="Close"></button>
+
                 </div>
-                <div class="my-auto py-10">
+                <div class="my-auto pb-10">
+                    <input class="form-control mb-16" placeholder="Type to search...">
+
                     <ul class="nav flex-column">
                         <li class="nav-item mb-6"><a class="nav-link p-0 text-dark" href="/home">Home</a></li>
                         <li class="nav-item mb-6"><a class="nav-link p-0 text-dark" href="/pricing">Pricing</a></li>
-                        <li class="nav-item mb-6"><a class="nav-link p-0 text-dark" href="/privacy-policy">Privacy
-                                Policy</a></li>
+                        <li class="nav-item mb-6"><a class="nav-link p-0 text-dark" href="/privacy-policy">About
+                                Us</a></li>
                         <li class="nav-item mb-16"><a class="nav-link p-0 text-dark" href="/features">Features</a></li>
                         @if (!$isAuthorized)
                             <li class="nav-item mb-6"><a class="nav-link p-0 text-dark" href="/login">Register</a></li>
