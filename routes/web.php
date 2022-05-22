@@ -48,6 +48,14 @@ Route::get('pricing', function () {
     ]);
 });
 
+Route::get('sitemap', function () {
+    session_start();
+
+    return view("sitemap", [
+        'is_authorized' => isset($_SESSION['id'])
+    ]);
+});
+
 Route::get('/', function () {
     session_start();
 
