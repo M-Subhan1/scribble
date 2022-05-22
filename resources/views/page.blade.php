@@ -1,32 +1,19 @@
 <x-dashboard-layout>
     <div class="container dashboard-container">
-        <div id="components-container">
-            <div class="bg-white page-title-container">
-                <h3 class="page-title" contenteditable="true">Title</h3>
-                <div class="row">
-                    <div class="col-6 col-md-3 d-flex align-items-center">
-                        <svg viewBox="0 0 14 14" class="d-inline-block"
-                            style="width: 16px; height: 16px; fill: rgba(55, 53, 47, 0.45); flex-shrink: 0; backface-visibility: hidden; margin-right: 5px;">
-                            <path
-                                d="M7.01356 14.0001C8.8042 14.0001 10.5958 13.3107 11.9575 11.9324C14.681 9.21201 14.6808 4.7603 11.9571 2.04013C9.23336 -0.680043 4.77573 -0.680043 2.05199 2.04013C0.727519 3.36277 0 5.13301 0 6.99553C0 8.8764 0.727811 10.6285 2.05199 11.9509C3.43207 13.3106 5.22243 14.0001 7.01356 14.0001ZM3.72947 7.00914V8.461V8.65543H3.92382H5.34563H8.2794H8.4738V8.461V5.52541V3.37947V3.18502H8.2794H6.82747H6.63307V3.37947V6.81467H3.92382H3.72947V7.00914ZM1.83985 6.99553C1.83985 5.61698 2.38099 4.32597 3.36061 3.3477C5.36746 1.34337 8.64803 1.34062 10.6585 3.33944C10.6613 3.34219 10.6639 3.34494 10.6668 3.3477C12.676 5.3546 12.6763 8.63642 10.6668 10.6434C8.65705 12.6504 5.37031 12.6504 3.36061 10.6434C2.38099 9.66506 1.83985 8.37408 1.83985 6.99553Z">
-                            </path>
-                        </svg>
-                        Created
-                    </div>
-                    <div class="col-6 col-md-9">Time</div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-md-3 d-flex align-items-center">
-                        <svg viewBox="0 0 14 14" class="d-inline-block"
-                            style="width: 16px; height: 16px; fill: rgba(55, 53, 47, 0.45); flex-shrink: 0; backface-visibility: hidden; margin-right: 5px;">
-                            <path
-                                d="M7.01356 14.0001C8.8042 14.0001 10.5958 13.3107 11.9575 11.9324C14.681 9.21201 14.6808 4.7603 11.9571 2.04013C9.23336 -0.680043 4.77573 -0.680043 2.05199 2.04013C0.727519 3.36277 0 5.13301 0 6.99553C0 8.8764 0.727811 10.6285 2.05199 11.9509C3.43207 13.3106 5.22243 14.0001 7.01356 14.0001ZM3.72947 7.00914V8.461V8.65543H3.92382H5.34563H8.2794H8.4738V8.461V5.52541V3.37947V3.18502H8.2794H6.82747H6.63307V3.37947V6.81467H3.92382H3.72947V7.00914ZM1.83985 6.99553C1.83985 5.61698 2.38099 4.32597 3.36061 3.3477C5.36746 1.34337 8.64803 1.34062 10.6585 3.33944C10.6613 3.34219 10.6639 3.34494 10.6668 3.3477C12.676 5.3546 12.6763 8.63642 10.6668 10.6434C8.65705 12.6504 5.37031 12.6504 3.36061 10.6434C2.38099 9.66506 1.83985 8.37408 1.83985 6.99553Z">
-                            </path>
-                        </svg>
-                        Last Updated
-                    </div>
-                    <div class="col-6 col-md-9">Time</div>
-                </div>
+        <nav id="bread-crumb" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/dashboards/">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/journals/">Journals</a></li>
+                <li class="breadcrumb-item"><a href="/journals/{{ $journal_id }}">{{ $journal->name }}</a></li>
+                <li class="breadcrumb-item active page-title" aria-current="page">{{ $page['identifier'] }}</li>
+            </ol>
+        </nav>
+        <div id="components-container" data-page-id='{{ $page_id }}' data-journal-id='{{ $journal_id }}'>
+            <div class="bg-white page-title-container row">
+                <h3 id="page-title" class="col-md-9 page-title mb-2" contenteditable="true">Title</h3>
+                <button class="btn btn-primary col-md-3 mb-2 component-add-btn">
+                    Add Component
+                </button>
                 <hr />
             </div>
             @foreach ($components as $component)
@@ -36,7 +23,7 @@
                         {{ Illuminate\Mail\Markdown::parse($component['content']) }}
                     </div>
                     <div class="menu">
-                        <span class="component-add-btn">
+                        <span class="component-clone-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"
                                 fill="none" data-icon="ui-components:duplicate">
                                 <path xmlns="http://www.w3.org/2000/svg" class="jp-icon3" fill-rule="evenodd"
@@ -116,10 +103,12 @@
                     </div>
                 </div>
             @endforeach
-            <div class="d-flex justify-content-end mt-4">
-                <a role="button" class="btn btn-danger m-2">Back</a>
-                <a id="save-btn" role="button" class="btn btn-primary m-2">Save</a>
-            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-4">
+            <a role="button" class="btn btn-danger m-2" href="/journal/{{ $journal_id }}}" data-bs-toggle="modal"
+                data-bs-target="#backModal">Back</a>
+            <a id="save-btn" role="button" class="btn btn-primary m-2">Save</a>
         </div>
     </div>
 
@@ -136,8 +125,28 @@
         </div>
     @endisset
 
+    <div class="modal fade" id="backModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-3">
+                <div class="modal-header">
+                    <h5 class="modal-title">Warning</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to go back? Any unsaved changes will be reverted.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark btn-sm" data-bs-dismiss="modal">No</button>
+                    <button type="button" data-bs-dismiss="modal" id="back-btn"
+                        class="btn btn-danger btn-sm">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @push('body-scripts')
         @once
+            <script src="https://cdn.jsdelivr.net/remarkable/1.7.1/remarkable.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
             <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
             <script src={{ asset('js/jquery.min.js') }}></script>
