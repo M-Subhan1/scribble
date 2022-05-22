@@ -1,5 +1,14 @@
 <x-dashboard-layout>
     <div class="container dashboard-container">
+
+    <nav id="bread-crumb" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/list">Todos</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{$list->name}}</li>
+            </ol>
+        </nav>
+        
         <h2 class="mt-20">{{ $list->name }}</h2>
 
         <h5>{{$list->subtitle}}</h5>
