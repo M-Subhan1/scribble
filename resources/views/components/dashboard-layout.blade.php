@@ -30,7 +30,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="btn p-0 mb-6 text-light" href='/dashboard'>
+                    <a class="btn p-0 mb-6 text-light dashboard-menu  @if (strcmp($currentPage, 'dashboard') == 0) active @endif"
+                        href='/dashboard'>
                         <svg width="25" height="25" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -43,7 +44,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn p-0 mb-6 text-light" href='/journals'>
+                    <a class="btn p-0 mb-6 text-light dashboard-menu  @if (strcmp($currentPage, 'journals') == 0) active @endif"
+                        href='/journals'>
                         <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g>
                                 <path
@@ -55,21 +57,28 @@
                                     fill="#000" />
                             </g>
                         </svg>
-                        <span class="px-2 label text-light">
+                        <span class="px-2 label text-light mb-2">
                             Journals
                         </span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn p-0 mb-6 text-light" href='/list'>
+                    <a class="btn p-0 mb-6 text-light dashboard-menu  @if (strcmp($currentPage, 'list') == 0) active @endif"
+                        href='/list'>
                         <svg width="25" height="13" viewBox="0 0 20 9" fill="black" xmlns="http://www.w3.org/2000/svg">
                             <line x1="0.75" y1="1.25" x2="19.25" y2="1.25" stroke="white" stroke-width="1.5"
                                 stroke-linecap="round"></line>
                             <line x1="0.75" y1="8.25" x2="13.25" y2="8.25" stroke="white" stroke-width="1.5"
                                 stroke-linecap="round"></line>
-                        </svg> <span class="px-2 label text-light">
-                            Todo Lists
-                        </span>
+                            <span class="px-2 label text-light mb-2">
+                                Todo Lists
+                                @isset($currentPage)
+                                    @if (strcmp($currentPage, 'list') == 0)
+                                        <div class="mt-4 pe-10 position-absolute bottom-0 start-0 w-100 bg-success-light"
+                                            style="height: 3px;"></div>
+                                    @endif
+                                @endisset
+                            </span>
                     </a>
                 </li>
             </div>
