@@ -26,6 +26,7 @@ Route::get("/login", function () {
 
     if (array_key_exists('success', $_GET) && $_GET['success'] == 'true')
         return view('login', ['alert' => (object)array('type' => 'success', 'message' => 'Account Created!')]);
+    else  return view('login');
 });
 
 Route::get("/register", function () {
