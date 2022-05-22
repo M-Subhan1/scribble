@@ -1,5 +1,13 @@
 <x-dashboard-layout>
     <div class="container dashboard-container" id="page" data-journal-id='{{ $journal->id }}'>
+        <nav id="bread-crumb" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="/journals">Journals</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ $journal->name }}</li>
+            </ol>
+        </nav>
+
         <div class="px-4">
             <h2 class="mt-12">{{ $journal->name }}</h2>
 
@@ -44,7 +52,7 @@
 
         <div class="modal fade" id="createPageModal" tabindex="-1" aria-labelledby="createPageModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content p-3">
                     <div class="modal-header">
                         <h5 class="modal-title" id="createPageModalLabel">Add Entry</h5>
@@ -89,7 +97,7 @@
 
         <div class="modal fade" id="editPageModal" tabindex="-1" aria-labelledby="editPageModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content p-3">
                     <div class="modal-header">
                         <h5 class="modal-title">Edit Page</h5>

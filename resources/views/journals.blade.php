@@ -1,5 +1,12 @@
 <x-dashboard-layout>
     <div class="container dashboard-container">
+        <nav id="bread-crumb" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Journals</li>
+            </ol>
+        </nav>
+
         <div class="px-4">
             <h2 class="mt-12">Journals</h2>
 
@@ -26,7 +33,7 @@
                 <div class="journal-list-entry" data-id='{{ $journal->id }}' data-title='{{ $journal->name }}'
                     data-description='{{ $journal->description }}'>
                     <div>
-                        <div class="p-2 border bg-light d-flex justify-content-between align-items-center">
+                        <div class="p-2 border bg-light d-flex justify-content-between align-items-center text-dark">
                             <a href='/journals/{{ $journal->id }}' class="h5 journal-name"> {{ $journal->name }}</a>
                             <div>
                                 <span class="d-none d-md-inline-block mr-2 text-muted text-sm">Created At: 7</span>
@@ -45,7 +52,7 @@
 
         <div class="modal fade" id="createJournalModal" tabindex="-1" aria-labelledby="createJournalModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content p-3">
                     <div class="modal-header">
                         <h5 class="modal-title" id="createJournalModalLabel">Create Journal</h5>
@@ -94,7 +101,7 @@
 
         <div class="modal fade" id="editJournalModal" tabindex="-1" aria-labelledby="editJournalModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content p-3">
                     <div class="modal-header">
                         <h5 class="modal-title">Edit Journal</h5>

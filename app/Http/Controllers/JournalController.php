@@ -9,6 +9,7 @@ use App\Models\Component;
 use App\Models\Page;
 use Illuminate\Support\Facades\Response;
 use LDAP\Result;
+use Mockery\Undefined;
 
 class JournalController extends Controller
 {
@@ -164,7 +165,7 @@ class JournalController extends Controller
         return Response::view('journal_pages', ['journal' => $journal]);
     }
 
-    public function render_page($journal_id, $page_identifier)
+    public function render_page($journal_id, $page_id)
     {
         session_start();
 
@@ -173,13 +174,12 @@ class JournalController extends Controller
 
         $journal = Journal::where(['authorId' => $_SESSION['id'], 'id' => $journal_id])->with(['pages', 'pages.components'])->first();
 
-        $GLOBALS['page_id'] = $page_identifier;
-
         if (!$journal)
             return Response::redirectTo('/404');
+        $GLOBALS['page_id'] = $page_id;
 
         $pages = [...array_filter($journal['pages']->toArray(), function ($page) {
-            return $page['id'] == $GLOBALS['page_id'];
+            return ($page['id'] == $GLOBALS['page_id']);
         })];
 
         if (count($pages) == 0)
@@ -191,7 +191,7 @@ class JournalController extends Controller
             return $a['number'] - $b['number'];
         });
 
-        return view('page', ['components' => $components]);
+        return view('page', ['components' => $components, 'journal_id' => $journal_id, 'page_id' => $page_id, 'journal' => $journal, 'page' => $pages[0]]);
     }
 
     public function add_page(Request $request, $journal_id)
@@ -253,9 +253,27 @@ class JournalController extends Controller
         }
 
         $data = request()->all();
-        $page->identifier = $data['name'];
-        $page->save();
 
+        $page->identifier = $data['name'];
+
+        if (isset($data['components'])) {
+            $page->components->each(function ($component) {
+                $component->delete();
+            });
+
+            foreach ($data['components'] as $component) {
+                $new_component = new Component();
+                $new_component->pageId = $page->id;
+                $new_component->content = $component['content'];
+                $new_component->number = $component['number'];
+                $new_component->save();
+            }
+
+            $page->save();
+            return Response::json([], 204);
+        }
+
+        $page->save();
         return Response::json([], 204);
     }
 

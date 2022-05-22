@@ -50,3 +50,5 @@ document.addEventListener("DOMContentLoaded", function () {
     // Toggle
     toastList.forEach((toast) => toast.show());
 });
+
+function addAlert() {}

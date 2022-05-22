@@ -40,6 +40,7 @@
     min-height: 100vh;
     margin-left: 200px;
     background-color: $gray-100;
+    position: relative;
 }
 
 .dashboard-collapse-content {
@@ -48,11 +49,11 @@
 }
 
 .component {
-    position: relative;
     padding: 0.5rem 1.5rem;
     border: none;
     border-left: 5px solid white;
     min-height: calc(1rem + 0.5rem);
+    position: relative;
 }
 
 .component:hover {
@@ -88,13 +89,29 @@
 #components-container {
     background-color: white;
     padding: 4rem 2rem;
+    min-height: 80vh;
+}
+
+#page-prev-icon {
+    left: 1rem;
+}
+
+#page-next-icon {
+    right: 1rem;
+}
+
+.page-navigate-icon {
+    position: absolute;
+    height: 45px;
+    width: 25px;
+    top: 50%;
 }
 
 .page-title-container {
     padding: 0 1.5rem;
 }
 
-.page-title {
+#page-title {
     padding: 0.5rem;
 }
 
@@ -111,11 +128,19 @@
     font-size: smaller;
 }
 
+[contenteditable] {
+    padding: 0.5rem;
+}
+
 [contenteditable]:focus {
     outline: 1px solid $primary;
-    padding: 0.5rem;
 }
 
 [contenteditable]:empty:before {
     content: attr(data-placeholder);
+}
+
+#bread-crumb {
+    position: relative;
+    left: 1rem;
 }
