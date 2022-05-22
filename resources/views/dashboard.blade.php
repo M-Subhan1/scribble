@@ -8,13 +8,12 @@
         </nav>
 
         <div class="px-4">
-            <h2 class="mt-12">Journals</h2>
+            <h2 class="mt-12">Happy Scribbling!!</h2>
             <div class="description mt-7 mb-0">
                 Welcome to Scribble.<br>
                 All of your journals entries can be accessed using the menu of the left.<br>
                 You can store and edit journal pages/entries using markdown syntax. This provides a lot of flexibility
                 on top of our fast and robust platform<br /><br />
-                <h4>Happy Scribbling!!</h4><br>
                 </span>
             </div>
         </div>

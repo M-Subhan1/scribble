@@ -112,7 +112,6 @@
                 <div class="p-2 border bg-light d-flex justify-content-between align-items-center mb-4">
                     <div>
                         <a href='/render-list/{{ $list->id }}' class="h5"> {{ $list->name }}</a>
-                        <div>{{ $list->subtitle }}</div>
                         <div class="text-muted">Created at: {{ $list->created_at }} Updated at:
                             {{ $list->updated_at }}</div>
                     </div>

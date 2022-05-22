@@ -35,50 +35,7 @@
             </div>
             <img class="img-fluid w-100" src="wrexa-assets/images/image-app-placeholder.png" alt="">
         </div>
-        <div class="d-none navbar-menu position-relative" style="z-index: 99;">
-            <div class="navbar-backdrop position-fixed top-0 start-0 end-0 bottom-0 bg-dark opacity-75"></div>
-            <nav class="position-fixed top-0 start-0 bottom-0 w-75 mw-sm pt-6 bg-light">
-                <div class="d-flex flex-column px-6 pb-32 h-100 overflow-auto">
-                    <div class="d-flex align-items-center mb-10">
-                        <a class="me-auto h4 mb-0 text-decoration-none" href="#">
-                            <img src="wrexa-assets/logos/logo-wrexa.svg" alt="" width="auto">
-                        </a>
-                        <button class="navbar-close btn-close" type="button" aria-label="Close"></button>
-                    </div>
-                    <div class="my-auto py-10">
-                        <ul class="nav flex-column">
-                            <li class="nav-item dropdown mb-6"><a class="nav-link dropdown-toggle p-0 text-dark"
-                                    href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">Collection</a></li>
-                            <li class="nav-item mb-6"><a class="nav-link p-0 text-dark" href="#">Projects</a></li>
-                            <li class="nav-item mb-16"><a class="nav-link p-0 text-dark" href="#">About</a></li>
-                            <li class="nav-item dropdown mb-6"><a class="nav-link dropdown-toggle p-0 text-dark"
-                                    href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">How to
-                                    Start</a></li>
-                            <li class="nav-item"><a class="nav-link p-0 text-dark" href="#">Design</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="position-absolute bottom-0 w-100">
-                    <a class="btn py-5 px-4 d-flex align-items-center text-start mt-auto bg-white" href="#">
-                        <div class="position-relative me-4">
-                            <img class="img-fluid rounded-circle" style="width: 48px; height: 48px;"
-                                src="wrexa-assets/images/avatar2.png" alt="">
-                            <div class="position-absolute bottom-0 start-0 ms-n2 d-flex align-items-center justify-content-center rounded-circle bg-success text-white small"
-                                style="width: 23px; height: 23px;">1</div>
-                        </div>
-                        <div class="me-auto">
-                            <h4 class="text-secondary small mb-0">Account</h4>
-                            <span class="text-dark">matloay</span>
-                        </div>
-                        <svg width="12" height="7" viewbox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10 2L6 6L2 2" stroke="black" stroke-width="1.5" stroke-miterlimit="10"
-                                stroke-linecap="square" stroke-linejoin="round"></path>
-                        </svg>
-                    </a>
-                </div>
-            </nav>
-        </div>
+
     </section>
 
     <section class="position-relative pt-32 pb-12 overflow-hidden bg-dark">
