@@ -1,4 +1,4 @@
-<x-dashboard-layout>
+<x-dashboard-layout current-page="journals">
     <div class="container dashboard-container" id="page" data-journal-id='{{ $journal->id }}'>
         <nav id="bread-crumb" aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -12,8 +12,10 @@
             <h2 class="mt-12">{{ $journal->name }}</h2>
 
             <div class="description mt-7 mb-0">
-                {{ $journal->description }}
-                </span>
+                {{ $journal->description }}<br /><br />
+                All of your journals entries are displayed below.<br>
+                Click on the entry tag you want to open. <br>
+                To create a new entry click the create entry button.
             </div>
 
             <div class="position-relative mb-0 mt-6">
@@ -32,17 +34,18 @@
                         data-identifier='{{ $page->identifier }}'>
                         <div>
                             <div class="p-2 border bg-light d-flex justify-content-between align-items-center">
-                                <a href='/journals/{{ $journal->id }}/{{ $page->id }}' class="h5 page-name">
-                                    {{ $page->identifier }}</a>
                                 <div>
-                                    <span class="d-none d-md-inline-block mr-2 text-muted text-sm">Created At: 7</span>
-                                    <span>
-                                        <button class="btn btn-sm btn-primary edit-page-btn" data-bs-toggle="modal"
-                                            data-bs-target="#editPageModal">Edit</button>
-                                        <button class="btn btn-sm btn-danger delete-page-btn" data-bs-toggle="modal"
-                                            data-bs-target="#deletePageModal">Delete</button>
-                                    </span>
+                                    <a href='/journals/{{ $journal->id }}/{{ $page->id }}' class="h5">
+                                        {{ $page->identifier }}</a>
+                                    <div class="text-muted">Created at: {{ $page->created_at }} Updated at:
+                                        {{ $page->updated_at }}</div>
                                 </div>
+                                <span>
+                                    <button class="btn btn-sm btn-primary edit-page-btn" data-bs-toggle="modal"
+                                        data-bs-target="#editPageModal">Edit</button>
+                                    <button class="btn btn-sm btn-danger delete-page-btn" data-bs-toggle="modal"
+                                        data-bs-target="#deletePageModal">Delete</button>
+                                </span>
                             </div>
                         </div>
                     </div>
