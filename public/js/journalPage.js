@@ -14,6 +14,36 @@ $(() => {
             `journal-id`
         )}`;
     });
+
+    $("[contenteditable]")
+        // make sure br is always the lastChild of contenteditable
+        .live("keyup mouseup", function () {
+            if (
+                !this.lastChild ||
+                this.lastChild.nodeName.toLowerCase() != "br"
+            ) {
+                this.appendChild(document.createChild("br"));
+            }
+        })
+
+        // use br instead of div div
+        .live("keypress", function (e) {
+            if (e.which == 13) {
+                if (window.getSelection) {
+                    var selection = window.getSelection(),
+                        range = selection.getRangeAt(0),
+                        br = document.createElement("br");
+                    range.deleteContents();
+                    range.insertNode(br);
+                    range.setStartAfter(br);
+                    range.setEndAfter(br);
+                    range.collapse(false);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                    return false;
+                }
+            }
+        });
 });
 
 function add_component_event_listener() {

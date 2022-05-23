@@ -1,11 +1,8 @@
-#leftbox {
-    width: 200px;
-    height: auto;
+.board-container {
+    display: flex;
 }
 
-#boxes{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-flow:wrap;
+.board-column {
+    display: inline-block;
+    padding: 1rem;
 }
