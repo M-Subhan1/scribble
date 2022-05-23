@@ -35,7 +35,7 @@
                     data-description='{{ $journal->description }}'>
                     <div>
                         <a href='/journals/{{ $journal->id }}' class="h5"> {{ $journal->name }}</a>
-                        <div class="text-muted">Created at: {{ $journal->created_at }} Updated at:
+                        <div class="text-muted meta-data">Created at: {{ $journal->created_at }} Updated at:
                             {{ $journal->updated_at }}</div>
                     </div>
                     <span>
