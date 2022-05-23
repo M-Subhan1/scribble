@@ -24,7 +24,8 @@
                         {{ Illuminate\Mail\Markdown::parse($component['content']) }}
                     </div>
                     <div class="menu">
-                        <span class="component-clone-btn">
+                        <span class="component-clone-btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Clone Component">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"
                                 fill="none" data-icon="ui-components:duplicate">
                                 <path xmlns="http://www.w3.org/2000/svg" class="jp-icon3" fill-rule="evenodd"
@@ -36,7 +37,8 @@
                                     fill="#616161" stroke="#616161" stroke-width="0.5"></path>
                             </svg>
                         </span>
-                        <span class="component-up-btn">
+                        <span class="component-up-btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Move Component Up">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"
                                 fill="none" data-icon="ui-components:move-up">
                                 <path xmlns="http://www.w3.org/2000/svg" class="jp-icon3"
@@ -44,7 +46,8 @@
                                     fill="#616161"></path>
                             </svg>
                         </span>
-                        <span class="component-down-btn">
+                        <span class="component-down-btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Move Component Down">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"
                                 fill="none" data-icon="ui-components:move-down">
                                 <path xmlns="http://www.w3.org/2000/svg" class="jp-icon3"
@@ -52,7 +55,8 @@
                                     fill="#616161"></path>
                             </svg>
                         </span>
-                        <span class="component-add-above-btn">
+                        <span class="component-add-above-btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Add Component Above">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"
                                 fill="none" data-icon="ui-components:add-above">
                                 <g xmlns="http://www.w3.org/2000/svg" clip-path="url(#clip0_137_19492)">
@@ -72,7 +76,8 @@
                                 </defs>
                             </svg>
                         </span>
-                        <span class="component-add-below-btn">
+                        <span class="component-add-below-btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Add Component Below">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"
                                 fill="none" data-icon="ui-components:add-below">
                                 <g xmlns="http://www.w3.org/2000/svg" clip-path="url(#clip0_137_19498)">
@@ -92,7 +97,8 @@
                                 </defs>
                             </svg>
                         </span>
-                        <span class="component-delete-btn">
+                        <span class="component-delete-btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Delete Component">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px"
                                 data-icon="ui-components:delete">
                                 <path xmlns="http://www.w3.org/2000/svg" d="M0 0h24v24H0z" fill="none"></path>
