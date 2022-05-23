@@ -150,5 +150,18 @@
 }
 
 .dashboard-menu.active {
-    border-right: 4px solid $green;
+    border-right: 4px solid $success;
+}
+
+.meta-data {
+    font-size: 0.8rem;
+}
+
+.board-container {
+    display: flex;
+}
+
+.board-column {
+    display: inline-block;
+    padding: 1rem;
 }

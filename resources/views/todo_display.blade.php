@@ -1,4 +1,3 @@
-
 <x-dashboard-layout current-page="list">
 
     <div class="container dashboard-container">
@@ -24,7 +23,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="CreateModalLabel">Create Todo</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form id="create_todo">
@@ -119,7 +119,7 @@
                 <div class="p-2 border bg-light d-flex justify-content-between align-items-center mb-4">
                     <div>
                         <a href='/render-list/{{ $list->id }}' class="h5"> {{ $list->name }}</a>
-                        <div class="text-muted">Created at: {{ $list->created_at }} Updated at:
+                        <div class="text-muted meta-data">Created at: {{ $list->created_at }} Updated at:
                             {{ $list->updated_at }}</div>
                     </div>
                     <span>

@@ -10,7 +10,8 @@
         </nav>
         <div id="components-container" data-page-id='{{ $page_id }}' data-journal-id='{{ $journal_id }}'>
             <div class="bg-white page-title-container row">
-                <h3 id="page-title" class="col-md-9 page-title mb-2" contenteditable="true">Title</h3>
+                <h3 id="page-title" class="col-md-9 page-title mb-2" contenteditable="true">{{ $page['identifier'] }}
+                </h3>
                 <button class="btn btn-primary col-md-3 mb-2 component-add-btn">
                     Add Component
                 </button>

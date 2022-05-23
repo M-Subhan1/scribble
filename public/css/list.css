@@ -1,5 +1,8 @@
-#leftbox {
-    float: left;
-    width: 200px;
-    height: auto;
+.board-container {
+    display: flex;
+}
+
+.board-column {
+    display: inline-block;
+    padding: 1rem;
 }
