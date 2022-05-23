@@ -17,28 +17,15 @@ $(function () {
         $("#dashboard-nav").toggleClass("nav-collapse");
         $("#dashboard-content").toggleClass("dashboard-collapse-content");
     });
-});
 
-function display_view_border() {
-    const queryString = window.location.search;
-    console.log(queryString);
-    const urlParams = new URLSearchParams(queryString);
+    const urlParams = new URLSearchParams(window.location.search);
     const view = urlParams.get("view");
-    console.log(view);
-    if (view == "table") {
-        document.getElementsByClassName("tb-view").style.borderBottom =
-            "2px solid rgb(102, 0, 204)";
-    } else
-        document.getElementsByClassName("bd-view").style.borderBottom =
-            "2px solid rgb(102, 0, 204)";
-}
 
-$(".bd-view").on("click", function () {
-    $(this).css({ "border-bottom": "4px solid rgb(102, 0, 204)" });
-});
-
-$(".tb-view").on("click", function () {
-    $(this).css({ "border-bottom": "4px solid rgb(102, 0, 204)" });
+    if (view === "table") {
+        $(".tb-view").css({ "border-bottom": "2px solid rgb(102, 0, 204)" });
+    } else {
+        $(".bd-view").css({ "border-bottom": "2px solid rgb(102, 0, 204)" });
+    }
 });
 
 $(".todo_btn").on(
@@ -115,7 +102,7 @@ $(document).on("click", ".delete_list_btn", function (e) {
     e.preventDefault();
     var list_id = $("#delete_todo_id").val();
     $("#DeleteTodoModal").modal("show");
-    createAlert("success", "Processing...");
+    createAlert("info", "Processing...");
 
     $.ajaxSetup({
         headers: {
@@ -440,7 +427,7 @@ function createJournal() {
                         <div class="p-2 border bg-light d-flex justify-content-between align-items-center">
                             <div>
                                 <a href='/journals/${journal.id}' class="h5 journal-name"> ${journal.name}</a>
-                                <div class="text-muted">Created at: ${journal.created_at} Updated at: ${journal.updated_at}</div>
+                                <div class="text-muted meta-data">Created at: ${journal.created_at} Updated at: ${journal.updated_at}</div>
                             </div>
                             <div>
                                 <span>
@@ -469,7 +456,7 @@ function deleteJournal() {
     if (selectedJournal == undefined) return;
 
     const journal_id = selectedJournal;
-    createAlert("success", "Processing...");
+    createAlert("info", "Processing...");
 
     $.ajax({
         url: `/journals/${journal_id}`,
@@ -495,7 +482,7 @@ function editJournal() {
 
     const name = $("#edit-journal-name").val();
     const description = $("#edit-journal-description").val();
-    createAlert("success", "Processing...");
+    createAlert("info", "Processing...");
 
     $.ajax({
         url: `/journals/${journal_id}`,
@@ -535,7 +522,7 @@ function selectPage() {
 function createPage() {
     const name = $("#createPageModal #page-name").val();
     const id = $("#page").data("journal-id");
-    createAlert("success", "Processing...");
+    createAlert("info", "Processing...");
 
     $.ajax({
         url: `/journals/${id}`,
@@ -554,8 +541,8 @@ function createPage() {
                         <div>
                             <div class="p-2 border bg-light d-flex justify-content-between align-items-center">
                                 <div>
-                                <a href='/journals/${page.journal_id}/${page.id}' class="h5 page-name"> ${page.identifier}</a>
-                                    <div class="text-muted">Created at: ${page.created_at} Updated at: ${page.updated_at}</div>
+                                <a href='/journals/${page.journalId}/${page.id}' class="h5 page-name"> ${page.identifier}</a>
+                                    <div class="text-muted meta-data">Created at: ${page.created_at} Updated at: ${page.updated_at}</div>
                                 </div>
                                 <div>
                                     <span>
@@ -584,7 +571,7 @@ function createPage() {
 function deletePage() {
     console.log(selectedJournal, selectedPage);
     if (selectedPage == undefined || selectedJournal == undefined) return;
-    createAlert("success", "Processing...");
+    createAlert("info", "Processing...");
 
     const journal_id = selectedJournal;
     const page_id = selectedPage;
@@ -614,7 +601,7 @@ function editPage() {
     const page_id = selectedPage;
 
     const name = $("#edit-page-name").val();
-    createAlert("success", "Processing...");
+    createAlert("info", "Processing...");
 
     $.ajax({
         url: `/journals/${selectedJournal}/${selectedPage}`,

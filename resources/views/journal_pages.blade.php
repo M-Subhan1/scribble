@@ -37,7 +37,7 @@
                                 <div>
                                     <a href='/journals/{{ $journal->id }}/{{ $page->id }}' class="h5">
                                         {{ $page->identifier }}</a>
-                                    <div class="text-muted">Created at: {{ $page->created_at }} Updated at:
+                                    <div class="text-muted meta-data">Created at: {{ $page->created_at }} Updated at:
                                         {{ $page->updated_at }}</div>
                                 </div>
                                 <span>
@@ -87,7 +87,7 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Are you sure you want to delete this journal?
+                        Are you sure you want to delete this entry?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark btn-sm" data-bs-dismiss="modal">Cancel</button>
