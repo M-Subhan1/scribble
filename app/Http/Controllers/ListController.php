@@ -48,7 +48,7 @@ class ListController extends Controller
         if (!isset($_SESSION['id']))
             return Response::json([
                 'success' => false,
-                'message' => 'You must be logged in to add a journal.'
+                'message' => 'You must be logged in to add a list.'
             ], 401);
 
         $lists = List_::where('user_id', $_SESSION['id'])->get();
@@ -127,7 +127,7 @@ class ListController extends Controller
         if (!isset($_SESSION['id']))
         return Response::json([
             'success' => false,
-            'message' => 'You must be logged in to add a journal.'
+            'message' => 'You must be logged in to access the list.'
         ], 401);
 
         $list = List_::where(["user_id" => $_SESSION["id"], "id" => $list_id])->with(['list_columns', 'list_columns.list_entries'])->first();

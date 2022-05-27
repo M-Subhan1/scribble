@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\ListController;
+use App\Http\Controllers\CalendarController;
 
 /* |-------------------------------------------------------------------------- | Web Routes |-------------------------------------------------------------------------- | | Here is where you can register web routes for your application. These | routes are loaded by the RouteServiceProvider within a group which | contains the "web" middleware group. Now create something great! | */
 
@@ -57,13 +58,13 @@ Route::get('sitemap', function () {
     ]);
 });
 
-Route::get('/', function () {
-    session_start();
+// Route::get('/', function () {
+//     session_start();
 
-    return view("home", [
-        'is_authorized' => isset($_SESSION['id'])
-    ]);
-});
+//     return view("home", [
+//         'is_authorized' => isset($_SESSION['id'])
+//     ]);
+// });
 
 Route::get('about-us', function () {
     session_start();
@@ -115,3 +116,11 @@ Route::put('/journals/{journal_id}', [JournalController::class, "add_page"]);
 Route::patch('/journals/{journal_id}/{id}', [JournalController::class, "update_page"]);
 Route::get('/journals/{journal_id}/{id}', [JournalController::class, "render_page"]);
 Route::delete('/journals/{journal_id}/{id}', [JournalController::class, "delete_page"]);
+
+//Calendar routes
+Route::put('/calendar', [CalendarController::class, "create_calendar"]);
+Route::put('/calendar/{calendar_id}', [CalendarController::class, "create_event"]);
+Route::get('/calendar/{calendar_id}', [CalendarController::class, "display_calendar"]);
+Route::patch('/calendar/{calendar_id}/{event_id}', [CalendarController::class, "edit_event"]);
+Route::delete('/calendar/{calendar_id}/{event_id}', [CalendarController::class, "delete_event"]);
+
