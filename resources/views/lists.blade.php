@@ -122,7 +122,6 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" id="delete_todo_id">
                         <h6>Are you sure you want to delete this todo?</h6>
                     </div>
                     <div class="modal-footer">

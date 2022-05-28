@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\CalendarController;
 use Illuminate\Http\Request;
 use App\Models\Account;
 use Illuminate\Support\Facades\Response;
@@ -88,7 +88,7 @@ class AuthController extends Controller
             'last_name' => $input['last_name'],
         ]);
 
-        if ($account->save())
+        if ($account->save() && CalendarController::create_calendar($account->id))
             return redirect('/login?success=true');
 
         return view('register', ['alert' => (object)array('type' => 'danger', 'message' => 'Account could not be created!')]);

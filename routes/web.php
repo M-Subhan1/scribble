@@ -83,6 +83,7 @@ Route::post("/register", [AuthController::class, "register"]);
 Route::post("/login", [AuthController::class, "login"]);
 Route::get("/page", [JournalController::class, "render_page"]);
 
+// List Routes
 Route::get('/lists', [ListController::class, "display_lists"]);
 Route::put('/lists/', [ListController::class, "add_list"]);
 Route::get('/lists/{list_id}', [ListController::class, "render_list"]);
@@ -107,8 +108,7 @@ Route::get('/journals/{journal_id}/{id}', [JournalController::class, "render_pag
 Route::delete('/journals/{journal_id}/{id}', [JournalController::class, "delete_page"]);
 
 //Calendar routes
-Route::put('/calendar', [CalendarController::class, "create_calendar"]);
+Route::get('/calendar/', [CalendarController::class, "display_calendar"]);
 Route::put('/calendar/{calendar_id}', [CalendarController::class, "create_event"]);
-Route::get('/calendar/{calendar_id}', [CalendarController::class, "display_calendar"]);
 Route::patch('/calendar/{calendar_id}/{event_id}', [CalendarController::class, "edit_event"]);
 Route::delete('/calendar/{calendar_id}/{event_id}', [CalendarController::class, "delete_event"]);
