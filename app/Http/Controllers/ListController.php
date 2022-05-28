@@ -64,9 +64,8 @@ class ListController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'status' => 400,
                 'errors' => $validator->messages(),
-            ]);
+            ], 400);
         }
 
         $list = new List_();
@@ -76,7 +75,6 @@ class ListController extends Controller
         $list->save();
 
         return response()->json([
-            'status' => 200,
             'list' => $list,
         ]);
     }

@@ -11,22 +11,10 @@ use Illuminate\Support\Facades\Response;
 
 class CalendarController extends Controller
 {
-    public function create_calendar(){
-        session_start();
-
-        if (!isset($_SESSION['id']))
-            return Response::json([
-                'success' => false,
-                'message' => 'You must be logged in to access the calendar.'
-            ], 401);
-
+    public static function create_calendar($user_id){
         $calendar = new Calendar();
-        $calendar->user_id = $_SESSION['id'];
-        $calendar->save();
-        return Response::json([
-            'success' => true,
-            'message' => 'You can access your personal calendar!.'
-        ], 200);
+        $calendar->user_id = $user_id;
+        return $calendar->save();
     }
 
     public function create_event(Request $request, $calendar_id){
@@ -39,17 +27,17 @@ class CalendarController extends Controller
             ], 401);
 
             $calendar = Calendar::where(["user_id" => $_SESSION["id"], "id" => $calendar_id])->first();
-            if(is_null($calendar)) 
+            if(is_null($calendar))
                 return Response::json([
                     'success' => false,
                     'message' => 'Your calendar cannot be accessed.'
                 ], 400);
-    
+
             $validator = Validator::make($request->all(), [
                 'description'=> 'required',
                 'occurrence_date' => 'required',
             ]);
-    
+
             if($validator->fails()){
                 return Response::json([
                     'success' => false,
@@ -68,7 +56,7 @@ class CalendarController extends Controller
                 'message' => 'Event Created Successfully!'
             ], 200);
     }
-    
+
     public function edit_event(Request $request, $calendar_id, $event_id){
         session_start();
 
@@ -79,7 +67,7 @@ class CalendarController extends Controller
             ], 401);
 
             $calendar = Calendar::where(["user_id" => $_SESSION["id"], "id" => $calendar_id])->first();
-            if(is_null($calendar)) 
+            if(is_null($calendar))
                 return Response::json([
                     'success' => false,
                     'message' => 'Your calendar cannot be accessed.'
@@ -116,7 +104,7 @@ class CalendarController extends Controller
             ], 401);
 
         $calendar = Calendar::where(["user_id" => $_SESSION["id"], "id" => $calendar_id])->first();
-        if(is_null($calendar)) 
+        if(is_null($calendar))
             return Response::json([
                 'success' => false,
                 'message' => 'Your calendar cannot be accessed.'
@@ -138,23 +126,17 @@ class CalendarController extends Controller
         ], 200);
 
     }
-    
-    public function display_calendar($calendar_id){
+
+    public function display_calendar(){
         session_start();
 
         if (!isset($_SESSION['id']))
-            return Response::json([
-                'success' => false,
-                'message' => 'You must be logged in to access the calendar.'
-            ], 401);
-        
-        $calendar = Calendar::where(["user_id" => $_SESSION["id"], "id" => $calendar_id])->with("events")->first();
-        if(is_null($calendar)) 
-            return Response::json([
-                'success' => false,
-                'message' => 'Your calendar cannot be accessed.'
-            ], 400);
+            return Response::redirectTo('/login');
 
-        return Response::view('', ['calendar' => $calendar]);
+        $calendar = Calendar::where(["user_id" => $_SESSION["id"]])->with("events")->first();
+
+        if(is_null($calendar)) return Response::view('404');
+
+        return Response::view('calendar', ['calendar' => $calendar]);
     }
 }

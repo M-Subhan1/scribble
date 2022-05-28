@@ -14,6 +14,8 @@ $(function () {
     $("#edit-page-btn").on("click", editPage);
     $("#delete-page-btn").on("click", deletePage);
     $(".edit-page-btn").on("click", selectPage);
+    $(".delete-list-btn").on("click", selectList);
+    $(".edit-list-btn").on("click", selectList);
     $("#delete-list-btn").on("click", deleteList);
     $("#create-list-btn").on("click", createList);
     $("#update-list-btn").on("click", updateList);
