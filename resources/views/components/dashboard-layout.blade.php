@@ -64,7 +64,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="btn p-0 mb-6 text-light dashboard-menu  @if (strcmp($currentPage, 'list') == 0) active @endif"
-                        href='/list'>
+                        href='/lists'>
                         <svg width="25" height="13" viewBox="0 0 20 9" fill="black" xmlns="http://www.w3.org/2000/svg">
                             <line x1="0.75" y1="1.25" x2="19.25" y2="1.25" stroke="white" stroke-width="1.5"
                                 stroke-linecap="round"></line>

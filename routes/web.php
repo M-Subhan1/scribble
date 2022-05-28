@@ -49,14 +49,6 @@ Route::get('pricing', function () {
     ]);
 });
 
-Route::get('sitemap', function () {
-    session_start();
-
-    return view("sitemap", [
-        'is_authorized' => isset($_SESSION['id'])
-    ]);
-});
-
 Route::get('/', function () {
     session_start();
 
@@ -81,29 +73,26 @@ Route::get('features', function () {
     ]);
 });
 
+Route::get('test', function () {
+    return view("test");
+});
+
 Route::get("/logout", [AuthController::class, "logout"]);
 Route::post("/register", [AuthController::class, "register"]);
 Route::post("/login", [AuthController::class, "login"]);
 Route::get("/page", [JournalController::class, "render_page"]);
 
-// List Routes
-Route::get('/render-list/{list_id}', [ListController::class, "render_list"]);
-Route::get('/list', [ListController::class, "display_lists"]);
-Route::post('/create-list', [ListController::class, "add_list"]);
-// Route::put('/list/{list_id}', [ListController::class , "add_list_column"]);
-Route::post('/create-entry/{list_id}', [ListController::class, "add_list_entry"]);
-Route::delete('/list/{list_id}', [ListController::class, "delete_list"]);
-Route::delete('/list/{list_id}/{list_col_id}', [ListController::class, "delete_column"]);
-// Route::delete('/list/{list_id}/{list_col_id}/{list_entry_id}', [ListController::class , "delete_entry"]);
-Route::get('/list/{list_id}', [ListController::class, "edit_list"]);
-Route::patch('list/{list_id}/{list_col_id}', [ListController::class, "edit_column"]);
-Route::get('/list/{list_id}/{list_col_id}/{list_entry_id}', [ListController::class, "edit_entry"]);
-Route::patch('/update-list/{list_id}', [ListController::class, "update_list"]);
-Route::patch('/list/{list_id}/{list_col_id}/{list_entry_id}', [ListController::class, "update_entry"]);
-Route::delete('/delete-list/{list_entry_id}', [ListController::class, "delete_entry"]);
-Route::post('/create-bdentry/{list_id}/{list_col_id}', [ListController::class, "add_list_dbentry"]);
-Route::get('/create-bdentry/{list_id}/{list_col_id}', [ListController::class, "add_dbentry"]);
-Route::post('/create-col/{list_id}', [ListController::class, "add_list_column"]);
+Route::get('/lists', [ListController::class, "display_lists"]);
+Route::put('/lists/', [ListController::class, "add_list"]);
+Route::get('/lists/{list_id}', [ListController::class, "render_list"]);
+Route::patch('/lists/{list_id}', [ListController::class, "update_list"]);
+Route::delete('/lists/{list_id}', [ListController::class, "delete_list"]);
+Route::put('/lists/{list_id}', [ListController::class, "add_column"]);
+Route::patch('/lists/{list_id}/{col_id}', [ListController::class, "edit_column"]);
+Route::delete('/lists/{list_id}/{col_id}', [ListController::class, "delete_column"]);
+Route::put('/lists/{list_id}/{col_id}', [ListController::class, "add_list_entry"]);
+Route::delete('/lists/{list_id}/{col_id}/{entry_id}', [ListController::class, "delete_entry"]);
+Route::patch('/lists/{list_id}/{col_id}/{entry_id}', [ListController::class, "update_entry"]);
 
 // Journal Routes
 Route::get('/journals', [JournalController::class, "list_journals"]);

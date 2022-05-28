@@ -1,5 +1,8 @@
 let selectedJournal = undefined;
 let selectedPage = undefined;
+let selectedList = undefined;
+let selectedColumn = undefined;
+let selectedEntry = undefined;
 
 $(function () {
     $("#create-journal-btn").on("click", createJournal);
@@ -11,7 +14,29 @@ $(function () {
     $("#edit-page-btn").on("click", editPage);
     $("#delete-page-btn").on("click", deletePage);
     $(".edit-page-btn").on("click", selectPage);
-    $(".delete-page-btn").on("click", selectPage);
+    $("#delete-list-btn").on("click", deleteList);
+    $("#create-list-btn").on("click", createList);
+    $("#update-list-btn").on("click", updateList);
+    $(document).on("click", ".edit-list-column-btn", selectColumn);
+    $(document).on("click", ".delete-list-column-btn", selectColumn);
+    $(document).on("click", ".add-entry", selectColumn);
+    $("#create-col-btn").on("click", createListColumn);
+    $("#delete-col-btn").on("click", deleteListColumn);
+    $("#update-col-btn").on("click", updateListColumn);
+    $(document).on("click", ".delete-entry-btn", selectListEntry);
+    $(document).on("click", ".edit-entry-btn", selectListEntry);
+    $("#create-entry-btn").on("click", createListEntry);
+    $("#update-entry-btn").on("click", updateListEntry);
+    $("#delete-entry-btn").on("click", deleteListEntry);
+    $(document).on("click", ".entry-menu-container", function (e) {
+        e.stopPropagation();
+        $(this).closest(".entry-menu-container").toggleClass("collapsed");
+    });
+
+    $("body").on("click", function () {
+        $(this).find(".entry-menu-container").addClass("collapsed");
+    });
+
     $("#dashboard-hamburger").on("click", (e) => {
         e.stopPropagation();
         $("#dashboard-nav").toggleClass("nav-collapse");
@@ -28,370 +53,428 @@ $(function () {
     }
 });
 
-$(".todo_btn").on(
-    "hover",
-    function () {
-        $(this).css("background-color", "black");
-    },
-    function () {
-        $(this).css("background-color", "rgb(102, 0, 204)");
-    }
-);
+function selectList() {
+    const list = $(this).closest(".list-entry");
+    selectedList = $(this).closest(".list-entry").data("id");
 
-$(document).on("click", ".create_list", function (e) {
-    e.preventDefault();
-    console.log("hello");
+    $("#EditListModal [name='list-name']").val(list.data("name"));
+    $("#EditListModal [name='list-subtitle']").val(list.data("description"));
+}
 
-    var data = {
-        name: $("#todo").val(),
-        subtitle: $("#todo_desc").val(),
-    };
+function createList() {
+    const name = $("#AddListModal [name='list-name']").val();
+    const subtitle = $("#AddListModal [name='list-subtitle']").val();
 
-    $("#AddTodoModal").modal("hide");
     createAlert("info", "Processing...");
-
-    $.ajaxSetup({
+    $.ajax({
+        url: "/lists/",
+        method: "PUT",
+        data: {
+            name,
+            subtitle,
+        },
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-    });
+        success: (response) => {
+            $("#lists-container").append(
+                `<div class="list-entry p-2 border bg-light d-flex justify-content-between align-items-center mb-4"
+                data-id="${response.list.id}" data-name="${name}"
+                data-description='${subtitle}'>
+                <div>
+                    <a href='/lists/${response.list.id}' class="h5 list-name"> ${name}</a>
+                    <div class="text-muted meta-data">Created at: ${response.list.created_at} Updated at:
+                        ${response.list.updated_at}</div>
+                </div>
+                <span>
+                    <button type="button" class="btn btn-sm btn-primary edit-list-btn" data-bs-toggle="modal"
+                        data-bs-target="#EditListModal">Edit</button>
+                    <button class="btn btn-sm btn-danger delete-list-btn" data-bs-toggle="modal"
+                        data-bs-target="#DeleteListModal">Delete</button>
+                </span>
+            </div>`
+            );
 
-    $.ajax({
-        type: "POST",
-        url: "/create-list",
-        data: data,
-        dataType: "json",
-        success: function (response) {
-            createAlert("success", "Data Saved");
-        },
-        error: function (response) {
-            alert("Data not saved");
-        },
-    });
-});
+            $(`[data-id='${response.list.id}']`)
+                .find(".btn")
+                .on("click", selectList);
 
-$(document).on("click", ".edit_list", function (e) {
-    e.preventDefault();
-    var list_id = $(this).val();
-    $("#EditTodoModal").modal("show");
-
-    $.ajax({
-        type: "GET",
-        url: "/list/" + list_id,
-        success: function (response) {
-            if (response.status == 200) {
-                $("#edit_name").val(response.list.name);
-                $("#edit_subtitle").val(response.list.subtitle);
-                $("#edit_todo_id").val(list_id);
-            }
+            createAlert("success", "List Added");
         },
-        error: function (response) {
-            alert("Data not saved");
+        error: (err) => {
+            createAlert("danger", "Server Error");
         },
     });
-});
+}
 
-$(document).on("click", ".delete_list", function (e) {
-    e.preventDefault();
-    var list_id = $(this).val();
-    $("#delete_todo_id").val(list_id);
-    $("#DeleteTodoModal").modal("show");
-});
+function updateList() {
+    if (selectedList == undefined) return;
+    const list = $(`[data-id='${selectedList}']`);
 
-$(document).on("click", ".delete_list_btn", function (e) {
-    e.preventDefault();
-    var list_id = $("#delete_todo_id").val();
-    $("#DeleteTodoModal").modal("show");
+    const name = $("#EditListModal [name='list-name']").val();
+    const subtitle = $("#EditListModal [name='list-subtitle']").val();
+
     createAlert("info", "Processing...");
 
-    $.ajaxSetup({
+    $.ajax({
+        url: `/lists/${selectedList}`,
+        method: "PATCH",
+        data: {
+            name,
+            subtitle,
+        },
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
+        success: () => {
+            createAlert("success", "List Updated");
+
+            list.data("name", name);
+            list.data("description", subtitle);
+            list.find(".list-name").text(name);
+        },
+        error: (err) => {
+            createAlert("danger", "Server Error");
+        },
     });
 
-    $("#DeleteTodoModal").modal("hide");
+    selectedList = undefined;
+}
+
+function deleteList() {
+    if (selectedList == undefined) return;
+
+    createAlert("info", "Processing...");
 
     $.ajax({
-        type: "DELETE",
-        url: "/list/" + list_id,
-        success: function (response) {
+        url: `/lists/${selectedList}`,
+        method: "DELETE",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: () => {
             createAlert("success", "List Deleted");
+            $(`[data-id='${selectedList}']`).remove();
         },
-        error: function (response) {
-            alert("Data not saved");
+        error: (err) => {
+            createAlert("danger", "Server Error");
         },
     });
-});
 
-$(document).on("click", ".update_list", function (e) {
-    e.preventDefault();
+    selectedList = undefined;
+}
 
-    var list_id = $("#edit_todo_id").val();
+function selectColumn() {
+    selectedColumn = $(this).closest("[data-col-id]").data("col-id");
+
+    $("#EditColModal #status").val(
+        $(this).closest("[data-col-name]").data("col-name")
+    );
+}
+
+function createListColumn() {
+    const name = $("#AddColModal [name='column-name']").val();
+    const list_id = $("[data-list-id]").data("list-id");
+
     createAlert("info", "Processing...");
 
-    var data = {
-        name: $("#edit_name").val(),
-        subtitle: $("#edit_subtitle").val(),
-    };
-
-    $.ajaxSetup({
+    $.ajax({
+        url: `/lists/${list_id}`,
+        method: "PUT",
+        data: {
+            name,
+        },
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-    });
+        success: (response) => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const view = urlParams.get("view");
 
-    $("#EditTodoModal").modal("hide");
+            $(".status-options").append(
+                `<option data-col-id="${response.column.id}" data-col-name="${name}" value="${response.column.id}">${name}</option>`
+            );
 
-    $.ajax({
-        type: "PATCH",
-        url: "/update-list/" + list_id,
-        data: data,
-        dataType: "json",
-        success: function (response) {
-            if (response.status == 200) {
-                createAlert("success", "Data Updated");
-            }
-        },
-        error: function (response) {
-            alert("Data not saved");
-        },
-    });
-});
+            $("#col-container").append(
+                `<div class="col-sm-12 col-md-6 col-xl-4 mb-4" data-col-id='${response.column.id}'
+                            data-col-name="${response.column.name}" data-col-name="${response.column.name}">
+                            <div class="card bg-light list-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h6 class="card-title text-dark py-2 col-name">${response.column.name}
+                                        </h6>
+                                        <span class="entry-menu-container collapsed">
+                                            <svg aria-hidden="true" role="img" class="octicon octicon-kebab-horizontal"
+                                                viewBox="0 0 16 16" width="16" height="16" fill="currentColor"
+                                                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
+                                                <path
+                                                    d="M8 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM1.5 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm13 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z">
+                                                </path>
+                                            </svg>
 
-$(document).on("click", ".create_entry", function (e) {
-    e.preventDefault();
+                                            <div class="entry-menu bg-dark">
+                                                <span class="btn btn-sm btn-dark text-light edit-list-column-btn"
+                                                    data-bs-toggle="modal" data-bs-target="#EditColModal">Edit</span>
+                                                <span class="btn btn-sm btn-dark text-light delete-list-column-btn"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#DeleteColModal">Delete</span>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="p-3 add-entry" data-bs-toggle="modal" data-bs-target="#AddEntryModal">+
+                                    Add Item</div>
+                            </div>
+                        </div>`
+            );
 
-    var list_id = $("#list_id").val();
-
-    var data = {
-        content: $("#content").val(),
-        status: $("#status").val(),
-    };
-
-    createAlert("info", "Processing...");
-
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
-
-    $("#AddEntryModal").modal("hide");
-
-    $.ajax({
-        type: "POST",
-        url: "/create-entry/" + list_id,
-        data: data,
-        dataType: "json",
-        success: function (response) {
-            createAlert("success", "Data Saved");
-        },
-        error: function (response) {
-            console.log(error);
-            alert("Data not saved");
-        },
-    });
-});
-
-$(document).on("click", ".edit_entry", function (e) {
-    e.preventDefault();
-    var entry_id = $(this).val();
-    var col_id = $("#col_id").val();
-    var list_id = $("#list_id").val();
-
-    $("#EditEntryModal").modal("show");
-
-    createAlert("info", "Processing...");
-
-    $.ajax({
-        type: "GET",
-        url: "/list/" + list_id + "/" + col_id + "/" + entry_id,
-        success: function (response) {
-            if (response.status == 200) {
-                $("#edit_content").val(response.entry.content);
-                $("#edit_status").val(response.column.name);
-                $("#edit_entry_id").val(entry_id);
-                $("#edit_col_id").val(col_id);
-                $("#edit_list_id").val(list_id);
-
-                createAlert("success", "List Deleted");
-            }
-        },
-        error: function (response) {
-            alert("Data not saved");
-        },
-    });
-});
-
-$(document).on("click", ".update_entry", function (e) {
-    e.preventDefault();
-
-    var entry_id = $("#edit_entry_id").val();
-    var col_id = $("#edit_col_id").val();
-    var list_id = $("#edit_list_id").val();
-
-    var data = {
-        content: $("#edit_content").val(),
-        status: $("#edit_status").val(),
-    };
-
-    $("#EditEntryModal").modal("hide");
-    createAlert("info", "Processing...");
-
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
-
-    $.ajax({
-        type: "PATCH",
-        url: "/list/" + list_id + "/" + col_id + "/" + entry_id,
-        data: data,
-        dataType: "json",
-        success: function (response) {
-            if (response.status == 200) {
-                createAlert("success", "List Updated");
-            }
-        },
-        error: function (response) {
-            alert("Data not saved");
-        },
-    });
-});
-
-$(document).on("click", ".delete_entry", function (e) {
-    e.preventDefault();
-    var entry_id = $(this).val();
-    // var list_id = $('#list_id').val();
-    $("#delete_entry_id").val(entry_id);
-    // $('#delete_list_id').val(list_id);
-    $("#DeleteEntryModal").modal("show");
-});
-
-$(document).on("click", ".delete_entry_btn", function (e) {
-    e.preventDefault();
-    var entry_id = $("#delete_entry_id").val();
-
-    $("#DeleteEntryModal").modal("show");
-
-    createAlert("info", "Processing...");
-
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
-
-    $.ajax({
-        type: "DELETE",
-        url: "/delete-list/" + entry_id,
-        success: function (response) {
-            $("#DeleteEntryModal").modal("hide");
-            if (response.status == 200) {
-                createAlert("success", "List Deleted");
-            }
-        },
-        error: function (response) {
-            alert("Data not saved");
-        },
-    });
-});
-
-$(document).on("click", ".add_bdentry", function (e) {
-    e.preventDefault();
-    var col_id = $(this).val();
-    var list_id = $("#list_id").val();
-
-    $("#AddBDEntryModal").modal("show");
-
-    createAlert("info", "Processing...");
-
-    $.ajax({
-        type: "GET",
-        url: "/create-bdentry/" + list_id + "/" + col_id,
-        success: function (response) {
-            if (response.status == 200) {
-                $("#bd_status").val(response.column.name);
-                $("#bd_col_id").val(response.column.id);
-                $("#bd_list_id").val(response.list.id);
-                createAlert("success", "Entry Added");
-            }
-        },
-        error: function (response) {
-            alert("Data not saved");
-        },
-    });
-});
-
-$(document).on("click", ".create_bdentry", function (e) {
-    e.preventDefault();
-    var col_id = $(".add_bdentry").val();
-    var list_id = $("#list_id").val();
-
-    var data = {
-        col_id: $("#bd_col_id").val(),
-        list_id: $("#bd_list_id").val(),
-        content: $("#bd_content").val(),
-        status: $("#bd_status").val(),
-    };
-
-    createAlert("info", "Processing...");
-
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "/create-bdentry/" + list_id + "/" + col_id,
-        data: data,
-        success: function (response) {
-            console.log(response);
-            if (response.status == 200) {
-                $("#AddBDEntryModal").modal("hide");
-                createAlert("success", "Entry Added");
-            }
-        },
-        error: function (response) {
-            alert("Data not saved");
-        },
-    });
-});
-
-$(document).on("click", ".create_col", function (e) {
-    e.preventDefault();
-    var list_id = $("#list_id").val();
-
-    var data = {
-        name: $("#bdv_status").val(),
-    };
-
-    createAlert("info", "Processing...");
-
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "/create-col/" + list_id,
-        data: data,
-        dataType: "json",
-        success: function (response) {
-            $("#AddTodoModal").modal("hide");
             createAlert("success", "Column Added");
         },
-        error: function (response) {
-            alert("Data not saved");
+        error: (err) => {
+            createAlert("danger", "Server Error");
         },
     });
-});
+}
+
+function updateListColumn() {
+    const name = $("#EditColModal [name='column-name']").val();
+    const list_id = $("[data-list-id]").data("list-id");
+
+    createAlert("info", "Processing...");
+
+    $.ajax({
+        url: `/lists/${list_id}/${selectedColumn}`,
+        method: "PATCH",
+        data: {
+            name,
+        },
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: (response) => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const view = urlParams.get("view");
+
+            $(`option[data-col-id="${selectedColumn}"]`).text(name);
+            $(`[data-col-id='${selectedColumn}']`).data("col-name", name);
+            $(`[data-col-id='${selectedColumn}'] .col-name`).text(name);
+
+            if (view !== "table") {
+                const col = $(`[data-col-id="${selectedColumn}"]`);
+                col.data("col-name", name);
+                col.find(".col-name").val(name);
+            }
+
+            createAlert("success", "Column Added");
+        },
+        error: (err) => {
+            createAlert("danger", "Server Error");
+        },
+    });
+}
+
+function deleteListColumn() {
+    if (!selectedColumn) return;
+
+    const selectedList = $("[data-list-id]").data("list-id");
+    const entry = $(`[data-col-id='${selectedColumn}']`);
+
+    createAlert("info", "Processing...");
+
+    $.ajax({
+        url: `/lists/${selectedList}/${selectedColumn}`,
+        method: "DELETE",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: () => {
+            entry.remove();
+            createAlert("success", "Column Deleted");
+        },
+        error: (err) => {
+            createAlert("danger", "Server Error");
+        },
+    });
+
+    selectedColumn = undefined;
+}
+
+function selectListEntry() {
+    selectedList = $("[data-list-id]").data("list-id");
+    selectedColumn = $(this).closest("[data-col-id]").data("col-id");
+    selectedEntry = $(this).closest("[data-id]").data("id");
+
+    $("#EditEntryModal #content").val(
+        $(this).closest("[data-id]").find(".entry-content").text()
+    );
+
+    $("#EditEntryModal #status").val(
+        $(this).closest("[data-col-id]").data("col-id")
+    );
+}
+
+function createListEntry() {
+    let list_id = $("[data-list-id").data("list-id");
+    let content = $("#AddEntryModal #content").val();
+    let col_id = $("#AddEntryModal #status").val();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const view = urlParams.get("view");
+
+    if (view !== "table") {
+        content = $("#AddEntryModal [name='content']").val();
+        list_id = $("#board-container").data("list-id");
+        col_id = selectedColumn;
+    }
+
+    createAlert("info", "Processing...");
+
+    $.ajax({
+        url: `/lists/${list_id}/${selectedColumn}`,
+        method: "PUT",
+        data: {
+            content,
+            col_id,
+        },
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: (response) => {
+            createAlert("success", "Entry Added");
+
+            if (view === "table") {
+                const column_name = $(
+                    `#AddEntryModal option[value='${status}']`
+                ).data("col-name");
+
+                $("#entry-container")
+                    .append(`<tr data-id="${response.entry.id}" data-col-id="${response.entry.column_id}">
+                            <td>${response.entry.content}</td>
+                            <td class="text-center align-middle">${column_name}</td>
+                            <td class="text-center align-middle">${response.entry.created_at}</td>
+                            <td>
+                                <div class='text-center'>
+                                    <button type="button" class="btn btn-sm btn-primary edit-entry-btn"
+                                        data-bs-toggle="modal" data-bs-target="#EditEntryModal">Edit</button>
+                                    <button class="btn btn-sm btn-danger delete-entry-btn" data-bs-toggle="modal"
+                                        data-bs-target="#DeleteEntryModal">Delete</button>
+                                </div>
+                            </td>
+                        </tr>`);
+            } else {
+                $(
+                    `[data-col-id='${selectedColumn}'] > .card > .card-body`
+                ).append(
+                    `<div class="items mb-1" data-id='${response.entry.id}'>
+                        <div class="card draggable">
+                            <div
+                                class="card-body d-flex justify-content-between align-items-center">
+                                <p class="mb-0 entry-content">${response.entry.content}</p>
+                                <span class="entry-menu-container collapsed">
+                                    <svg aria-hidden="true" role="img"
+                                        class="octicon octicon-kebab-horizontal" viewBox="0 0 16 16"
+                                        width="16" height="16" fill="currentColor"
+                                        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
+                                        <path
+                                            d="M8 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM1.5 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm13 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z">
+                                        </path>
+                                    </svg>
+                                    <div class="entry-menu bg-dark">
+                                        <span class="btn btn-sm btn-dark text-light edit-entry-btn"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#EditEntryModal">Edit</span>
+                                        <span
+                                            class="btn btn-sm btn-dark text-light delete-entry-btn"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#DeleteEntryModal">Delete</span>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>`
+                );
+            }
+        },
+        error: (err) => {
+            createAlert("danger", "Server Error");
+        },
+    });
+}
+
+function updateListEntry() {
+    if (!selectedList || !selectedColumn || !selectedEntry) return;
+
+    const list_id = $("[data-list-id").data("list-id");
+    const content = $("#EditEntryModal #content").val();
+    const col_id = $("#EditEntryModal #status").val();
+    const entry = $(`[data-id='${selectedEntry}']`);
+    const column_name = $(`[data-col-id='${col_id}']`).data("col-name");
+
+    createAlert("info", "Processing...");
+
+    $.ajax({
+        url: `/lists/${list_id}/${selectedColumn}/${selectedEntry}`,
+        method: "PATCH",
+        data: {
+            content,
+            col_id,
+        },
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: () => {
+            entry.data("col-id", col_id);
+            entry.data("col-name", column_name);
+            entry.find(".entry-content").text(content);
+            entry.find(".entry-column").text(column_name);
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const view = urlParams.get("view");
+
+            if (view !== "table") {
+                console.log($(`[data-id='${selectedEntry}']`));
+
+                $(`[data-col-id='${col_id}'] > .card > .card-body`).append(
+                    entry.clone(true, true)
+                );
+
+                entry.remove();
+            }
+
+            createAlert("success", "Entry Updated");
+        },
+        error: (err) => {
+            createAlert("danger", "Server Error");
+        },
+    });
+
+    selectedList = selectedColumn = selectedEntry = undefined;
+}
+
+function deleteListEntry() {
+    if (!selectedList || !selectedColumn || !selectedEntry) return;
+
+    createAlert("info", "Processing...");
+
+    const entry = $(`[data-id='${selectedEntry}']`);
+
+    $.ajax({
+        url: `/lists/${selectedList}/${selectedColumn}/${selectedEntry}`,
+        method: "DELETE",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: () => {
+            entry.remove();
+            createAlert("success", "Entry Deleted");
+        },
+        error: (err) => {
+            createAlert("danger", "Server Error");
+        },
+    });
+
+    selectedList = selectedColumn = selectedEntry = undefined;
+}
 
 function selectJournal() {
     const journal = $(this).closest(".journal-list-entry");

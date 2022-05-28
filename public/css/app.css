@@ -29464,3 +29464,28 @@ textarea.form-control-lg {
   display: inline-block;
   padding: 1rem;
 }
+
+.list-card {
+  height: 500px;
+}
+
+.list-card > .card-body {
+  height: 450px;
+  overflow-y: auto;
+}
+
+.entry-menu-container {
+  position: relative;
+}
+
+.entry-menu-container.collapsed .entry-menu {
+  display: none;
+}
+
+.entry-menu {
+  position: absolute;
+  right: 20px;
+  top: 0px;
+  background-color: #f8f8f8;
+  z-index: 100;
+}
