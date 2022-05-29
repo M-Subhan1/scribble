@@ -35,7 +35,7 @@ class CalendarController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'description'=> 'required',
-                'occurrence_date' => 'required',
+                'date' => 'required',
             ]);
 
             if($validator->fails()){
@@ -48,7 +48,7 @@ class CalendarController extends Controller
             $event = new Event();
             $event->calendar_id = $calendar_id;
             $event->description = $request->input('description');
-            $event->occurrence_date = $request->input('occurrence_date');
+            $event->occurrence_date = $request->input('date');
             $event->save();
 
             return Response::json([
@@ -84,7 +84,7 @@ class CalendarController extends Controller
 
             $event->calendar_id = $calendar_id;
             $event->description = $request->input('description');
-            $event->occurrence_date = $request->input('occurrence_date');
+            $event->occurrence_date = $request->input('date');
             $event->update();
 
             return Response::json([
