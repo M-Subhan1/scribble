@@ -125,9 +125,6 @@ document.addEventListener(
                 );
             });
 
-            console.log(selectedDay);
-            console.log(filteredEvents);
-
             if (filteredEvents.length == 0) document.getElementById("event").innerHTML = `No events set for today!`;
 
             else {
@@ -247,7 +244,15 @@ function create_event() {
         },
         success: (response) => {
             $("#event").append(
-                `Event: ${description} and date: ${date}`
+                `<div class="calendar-event" data-id="${response.event.id}" data-desc="${description}" data-date="${date}">
+                    Event: ${description} and occurrence time ${date}
+                    <span>
+                        <button type="button" class="btn btn-sm btn-primary edit-event-btn" data-bs-toggle="modal"
+                            data-bs-target="#UpdateEventModal">Edit</button>
+                        <button class="btn btn-sm btn-danger delete-event-btn" data-bs-toggle="modal"
+                            data-bs-target="#DeleteEventModal">Delete</button>
+                    </span>
+                    </div><br/>`
             );
 
             createAlert("success", "Event Added");
@@ -263,14 +268,13 @@ function select_event() {
     var event = $(this).closest(".calendar-event");
     $date = new Date(event.data("date"));
     $date = $date.toLocaleString();
-    console.log($date);
     $("#UpdateEventModal [name='event-desc']").val(event.data("desc"));
     $("#UpdateEventModal [name='event-date']").val("2022-05-04T06:04");
 }
 
 function update_event(){
     var calendar_id = $("#calendar").data('id');
-    var event = $(".calendar-event");
+    var event = $(this).closest(".calender-event");
     var event_id = $(".calendar-event").data("id");
     const description = $("#UpdateEventModal [name='event-desc']").val();
     const date = $("#UpdateEventModal [name='event-date']").val();
@@ -292,6 +296,7 @@ function update_event(){
 
             event.data("desc", description);
             event.data("date", date);
+            
         },
         error: (err) => {
             createAlert("danger", "Server Error");
