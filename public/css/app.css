@@ -29466,11 +29466,11 @@ textarea.form-control-lg {
 }
 
 .list-card {
-  height: 500px;
+  height: 600px;
 }
 
 .list-card > .card-body {
-  height: 450px;
+  height: 550px;
   overflow-y: auto;
 }
 
@@ -29490,15 +29490,19 @@ textarea.form-control-lg {
   z-index: 100;
 }
 
+.entry-menu .btn-dark {
+  width: 100%;
+}
+
+.btn-dark:hover {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+
 .heading-section {
   font-size: 28px;
   color: #000;
-}
-
-.img {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
 }
 
 .elegant-calencar {
@@ -29535,7 +29539,7 @@ textarea.form-control-lg {
 @media (max-width: 767.98px) {
   .wrap-header {
     width: 100%;
-    padding: 20px 0;
+    padding: 1rem;
   }
 }
 
@@ -29592,21 +29596,6 @@ textarea.form-control-lg {
 }
 .button-wrap .next-button {
   right: 20px;
-}
-
-.head-day {
-  font-size: 9em;
-  line-height: 1;
-  color: #fff;
-}
-
-.head-month {
-  font-size: 2em;
-  line-height: 1;
-  color: #fff;
-  font-size: 16px;
-  text-transform: uppercase;
-  font-weight: 300;
 }
 
 .calendar-wrap {
@@ -29733,4 +29722,10 @@ textarea.form-control-lg {
 
 #calendar #reset:active {
   transform: scale(0.8);
+}
+
+#events-container {
+  height: 400px;
+  overflow-y: auto;
+  background-color: #000;
 }

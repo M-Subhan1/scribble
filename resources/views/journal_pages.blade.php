@@ -35,7 +35,7 @@
                         <div>
                             <div class="p-2 border bg-light d-flex justify-content-between align-items-center">
                                 <div>
-                                    <a href='/journals/{{ $journal->id }}/{{ $page->id }}' class="h5">
+                                    <a href='/journals/{{ $journal->id }}/{{ $page->id }}' class="h5 page-name">
                                         {{ $page->identifier }}</a>
                                     <div class="text-muted meta-data">Created at: {{ $page->created_at }} Updated at:
                                         {{ $page->updated_at }}</div>

@@ -3,7 +3,7 @@
         <nav id="bread-crumb" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="/lists">Todos</a></li>
+                <li class="breadcrumb-item"><a href="/lists">Lists</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ $list->name }}</li>
             </ol>
         </nav>
@@ -13,9 +13,9 @@
             <h5>{{ $list->subtitle }}</h5>
 
             <div class="description mt-7 mb-0">
-                Use todo to track your personal tasks.<br>
+                Use lists to track your personal tasks and progress.<br>
                 Click on the list tag you want to open. <br>
-                To create a new todo click the create list button.
+                To create a new list column click the add column button.
                 </span>
             </div>
         </div>
@@ -61,9 +61,9 @@
                                             </svg>
 
                                             <div class="entry-menu bg-dark">
-                                                <span class="btn btn-sm btn-dark text-light edit-list-column-btn"
+                                                <span class="btn btn-sm btn-dark edit-list-column-btn"
                                                     data-bs-toggle="modal" data-bs-target="#EditColModal">Edit</span>
-                                                <span class="btn btn-sm btn-dark text-light delete-list-column-btn"
+                                                <span class="btn btn-sm btn-dark delete-list-column-btn"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#DeleteColModal">Delete</span>
                                             </div>
@@ -90,11 +90,10 @@
                                                             </path>
                                                         </svg>
                                                         <div class="entry-menu bg-dark">
-                                                            <span class="btn btn-sm btn-dark text-light edit-entry-btn"
+                                                            <span class="btn btn-sm btn-dark edit-entry-btn"
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#EditEntryModal">Edit</span>
-                                                            <span
-                                                                class="btn btn-sm btn-dark text-light delete-entry-btn"
+                                                            <span class="btn btn-sm btn-dark delete-entry-btn"
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#DeleteEntryModal">Delete</span>
                                                         </div>
@@ -118,7 +117,7 @@
         <div class="modal fade" id="AddEntryModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
+                <div class="modal-content p-3">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -144,7 +143,7 @@
         <!-- Delete entry Modal-->
         <div class="modal fade" id="DeleteEntryModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
+                <div class="modal-content p-3">
                     <div class="modal-header">
                         <h5 class="modal-title" id="CreateModalLabel">Delete Item</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -166,9 +165,9 @@
         <div class="modal fade" id="EditEntryModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog  modal-dialog-centered">
-                <div class="modal-content">
+                <div class="modal-content p-3">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Todo Entry</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Item</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
@@ -203,7 +202,7 @@
         <div class="modal fade" id="AddColModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
+                <div class="modal-content p-3">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Add Column</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -230,7 +229,7 @@
         <div class="modal fade" id="EditColModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
+                <div class="modal-content p-3">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Edit Column</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -255,7 +254,7 @@
         <div class="modal fade" id="DeleteColModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
+                <div class="modal-content p-3">
                     <div class="modal-header">
                         <h5 class="modal-title" id="CreateModalLabel">Delete Column</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
