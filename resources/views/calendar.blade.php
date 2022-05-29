@@ -16,121 +16,109 @@
                     To create a new event click the add event button.
                     </span>
                 </div>
-            <div class="position-relative mb-10 mt-0">
-                <div class="position-absolute top-10 end-0 mr-90">
-                    <div class="text-right"><button type="button" class="btn btn-primary btn-sm"
-                                    data-bs-toggle="modal" data-bs-target="#AddEventModal">Create
-                                    Event</button></div>
+                <div class="position-relative mb-10 mt-0">
+                    <div class="position-absolute top-10 end-0 mr-90">
+                        <div class="text-right mt-2"><button type="button" class="btn btn-primary btn-sm"
+                                data-bs-toggle="modal" data-bs-target="#AddEventModal">Create
+                                Event</button></div>
+                    </div>
                 </div>
             </div>
-        </div>
+            <hr>
 
-        <hr>
+            <div class="mt-8 row">
+                <div class="col-md-12">
+                    <div class="elegant-calencar d-md-flex">
+                        <div id="events-container" class="wrap-header">
 
-            <div class="mt-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="elegant-calencar d-md-flex">
-                            <div id="events-container" class="wrap-header">
-                                <div>
-                                    <p id="reset">Today</p>
-                                </div>
-                                <div id="header" class="p-0">
-                                    <div class="head-info">
-                                        <div class="head-month"></div>
-                                        <div class="head-day"></div>
-                                    </div>
-                                </div>
-                                <div id="event"></div>
+                        </div>
+                        <div class="calendar-wrap">
+                            <div class="w-100 button-wrap">
+                                <div class="pre-button d-flex align-items-center justify-content-center"><i
+                                        class="fa fa-chevron-left"></i></div>
+                                <div class="next-button d-flex align-items-center justify-content-center"><i
+                                        class="fa fa-chevron-right"></i></div>
                             </div>
-                            <div class="calendar-wrap">
-                                <div class="w-100 button-wrap">
-                                    <div class="pre-button d-flex align-items-center justify-content-center"><i
-                                            class="fa fa-chevron-left"></i></div>
-                                    <div class="next-button d-flex align-items-center justify-content-center"><i
-                                            class="fa fa-chevron-right"></i></div>
-                                </div>
-                                <table id="calendar" data-id={{$calendar->id}}>
-                                    <thead>
-                                        <tr>
-                                            <th>Sun</th>
-                                            <th>Mon</th>
-                                            <th>Tue</th>
-                                            <th>Wed</th>
-                                            <th>Thu</th>
-                                            <th>Fri</th>
-                                            <th>Sat</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table id="calendar">
+                                <thead>
+                                    <tr>
+                                        <th>Sun</th>
+                                        <th>Mon</th>
+                                        <th>Tue</th>
+                                        <th>Wed</th>
+                                        <th>Thu</th>
+                                        <th>Fri</th>
+                                        <th>Sat</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-                <!--Create Event Modal -->
+        <!--Create Event Modal -->
         <div class="modal fade" id="AddEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
+                <div class="modal-content p-2">
                     <div class="modal-header">
                         <h5 class="modal-title" id="CreateModalLabel">Create Event</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -144,8 +132,8 @@
                         </div>
                         <div class="form-group">
                             <label for="event_date">Occurrence Date</label>
-                            <input type="datetime-local" class="form-control pt-1 pb-1" id="event_date" name="event-date"
-                                 placeholder="Date and time on which the event will take place">
+                            <input type="datetime-local" class="form-control pt-1 pb-1" id="event_date"
+                                name="event-date" placeholder="Date and time on which the event will take place">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -158,11 +146,11 @@
             </div>
         </div>
 
-         <!--Update Event Modal -->
-        <div class="modal fade" id="UpdateEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <!--Update Event Modal -->
+        <div class="modal fade" id="UpdateEventModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
+                <div class="modal-content p-2">
                     <div class="modal-header">
                         <h5 class="modal-title" id="CreateModalLabel">Edit Event</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -176,8 +164,8 @@
                         </div>
                         <div class="form-group">
                             <label for="event_date">Occurrence Date</label>
-                            <input type="datetime-local" class="form-control pt-1 pb-1" id="event_date" name="event-date"
-                                 placeholder="Date and time on which the event will take place">
+                            <input type="datetime-local" class="form-control pt-1 pb-1" id="event_date"
+                                name="event-date" placeholder="Date and time on which the event will take place">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -191,10 +179,10 @@
         </div>
 
         <!-- Delete event modal -->
-        <div class="modal fade" id="DeleteEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="DeleteEventModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
+                <div class="modal-content p-2">
                     <div class="modal-header">
                         <h5 class="modal-title" id="UpdateModalLabel">Delete Event</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"

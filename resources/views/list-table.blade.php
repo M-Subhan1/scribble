@@ -13,14 +13,14 @@
             <h5>{{ $list->subtitle }}</h5>
 
             <div class="description mt-7 mb-0">
-                Use todo to track your personal tasks.<br>
+                Use lists to track your personal tasks and progress.<br>
                 Click on the list tag you want to open. <br>
-                To create a new todo click the create list button.
+                To create a new item click the add item button.
                 </span>
             </div>
         </div>
 
-        <nav class="navbar navbar-expand-lg navbar-light border-bottom pb-0">
+        <nav class="navbar navbar-expand-lg navbar-light border-bottom pb-4">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -34,13 +34,9 @@
                                 View</a>
                         </li>
                     </ul>
-                    <button type="button" class="btn btn-primary btn-sm add-table-column" data-bs-toggle="modal"
-                        data-bs-target="#AddColModal">
-                        Add Column
-                    </button>
                     <button type="button" class="btn btn-primary btn-sm add-entry" data-bs-toggle="modal"
                         data-bs-target="#AddEntryModal">
-                        Add Entry</button>
+                        Add Item</button>
                 </div>
             </div>
         </nav>
@@ -80,15 +76,15 @@
             <div class="modal-dialog  modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Todo Entry</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="content">Task</label>
+                            <label for="content">Content</label>
                             <input type="text" class="form-control mb-4 pt-1 pb-1" id="content" name="name"
-                                placeholder="Your task">
+                                placeholder="Item content">
                         </div>
                         <div class="form-group">
                             <label for="status">Status</label>
@@ -163,33 +159,6 @@
                         <button type="button" class="btn btn-dark btn-sm" data-bs-dismiss="modal">Close</button>
                         <button type="button" id="delete-entry-btn" data-bs-dismiss="modal"
                             class="btn btn-danger btn-sm">Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--Add Column Modal -->
-        <div class="modal fade" id="AddColModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Todo Column</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="bdv_status">Name</label>
-                                <input type="text" name="column-name" class="form-control mb-4 pt-1 pb-1">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" id="create-col-btn" data-bs-dismiss="modal"
-                            class="btn btn-primary btn-sm">Create</button>
                     </div>
                 </div>
             </div>

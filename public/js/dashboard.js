@@ -14,6 +14,7 @@ $(function () {
     $("#edit-page-btn").on("click", editPage);
     $("#delete-page-btn").on("click", deletePage);
     $(".edit-page-btn").on("click", selectPage);
+    $(".delete-page-btn").on("click", selectPage);
     $(".delete-list-btn").on("click", selectList);
     $(".edit-list-btn").on("click", selectList);
     $("#delete-list-btn").on("click", deleteList);
@@ -66,6 +67,7 @@ function selectList() {
 function createList() {
     const name = $("#AddListModal [name='list-name']").val();
     const subtitle = $("#AddListModal [name='list-subtitle']").val();
+    const template = $("#AddListModal [name='list-template']").val();
 
     createAlert("info", "Processing...");
     $.ajax({
@@ -74,6 +76,7 @@ function createList() {
         data: {
             name,
             subtitle,
+            template,
         },
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -148,6 +151,8 @@ function deleteList() {
 
     createAlert("info", "Processing...");
 
+    const selected = $(`[data-id='${selectedList}']`);
+
     $.ajax({
         url: `/lists/${selectedList}`,
         method: "DELETE",
@@ -156,7 +161,7 @@ function deleteList() {
         },
         success: () => {
             createAlert("success", "List Deleted");
-            $(`[data-id='${selectedList}']`).remove();
+            selected.remove();
         },
         error: (err) => {
             createAlert("danger", "Server Error");

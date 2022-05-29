@@ -60,6 +60,7 @@ class ListController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'subtitle' => 'required',
+            'template' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -73,6 +74,10 @@ class ListController extends Controller
         $list->name = $request->input('name');
         $list->subtitle = $request->input('subtitle');
         $list->save();
+
+        if (strcmp($request->input('template'), 'none') !== 0) {
+            $this->create_template_list($list, $request->input('template'));
+        }
 
         return response()->json([
             'list' => $list,
@@ -376,5 +381,24 @@ class ListController extends Controller
         return response()->json([
             'message' => "Entry deleted successfully",
         ], 200);
+    }
+
+    public function create_template_list($list, $template) {
+        $column_names = [];
+
+        if (strcmp($template, 'todo') == 0) {
+            $column_names = ["To-do", "Doing", "Review", "Done"];
+        } else if (strcmp($template, 'watch') == 0) {
+            $column_names = ["Watched", "Watching"];
+        } else if (strcmp($template, 'reading') == 0) {
+            $column_names = ["To Read", "Reading", "Read"];
+        }
+
+        foreach ($column_names as $column_name) {
+            $list_col = new list_column();
+            $list_col->list_id = $list->id;
+            $list_col->name = $column_name;
+            $list_col->save();
+        }
     }
 }

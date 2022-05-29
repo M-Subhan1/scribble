@@ -167,11 +167,11 @@
 }
 
 .list-card {
-    height: 500px;
+    height: 600px;
 }
 
 .list-card > .card-body {
-    height: 450px;
+    height: 550px;
     overflow-y: auto;
 }
 
@@ -189,4 +189,14 @@
     top: 0px;
     background-color: $gray-100;
     z-index: 100;
+}
+
+.entry-menu .btn-dark {
+    width: 100%;
+}
+
+.btn-dark:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
 }

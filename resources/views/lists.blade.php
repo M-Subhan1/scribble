@@ -4,15 +4,15 @@
         <nav id="bread-crumb" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Todos</li>
+                <li class="breadcrumb-item active" aria-current="page">Lists</li>
             </ol>
         </nav>
         <div class="px-4 mt-20">
-            <h2>Todo Lists</h2>
+            <h2>Lists</h2>
             <div class="description mt-7 mb-0">
-                All your todo lists are displayed below.<br>
+                All your lists are displayed below.<br>
                 Click on the list tag you want to open. <br>
-                To create a new todo click the create list button.
+                To create a new list click the create list button.
                 </span>
             </div>
         </div>
@@ -21,7 +21,7 @@
             <div class="position-absolute top-0 end-0">
                 <div class="text-right"><button type="button" class="btn btn-primary btn-sm todo_btn"
                         data-bs-toggle="modal" data-bs-target="#AddListModal">Create
-                        Todo</button></div>
+                        List</button></div>
             </div>
         </div>
 
@@ -50,29 +50,39 @@
         <div class="modal fade" id="AddListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
+                <div class="modal-content p-3">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="CreateModalLabel">Create Todo</h5>
+                        <h5 class="modal-title" id="CreateModalLabel">Create List</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="todo">Name</label>
-                            <input type="text" class="form-control mb-4 pt-1 pb-1" id="list_name" name="list-name"
-                                placeholder="Name your todo">
+                            <input type="text" class="form-control mb-4" id="list_name" name="list-name"
+                                placeholder="Name your List">
                         </div>
                         <div class="form-group">
                             <label for="todo_desc">Description</label>
-                            <input type="text" class="form-control pt-1 pb-1" id="list_description" name="list-subtitle"
-                                name="list-description" placeholder="Description of your todo">
+                            <textarea class="form-control mb-4" id="list_description" name="list-subtitle"
+                                placeholder="Describe your List"></textarea>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="todo_desc">Template</label>
+                            <select class="form-control pt-1 pb-1" id="list_template" name="list-template"
+                                placeholder="Choose a template">
+                                <option value="none">None</option>
+                                <option value="todo">To-do List</option>
+                                <option value="reading">Reading List</option>
+                                <option value="watch">Watch List</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Close</button>
                         <button type="button" id="create-list-btn" class="btn btn-primary btn-sm todo_btn"
-                            data-bs-dismiss="modal">Save
-                            changes</button>
+                            data-bs-dismiss="modal">Create List</button>
                     </div>
                 </div>
             </div>
@@ -82,9 +92,9 @@
         <div class="modal fade" id="EditListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
+                <div class="modal-content p-3">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="CreateModalLabel">Edit Your Todo</h5>
+                        <h5 class="modal-title" id="CreateModalLabel">Edit List</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
@@ -93,12 +103,12 @@
                         <div class="form-group">
                             <label for="edit_name">Name</label>
                             <input type="text" class="form-control mb-4 pt-1 pb-1" id="edit_name" name="list-name"
-                                placeholder="Name your todo">
+                                placeholder="Name your List">
                         </div>
                         <div class="form-group">
                             <label for="edit_subtitle">Description</label>
                             <input type="text" class="form-control pt-1 pb-1" id="edit_subtitle" name="list-subtitle"
-                                placeholder="Description of your todo">
+                                placeholder="Description of your List">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -115,14 +125,14 @@
         <div class="modal fade" id="DeleteListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
+                <div class="modal-content p-3">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="CreateModalLabel">Delete Your Todo</h5>
+                        <h5 class="modal-title" id="CreateModalLabel">Delete List</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <h6>Are you sure you want to delete this todo?</h6>
+                        <h6>Are you sure you want to delete this list?</h6>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark btn-sm" data-bs-dismiss="modal">Close</button>

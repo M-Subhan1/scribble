@@ -109,6 +109,6 @@ Route::delete('/journals/{journal_id}/{id}', [JournalController::class, "delete_
 
 //Calendar routes
 Route::get('/calendar', [CalendarController::class, "display_calendar"]);
-Route::put('/calendar/{calendar_id}', [CalendarController::class, "create_event"]);
-Route::patch('/calendar/{calendar_id}/{event_id}', [CalendarController::class, "edit_event"]);
-Route::delete('/calendar/{calendar_id}/{event_id}', [CalendarController::class, "delete_event"]);
+Route::put('/calendar', [CalendarController::class, "create_event"]);
+Route::patch('/calendar/{event_id}', [CalendarController::class, "edit_event"]);
+Route::delete('/calendar/{event_id}', [CalendarController::class, "delete_event"]);

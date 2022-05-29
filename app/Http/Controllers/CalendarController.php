@@ -17,7 +17,7 @@ class CalendarController extends Controller
         return $calendar->save();
     }
 
-    public function create_event(Request $request, $calendar_id){
+    public function create_event(Request $request){
         session_start();
 
         if (!isset($_SESSION['id']))
@@ -26,7 +26,8 @@ class CalendarController extends Controller
                 'message' => 'You must be logged in to access the calendar.'
             ], 401);
 
-            $calendar = Calendar::where(["user_id" => $_SESSION["id"], "id" => $calendar_id])->first();
+            $calendar = Calendar::where(["user_id" => $_SESSION["id"]])->first();
+
             if(is_null($calendar))
                 return Response::json([
                     'success' => false,
@@ -46,7 +47,7 @@ class CalendarController extends Controller
             }
 
             $event = new Event();
-            $event->calendar_id = $calendar_id;
+            $event->calendar_id = $calendar->id;
             $event->description = $request->input('description');
             $event->occurrence_date = $request->input('date');
             $event->save();
@@ -56,7 +57,7 @@ class CalendarController extends Controller
             ]);
     }
 
-    public function edit_event(Request $request, $calendar_id, $event_id){
+    public function edit_event(Request $request, $event_id){
         session_start();
 
         if (!isset($_SESSION['id']))
@@ -65,7 +66,8 @@ class CalendarController extends Controller
                 'message' => 'You must be logged in to access the calendar.'
             ], 401);
 
-            $calendar = Calendar::where(["user_id" => $_SESSION["id"], "id" => $calendar_id])->first();
+            $calendar = Calendar::where(["user_id" => $_SESSION["id"]])->first();
+
             if(is_null($calendar))
                 return Response::json([
                     'success' => false,
@@ -81,7 +83,7 @@ class CalendarController extends Controller
                 ], 400);
             }
 
-            $event->calendar_id = $calendar_id;
+            $event->calendar_id = $calendar->id;
             $event->description = $request->input('description');
             $event->occurrence_date = $request->input('date');
             $event->update();
@@ -91,7 +93,7 @@ class CalendarController extends Controller
             ]);
     }
 
-    public function delete_event(Request $request, $calendar_id, $event_id){
+    public function delete_event(Request $request, $event_id){
         session_start();
 
         if (!isset($_SESSION['id']))
@@ -100,7 +102,8 @@ class CalendarController extends Controller
                 'message' => 'You must be logged in to access the calendar.'
             ], 401);
 
-        $calendar = Calendar::where(["user_id" => $_SESSION["id"], "id" => $calendar_id])->first();
+        $calendar = Calendar::where(["user_id" => $_SESSION["id"]])->first();
+
         if(is_null($calendar))
             return Response::json([
                 'success' => false,
@@ -117,6 +120,7 @@ class CalendarController extends Controller
         }
 
         $event->delete();
+
         return Response::json([
             'success' => true,
             'message' => 'Event Deleted Successfully!'
