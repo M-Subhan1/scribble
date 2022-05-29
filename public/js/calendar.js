@@ -125,7 +125,22 @@ document.addEventListener(
                 );
             });
 
-            console.log(filteredEvents);
+            if (filteredEvents.length == 0) document.getElementById("event").innerHTML = `No events set for today!`;
+
+            else {
+                for (var i = 0; i < filteredEvents.length; i++) {
+                    var date = new Date(filteredEvents[i]['occurrence_date']);
+                    $("#event").append(`<div class="calendar-event" data-id="${filteredEvents[i]['id']}" data-desc="${filteredEvents[i]['description']}" data-date="${filteredEvents[i]['occurrence_date']}">
+                    Event: ${filteredEvents[i]['description']} and occurrence time ${date.toLocaleTimeString()}
+                    <span>
+                        <button type="button" class="btn btn-sm btn-primary edit-event-btn" data-bs-toggle="modal"
+                            data-bs-target="#UpdateEventModal">Edit</button>
+                        <button class="btn btn-sm btn-danger delete-event-btn" data-bs-toggle="modal"
+                            data-bs-target="#DeleteEventModal">Delete</button>
+                    </span>
+                    </div><br/>`);
+                }
+            }
 
             this.drawHeader(o.innerHTML);
             this.setCookie("selected_day", 1);
@@ -204,3 +219,108 @@ document.addEventListener(
     },
     false
 );
+
+$(document).on("click", "#create-event", create_event);
+$(document).on("click", ".edit-event-btn", select_event);
+$(document).on("click", "#update-event", update_event);
+$(document).on("click", "#delete-event", delete_event);
+
+function create_event() {
+    var calendar_id = $("#calendar").data('id');
+    const description = $("#AddEventModal [name='event-desc']").val();
+    const date = $("#AddEventModal [name='event-date']").val().slice(0, 19).replace('T', ' ');
+    createAlert("info", "Processing...");
+    console.log(date);
+
+    $.ajax({
+        url: `/calendar/${calendar_id}`,
+        method: "PUT",
+        data: {
+            description,
+            date,
+        },
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: (response) => {
+            $("#event").append(
+                `<div class="calendar-event" data-id="${response.event.id}" data-desc="${description}" data-date="${date}">
+                    Event: ${description} and occurrence time ${date}
+                    <span>
+                        <button type="button" class="btn btn-sm btn-primary edit-event-btn" data-bs-toggle="modal"
+                            data-bs-target="#UpdateEventModal">Edit</button>
+                        <button class="btn btn-sm btn-danger delete-event-btn" data-bs-toggle="modal"
+                            data-bs-target="#DeleteEventModal">Delete</button>
+                    </span>
+                    </div><br/>`
+            );
+
+            createAlert("success", "Event Added");
+        },
+        error: (err) => {
+            createAlert("danger", "Server Error");
+        },
+    });
+
+}
+
+function select_event() {
+    var event = $(this).closest(".calendar-event");
+    $date = new Date(event.data("date"));
+    $date = $date.toLocaleString();
+    $("#UpdateEventModal [name='event-desc']").val(event.data("desc"));
+    $("#UpdateEventModal [name='event-date']").val("2022-05-04T06:04");
+}
+
+function update_event(){
+    var calendar_id = $("#calendar").data('id');
+    var event = $(this).closest(".calender-event");
+    var event_id = $(".calendar-event").data("id");
+    const description = $("#UpdateEventModal [name='event-desc']").val();
+    const date = $("#UpdateEventModal [name='event-date']").val();
+
+    createAlert("info", "Processing...");
+
+    $.ajax({
+        url: `/calendar/${calendar_id}/${event_id}`,
+        method: "PATCH",
+        data: {
+            description,
+            date,
+        },
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: () => {
+            createAlert("success", "Event Updated");
+
+            event.data("desc", description);
+            event.data("date", date);
+            
+        },
+        error: (err) => {
+            createAlert("danger", "Server Error");
+        },
+    });
+}
+
+function delete_event(){
+    var calendar_id = $("#calendar").data('id');
+    var event_id = $(".calendar-event").data("id");
+    createAlert("info", "Processing...");
+    $.ajax({
+        url: `/calendar/${calendar_id}/${event_id}`,
+        method: "DELETE",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: () => {
+            createAlert("success", "Event Deleted");
+            $(`[data-id='${event_id}']`).remove();
+        },
+        error: (err) => {
+            createAlert("danger", "Server Error");
+        },
+    });
+
+}
