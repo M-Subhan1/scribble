@@ -122,6 +122,7 @@ function move_component_down() {
 
 function delete_component() {
     $(this).closest(".component").remove();
+    createAlert("success", "Component Deleted");
 }
 // Utility Functions
 function create_component() {
@@ -239,12 +240,12 @@ function save_page() {
         });
     });
 
-    console.log(title);
-
     const data = {
         name: title,
         components,
     };
+
+    createAlert("info", "Processing");
 
     $.ajax({
         url: `/journals/${journal_id}/${page_id}`,
@@ -255,9 +256,10 @@ function save_page() {
         },
         success: function (data) {
             $(".page-title").text(title);
+            createAlert("success", "Data Saved");
         },
         error: function (err) {
-            console.log(err);
+            createAlert("danger", "Server Error");
         },
     });
 }
