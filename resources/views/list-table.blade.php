@@ -4,7 +4,7 @@
         <nav id="bread-crumb" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="/list">Todos</a></li>
+                <li class="breadcrumb-item"><a href="/lists">Lists</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ $list->name }}</li>
             </ol>
         </nav>
