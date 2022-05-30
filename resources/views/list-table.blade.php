@@ -54,7 +54,7 @@
                         <tr data-id="{{ $entry->id }}" data-col-id="{{ $column->id }}"
                             data-col-name="{{ $column->name }}">
                             <td class="entry-content">{{ $entry->content }}</td>
-                            <td class="text-center align-middle entry-column">{{ $column->name }}</td>
+                            <td class="entry-column text-center align-middle">{{ $column->name }}</td>
                             <td class="text-center align-middle">{{ $entry->created_at }}</td>
                             <td>
                                 <div class='text-center'>
