@@ -5,14 +5,20 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\CalendarController;
+use App\Models\Calendar;
+use App\Models\Event;
+
 
 /* |-------------------------------------------------------------------------- | Web Routes |-------------------------------------------------------------------------- | | Here is where you can register web routes for your application. These | routes are loaded by the RouteServiceProvider within a group which | contains the "web" middleware group. Now create something great! | */
 
 Route::get('/dashboard', function () {
     session_start();
-    // array_key_exists('account', $_SESSION) ? $account = $_SESSION['account'];
+
     if (array_key_exists('email', $_SESSION) && $_SESSION['email'] != null && $_SESSION['is_blocked'] == false && $_SESSION['is_verified'] == true) {
-        return view('dashboard', ['alert' => (object)array('type' => 'success', 'message' => 'Welcome back, ' . $_SESSION['first_name'] . '!')]);
+        $calendar = Calendar::where('user_id', $_SESSION['id'])->with(['events'])->first();
+        $events = Event::where('calendar_id', $calendar->id)->whereDate('occurrence_date', '=', date('Y-m-d'))->get();
+
+        return view('dashboard', ['events' => $events, 'alert' => (object)array('type' => 'success', 'message' => 'Welcome back, ' . $_SESSION['first_name'] . '!')]);
     }
 
     return redirect('/login');
