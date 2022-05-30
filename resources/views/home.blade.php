@@ -7,25 +7,11 @@
                 <div class="col-12 text-center scribble-welcome">
                     <span class="d-inline-block mb-10">Welcome to Scribble App</span>
                 </div>
-                <div class="col-auto mx-auto order-2 order-lg-0">
-                    <a class="d-inline-block" href="#">
-                        <svg width="11" height="20" viewbox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 18L1 10L9 2" stroke="#232126" stroke-width="1.5" stroke-miterlimit="10"
-                                stroke-linecap="square" stroke-linejoin="round"></path>
-                        </svg>
-                    </a>
-                </div>
+
                 <div class="col-12 col-md-9 mx-auto mx-lg-20 feature-animate">
                     <h1 class="display-2 mb-0">Boost your Productivity</h1>
                 </div>
-                <div class="col-auto mx-auto order-2 order-lg-0">
-                    <a class="d-inline-block" href="#">
-                        <svg width="12" height="20" viewbox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 2L11 10L2 18" stroke="#232126" stroke-width="1.5" stroke-miterlimit="10"
-                                stroke-linecap="square" stroke-linejoin="round"></path>
-                        </svg>
-                    </a>
-                </div>
+
                 <div class="col-12 mt-16 mb-16 mb-lg-0"><a class="btn py-3 px-8 btn-primary" href="/about-us">Discover
                         Now</a>
                 </div>

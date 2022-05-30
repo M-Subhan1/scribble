@@ -29677,7 +29677,7 @@ textarea.form-control-lg {
   line-height: 1em;
   border-radius: 50%;
   position: absolute;
-  top: 0;
+  top: 15px;
   font-size: 18px;
 }
 .button-wrap .pre-button i,
