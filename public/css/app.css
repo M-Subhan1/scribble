@@ -29500,6 +29500,99 @@ textarea.form-control-lg {
   border: 1px solid black;
 }
 
+.scribble-welcome {
+  -webkit-animation: movedown 1s linear 1;
+          animation: movedown 1s linear 1;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+  visibility: hidden;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes movedown {
+  0% {
+    transform: translateY(-100px);
+    visibility: visible;
+  }
+  100% {
+    transform: translateY(0);
+    visibility: visible;
+  }
+}
+
+@keyframes movedown {
+  0% {
+    transform: translateY(-100px);
+    visibility: visible;
+  }
+  100% {
+    transform: translateY(0);
+    visibility: visible;
+  }
+}
+.choose-plan {
+  -webkit-animation: move_right 1s linear 1;
+          animation: move_right 1s linear 1;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+  visibility: hidden;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes move_right {
+  0% {
+    transform: translateX(-50px);
+    visibility: visible;
+  }
+  100% {
+    transform: translateX(0);
+    visibility: visible;
+  }
+}
+
+@keyframes move_right {
+  0% {
+    transform: translateX(-50px);
+    visibility: visible;
+  }
+  100% {
+    transform: translateX(0);
+    visibility: visible;
+  }
+}
+.feature-animate {
+  -webkit-animation: zoomin 0.5s linear 1;
+          animation: zoomin 0.5s linear 1;
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+  visibility: hidden;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes zoomin {
+  0% {
+    transform: scale(0.5);
+    visibility: visible;
+  }
+  100% {
+    transform: scale(1);
+    visibility: visible;
+  }
+}
+
+@keyframes zoomin {
+  0% {
+    transform: scale(0.5);
+    visibility: visible;
+  }
+  100% {
+    transform: scale(1);
+    visibility: visible;
+  }
+}
 .heading-section {
   font-size: 28px;
   color: #000;
