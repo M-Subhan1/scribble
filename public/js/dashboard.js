@@ -433,14 +433,14 @@ function updateListEntry() {
             entry.data("col-id", col_id);
             entry.data("col-name", column_name);
             entry.find(".entry-content").text(content);
-            entry.find(".entry-column").text(column_name);
+            entry
+                .find(".entry-column")
+                .text($(`#AddEntryModal option[value='${col_id}']`).text());
 
             const urlParams = new URLSearchParams(window.location.search);
             const view = urlParams.get("view");
 
             if (view !== "table") {
-                console.log($(`[data-id='${selectedEntry}']`));
-
                 $(`[data-col-id='${col_id}'] > .card > .card-body`).append(
                     entry.clone(true, true)
                 );
