@@ -27,6 +27,8 @@ document.addEventListener(
             setDate,
             daysLen = days.length;
 
+        $(".selected-month").text(`${monthTag[month]}, ${year}`);
+
         function Calendar(selector, options) {
             this.options = options;
             this.draw();
@@ -66,6 +68,8 @@ document.addEventListener(
                     date.getFullYear() == selected_year
                 );
             });
+
+            $(".selected-month").text(`${monthTag[month]}, ${year}`);
 
             if (filteredEvents.length == 0) {
                 return (document.getElementById(

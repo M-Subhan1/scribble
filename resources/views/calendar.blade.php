@@ -36,6 +36,7 @@
                             <div class="w-100 button-wrap">
                                 <div class="pre-button d-flex align-items-center justify-content-center"><i
                                         class="fa fa-chevron-left"></i></div>
+                                <div class="selected-month text-muted text-bold">Month</div>
                                 <div class="next-button d-flex align-items-center justify-content-center"><i
                                         class="fa fa-chevron-right"></i></div>
                             </div>

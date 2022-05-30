@@ -204,9 +204,9 @@ function createListColumn() {
 
             $("#col-container").append(
                 `<div class="col-sm-12 col-md-6 col-xl-4 mb-4" data-col-id='${response.column.id}'
-                            data-col-name="${response.column.name}" data-col-name="${response.column.name}">
+                            data-col-name="${response.column.name}">
                             <div class="card bg-light list-card">
-                                <div class="card-body">
+                                <div class="card-header">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <h6 class="card-title text-dark py-2 col-name">${response.column.name}
                                         </h6>
@@ -220,16 +220,20 @@ function createListColumn() {
                                             </svg>
 
                                             <div class="entry-menu bg-dark">
-                                                <span class="btn btn-sm btn-dark text-light edit-list-column-btn"
+                                                <span class="btn btn-sm btn-dark edit-list-column-btn"
                                                     data-bs-toggle="modal" data-bs-target="#EditColModal">Edit</span>
-                                                <span class="btn btn-sm btn-dark text-light delete-list-column-btn"
+                                                <span class="btn btn-sm btn-dark delete-list-column-btn"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#DeleteColModal">Delete</span>
                                             </div>
                                         </span>
                                     </div>
                                 </div>
-                                <div class="p-3 add-entry" data-bs-toggle="modal" data-bs-target="#AddEntryModal">+
+                                <div class="card-body">
+
+                                </div>
+                                <div class="card-footer p-3 add-entry" data-bs-toggle="modal"
+                                    data-bs-target="#AddEntryModal">+
                                     Add Item</div>
                             </div>
                         </div>`
@@ -351,7 +355,7 @@ function createListEntry() {
 
             if (view === "table") {
                 const column_name = $(
-                    `#AddEntryModal option[value='${status}']`
+                    `#AddEntryModal option[value='${col_id}']`
                 ).data("col-name");
 
                 $("#entry-container")
