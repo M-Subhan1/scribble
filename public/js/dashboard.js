@@ -297,13 +297,13 @@ function deleteListColumn() {
         success: () => {
             entry.remove();
             createAlert("success", "Column Deleted");
+            selectedColumn = undefined;
         },
         error: (err) => {
             createAlert("danger", "Server Error");
+            selectedColumn = undefined;
         },
     });
-
-    selectedColumn = undefined;
 }
 
 function selectListEntry() {
@@ -449,13 +449,13 @@ function updateListEntry() {
             }
 
             createAlert("success", "Entry Updated");
+            selectedList = selectedColumn = selectedEntry = undefined;
         },
         error: (err) => {
             createAlert("danger", "Server Error");
+            selectedList = selectedColumn = selectedEntry = undefined;
         },
     });
-
-    selectedList = selectedColumn = selectedEntry = undefined;
 }
 
 function deleteListEntry() {
@@ -474,13 +474,13 @@ function deleteListEntry() {
         success: () => {
             entry.remove();
             createAlert("success", "Entry Deleted");
+            selectedList = selectedColumn = selectedEntry = undefined;
         },
         error: (err) => {
             createAlert("danger", "Server Error");
+            selectedList = selectedColumn = selectedEntry = undefined;
         },
     });
-
-    selectedList = selectedColumn = selectedEntry = undefined;
 }
 
 function selectJournal() {
@@ -557,13 +557,13 @@ function deleteJournal() {
         success: (data) => {
             $(`[data-id='${journal_id}']`).remove();
             createAlert("success", "Journal Deleted");
+            selectedJournal = undefined;
         },
         error: (err) => {
-            console.log(err);
+            createAlert("danger", "Server Error");
+            selectedJournal = undefined;
         },
     });
-
-    selectedJournal = undefined;
 }
 
 function editJournal() {
@@ -591,13 +591,13 @@ function editJournal() {
             journal.data("title", name);
             journal.find(".journal-name").text(name);
             createAlert("success", "Journal Updated");
+            selectedJournal = undefined;
         },
         error: (err) => {
-            console.log(err);
+            createAlert("danger", "Server Error");
+            selectedJournal = undefined;
         },
     });
-
-    selectedJournal = undefined;
 }
 
 function selectPage() {
@@ -605,8 +605,6 @@ function selectPage() {
     selectedPage = page.data("page-id");
     selectedJournal = $("#page").data("journal-id");
     $("#editPageModal #edit-page-name").val(page.data("identifier"));
-
-    console.log(selectedPage);
 }
 
 function createPage() {
@@ -675,14 +673,15 @@ function deletePage() {
         success: (data) => {
             $(`[data-page-id='${page_id}']`).remove();
             createAlert("success", "Page Deleted");
+            selectedJournal = undefined;
+            selectedPage = undefined;
         },
         error: (err) => {
             console.log(err);
+            selectedJournal = undefined;
+            selectedPage = undefined;
         },
     });
-
-    selectedJournal = undefined;
-    selectedPage = undefined;
 }
 
 function editPage() {
@@ -708,12 +707,13 @@ function editPage() {
             page.data("identifier", name);
             page.find(".page-name").text(name);
             createAlert("success", "Page Updated");
+            selectedJournal = undefined;
+            selectedPage = undefined;
         },
         error: (err) => {
             console.log(err);
+            selectedJournal = undefined;
+            selectedPage = undefined;
         },
     });
-
-    selectedJournal = undefined;
-    selectedPage = undefined;
 }

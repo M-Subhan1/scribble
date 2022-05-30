@@ -70,7 +70,9 @@ document.addEventListener(
             if (filteredEvents.length == 0) {
                 return (document.getElementById(
                     "events-container"
-                ).innerHTML = `<p class="text-light h6">No upcoming events on for ${selectedDay.toDateString()} !</p>`);
+                ).innerHTML = `<p class="text-light h6">No upcoming events for ${
+                    selectedDay ? selectedDay.toDateString() : "Today"
+                } !</p>`);
             }
 
             $("#events-container").html("");
@@ -223,6 +225,7 @@ $(document).on("click", "#delete-event", delete_event);
 
 function create_event() {
     const description = $("#AddEventModal [name='event-desc']").val();
+    const events_container = $("#events-container");
 
     const date = $("#AddEventModal [name='event-date']")
         .val()
@@ -245,8 +248,6 @@ function create_event() {
 
             events.push(response.event);
 
-            console.log(date);
-
             createAlert("success", "Event Added");
 
             if (
@@ -257,7 +258,7 @@ function create_event() {
                 return;
             }
 
-            $("#events-container").append(`
+            events_container.append(`
                         <div class="card mb-2 row" data-id="${
                             response.event.id
                         }" data-desc="$response.{event.description}" data-date="${
@@ -308,8 +309,6 @@ function select_event() {
     document.querySelector("#UpdateEventModal [name='event-date']").value = date
         .toISOString()
         .slice(0, 16);
-
-    selected_event = undefined;
 }
 
 function selected_date() {
@@ -345,17 +344,18 @@ function update_event() {
             event.data("desc", description);
             event.data("date", date);
             event.find(".desc").text(description);
+
+            selected_event = undefined;
         },
         error: (err) => {
             createAlert("danger", "Server Error");
         },
     });
-
-    selected_event = undefined;
 }
 
 function delete_event() {
     createAlert("info", "Processing...");
+    const event = $(`[data-id='${selected_event}']`);
 
     $.ajax({
         url: `/calendar/${selected_event}`,
@@ -365,12 +365,24 @@ function delete_event() {
         },
         success: () => {
             createAlert("success", "Event Deleted");
-            $(`[data-id='${selected_event}']`).remove();
+            event.remove();
+            events.splice(
+                events.findIndex((e) => e.id == parseInt(selected_event)),
+                1
+            );
+
+            if ($(`#events-container [data-id]`).length == 0) {
+                document.getElementById(
+                    "events-container"
+                ).innerHTML = `<p class="text-light h6">No upcoming events for ${
+                    selectedDay ? selectedDay.toDateString() : "Today"
+                } !</p>`;
+            }
+
+            selected_event = undefined;
         },
         error: (err) => {
             createAlert("danger", "Server Error");
         },
     });
-
-    selected_event = undefined;
 }
