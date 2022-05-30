@@ -8,7 +8,7 @@
             </div>
             <h1 class="display-3 text-white text-center mb-24">Features</h1>
             <div class="row">
-                <div class="col-12 col-lg-4 px-2 mb-16 mb-xl-0">
+                <div class="col-12 col-lg-4 px-2 mb-16 mb-xl-0 feature-animate">
                     <div class="d-flex flex-column h-100 mw-md mx-auto mx-xl-0 text-center">
                         <svg class="d-block mb-8 mx-auto" width="34" height="34" viewBox="0 0 34 34" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-4 px-2 mb-16 mb-xl-0">
+                <div class="col-12 col-lg-4 px-2 mb-16 mb-xl-0 feature-animate" >
                     <div class="d-flex flex-column h-100 mw-md mx-auto mx-xl-0 text-center">
                         <svg class="d-block mb-8 mx-auto" width="40" height="28" viewBox="0 0 40 28" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-4 px-2 mb-4 mb-xl-0">
+                <div class="col-12 col-lg-4 px-2 mb-4 mb-xl-0 feature-animate">
                     <div class="d-flex flex-column h-100 mw-md mx-auto mx-xl-0 text-center">
                         <svg class="d-block mb-8 mx-auto" width="35" height="31" viewBox="0 0 35 31" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -73,7 +73,7 @@
                             <rect x="15.275" width="3.525" height="30.55" rx="1.7625" fill="#5B2FE2"></rect>
                             <rect x="30.55" width="3.525" height="30.55" rx="1.7625" fill="#5B2FE2"></rect>
                         </svg>
-                        <div>
+                        <div >
                             <h5 class="display-6 text-white lh-lg mb-14">Build the workflow you want</h5>
                             <div class="mt-auto px-8 px-xl-20">
                                 <p class="text-light-dark lh-lg mb-0">Customize Notion to make it work the way you want
