@@ -4,7 +4,7 @@
     <section class="position-relative overflow-hidden bg-light">
         <div class="container">
             <div class="row align-items-center pt-28 pb-14 text-center">
-                <div class="col-12 text-center">
+                <div class="col-12 text-center scribble-welcome">
                     <span class="d-inline-block mb-10">Welcome to Scribble App</span>
                 </div>
                 <div class="col-auto mx-auto order-2 order-lg-0">
@@ -15,7 +15,7 @@
                         </svg>
                     </a>
                 </div>
-                <div class="col-12 col-md-9 mx-auto mx-lg-20">
+                <div class="col-12 col-md-9 mx-auto mx-lg-20 feature-animate">
                     <h1 class="display-2 mb-0">Boost your Productivity</h1>
                 </div>
                 <div class="col-auto mx-auto order-2 order-lg-0">

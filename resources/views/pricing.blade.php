@@ -6,7 +6,7 @@
                 <div class="mx-4 bg-white rounded-circle" style="width: 4px; height: 4px"></div>
                 <span class="display-6 h5 mb-0 text-white">Pricing</span>
             </div>
-            <div class="mw-2xl mx-auto mb-36 text-center">
+            <div class="mw-2xl mx-auto mb-36 text-center choose-plan">
                 <h1 class="display-3 text-white mb-8">Choose the plan</h1>
                 <div class="mb-16 text-white">
                     <span class="me-6">Get startet now!</span>

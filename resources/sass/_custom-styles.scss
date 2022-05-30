@@ -200,3 +200,61 @@
     color: black;
     border: 1px solid black;
 }
+
+.scribble-welcome{
+    animation: movedown 1s linear 1;
+    animation-delay:1s;
+    visibility: hidden;
+    animation-fill-mode: forwards;
+}
+
+@keyframes movedown{
+    0%{
+        transform: translateY(-100px);
+        visibility:visible;
+    }
+
+    100%{
+        transform: translateY(0);
+        visibility: visible;
+    }
+}
+
+.choose-plan{
+    animation: move_right 1s linear 1;
+    animation-delay:1s;
+    visibility: hidden;
+    animation-fill-mode: forwards;
+}
+
+@keyframes move_right{
+    0%{
+        transform: translateX(-50px);
+        visibility:visible;
+    }
+
+    100%{
+        transform: translateX(0);
+        visibility: visible;
+    }
+}
+
+.feature-animate{
+    animation: zoomin 0.5s linear 1;
+    animation-delay:0s;
+    visibility: hidden;
+    animation-fill-mode: forwards;
+}
+
+@keyframes zoomin{
+    0%{
+        transform: scale(0.5);
+        visibility:visible;
+    }
+
+    100%{
+        transform: scale(1);
+        visibility: visible;
+    }
+}
+
