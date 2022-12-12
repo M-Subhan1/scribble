@@ -14,4 +14,8 @@ Scribble is a lightweight clone of Notion that allows users to organize their th
 - Blade Templates
 - Bootstrap 5
 ## Getting started
-Clone the repository
+* Clone the repository
+* Install dependencies `composer install`
+* Create a local database and update the .env file with your database credentials and run migration to create necessary tables`php artisan migrate`
+* Start the development server `php artisan serve`
+* Access the application at http://localhost:8000
